@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         splashScreen.setKeepOnScreenCondition(() -> true );
         setContentView(R.layout.activity_main);
-        
+
         int SPLASH_TIME_OUT = 800;
         new Timer().schedule(new TimerTask() {
             @Override
