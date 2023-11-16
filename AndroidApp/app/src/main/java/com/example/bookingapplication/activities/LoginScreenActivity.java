@@ -1,10 +1,12 @@
-package com.example.bookingapplication;
+package com.example.bookingapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class HomeActivity extends AppCompatActivity {
+import com.example.bookingapplication.R;
+
+public class LoginScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
