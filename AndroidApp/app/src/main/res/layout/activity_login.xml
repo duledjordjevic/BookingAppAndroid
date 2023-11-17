@@ -32,6 +32,7 @@
         app:startIconDrawable="@drawable/ic_email"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailInput"
             android:maxLength="20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -52,6 +53,7 @@
         app:startIconDrawable="@drawable/ic_lock"
             >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
