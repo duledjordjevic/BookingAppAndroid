@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.bookingapplication.R;
 
-public class LoginScreenActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_login);
     }
 }
