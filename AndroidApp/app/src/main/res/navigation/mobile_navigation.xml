@@ -22,4 +22,9 @@
         android:name="com.example.bookingapplication.activities.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/reservationsFragment"
+        android:name="com.example.bookingapplication.activities.ui.reservations.ReservationsFragment"
+        android:label="fragment_reservations"
+        tools:layout="@layout/fragment_reservations" />
 </navigation>
