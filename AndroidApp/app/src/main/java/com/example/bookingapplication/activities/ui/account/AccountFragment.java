@@ -1,4 +1,4 @@
-package com.example.bookingapplication.activities.ui.dashboard;
+package com.example.bookingapplication.activities.ui.account;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.bookingapplication.databinding.FragmentDashboardBinding;
+import com.example.bookingapplication.databinding.FragmentAccountBinding;
 
-public class DashboardFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+public class AccountFragment extends Fragment {
+
+    private FragmentAccountBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        AccountViewModel accountViewModel =
+                new ViewModelProvider(this).get(AccountViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        accountViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

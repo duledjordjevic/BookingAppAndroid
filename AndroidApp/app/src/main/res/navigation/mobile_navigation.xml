@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.bookingapplication.activities.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_account"
+        android:name="com.example.bookingapplication.activities.ui.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_account" />
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/reservationsFragment"
         android:name="com.example.bookingapplication.activities.ui.reservations.ReservationsFragment"
-        android:label="fragment_reservations"
+        android:label="@string/title_reservations"
         tools:layout="@layout/fragment_reservations" />
 </navigation>

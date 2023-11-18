@@ -38,8 +38,24 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(emailInput.getText().toString().equals("admin") && passwordInput.getText().toString().equals("admin")) {
+                if(emailInput.getText().toString().equals("admin") && passwordInput.getText().toString().equals("1")) {
                     Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("Uloga","Admin");
+                    startActivity(intent);
+                    finish();
+                }else if(emailInput.getText().toString().equals("guest") && passwordInput.getText().toString().equals("1")){
+                    Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("Uloga","Guest");
+                    startActivity(intent);
+                    finish();
+                }else if(emailInput.getText().toString().equals("host") && passwordInput.getText().toString().equals("1")){
+                    Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("Uloga","Host");
+                    startActivity(intent);
+                    finish();
                 }else if(emailInput.getText().toString().equals("") || passwordInput.getText().toString().equals("")){
                     emptyInputFields.setText("All fields must be fill!");
                 }else{
@@ -55,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     public void openDialog(){
