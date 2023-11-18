@@ -24,4 +24,5 @@
     <string name="title_reported_users">Reported</string>
     <string name="title_comments">Comments</string>
     <string name="title_logout">Logout</string>
+    <string name="save_button">Save</string>
 </resources>
