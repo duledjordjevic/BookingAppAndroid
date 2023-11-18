@@ -47,4 +47,8 @@
         android:name="com.example.bookingapplication.activities.ui.addedProperties.AddedPropertiesFragment"
         android:label="Added properties"
         tools:layout="@layout/fragment_added_properties" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.bookingapplication.activities.LoginActivity"
+        android:label="LoginActivity" />
 </navigation>
