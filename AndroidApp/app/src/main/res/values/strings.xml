@@ -14,4 +14,14 @@
         <item>Host</item>
         <item>Guest</item>
     </string-array>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_account">Account</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_reservations">Reservations</string>
+    <string name="title_host_properties">My properties</string>
+    <string name="title_added_properties">Properties</string>
+    <string name="title_reported_users">Reported</string>
+    <string name="title_comments">Comments</string>
+    <string name="title_logout">Logout</string>
 </resources>
