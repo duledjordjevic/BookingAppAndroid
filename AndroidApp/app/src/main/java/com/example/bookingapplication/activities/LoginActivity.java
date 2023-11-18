@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText passwordInput;
     private Button btnLogin;
     private TextView joinNowTextView;
+    private TextView emptyInputFields;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +33,18 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = binding.passwordInput;
         btnLogin = binding.btnLogin;
         joinNowTextView = binding.joinNowTextView;
+        emptyInputFields = binding.emptyInputFields;
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(emailInput.getText().toString().equals("admin") && passwordInput.getText().toString().equals("admin")) {
                     Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
+                }else if(emailInput.getText().toString().equals("") || passwordInput.getText().toString().equals("")){
+                    emptyInputFields.setText("All fields must be fill!");
+                }else{
+                    openDialog();
+                    emptyInputFields.setText("");
                 }
             }
         });
@@ -48,5 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void openDialog(){
+        TryAgainDialog dialog = new TryAgainDialog();
+        dialog.show(getSupportFragmentManager(), "try again dialog");
     }
 }

@@ -2,12 +2,14 @@ package com.example.bookingapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.databinding.ActivityLoginBinding;
@@ -27,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText passwordReEnterInput;
     private Button btnSignUp;
     private TextView logInTextView;
+    private TextView  emptyInputFields;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordReEnterInput = binding.passwordReEnterInput;
         btnSignUp = binding.btnSignUp;
         logInTextView = binding.logInTextView;
+        emptyInputFields = binding.emptyInputFields;
 
         String[] accountTypes = getResources().getStringArray(R.array.account_types);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.account_type_dropdown_item, accountTypes);
@@ -53,14 +57,23 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(nameInput.getText().toString().equals("") || lastNameInput.getText().toString().equals("")
+                || phoneInput.getText().toString().equals("") || addressInput.getText().toString().equals("")
+                        || accountAutoCompleteTextView.getText().toString().equals("") || emailInput.getText().toString().equals("")
+                        || passwordInput.getText().toString().equals("") || passwordReEnterInput.getText().toString().equals("")) {
 
+                    emptyInputFields.setText("All fields must be fill!");
+                }else{
+                    emptyInputFields.setText("");
+                }
             }
         });
 
         logInTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

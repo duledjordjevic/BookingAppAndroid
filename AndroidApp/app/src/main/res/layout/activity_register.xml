@@ -55,11 +55,10 @@
             android:hint="Name"
             app:counterEnabled="true"
             app:endIconMode="clear_text"
-
+            app:startIconDrawable="@drawable/ic_person"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameInput"
-                android:maxLength="20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -78,11 +77,10 @@
             android:hint="Lastname"
             app:counterEnabled="true"
             app:endIconMode="clear_text"
-
+            app:startIconDrawable="@drawable/ic_person"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lastNameInput"
-                android:maxLength="20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -104,10 +102,12 @@
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic_phone"
             app:prefixText="+381"
+            app:counterMaxLength="10"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneInput"
-                android:maxLength="20"
+                android:inputType="phone"
+                android:maxLength="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -130,7 +130,6 @@
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/addressInput"
-                android:maxLength="20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -147,10 +146,10 @@
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:hint="@string/account_type"
+            app:startIconDrawable="@drawable/ic_person"
             >
             <AutoCompleteTextView
                 android:id="@+id/accountAutoCompleteTextView"
-                android:maxLength="20"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="none"
@@ -165,7 +164,7 @@
             app:layout_constraintEnd_toEndOf="@id/accountTypeInputLayout"
             app:layout_constraintStart_toStartOf="@id/accountTypeInputLayout"
             app:layout_constraintTop_toBottomOf="@id/accountTypeInputLayout"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:hint="@string/email"
@@ -175,7 +174,6 @@
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailInput"
-                android:maxLength="20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -221,6 +219,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/emptyInputFields"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="@id/passwordReEnterInputLayout"
+            app:layout_constraintStart_toStartOf="@id/passwordReEnterInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/passwordReEnterInputLayout"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/red"
+            />
 
             <Button
                 android:id="@+id/btnSignUp"
