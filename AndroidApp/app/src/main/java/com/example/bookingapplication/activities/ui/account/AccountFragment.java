@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.bookingapplication.databinding.FragmentAccountBinding;
+import com.google.android.material.textfield.TextInputEditText;
 
 
 public class AccountFragment extends Fragment {
@@ -25,8 +26,15 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        accountViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        binding.nameInputAccount.setText("Dusan");
+        binding.lastNameInputAccount.setText("Djordjevic");
+        binding.phoneInputAccount.setText("064123123");
+        binding.addressInputAccount.setText("Banovic Strahinje 10");
+        binding.emailInputAccount.setText("ftn@uns.ac.rs");
+        binding.passwordInputAccount.setText("nekasifra123");
+        binding.passwordReEnterInputAccount.setText("nekasifra123");
+
+//        accountViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
