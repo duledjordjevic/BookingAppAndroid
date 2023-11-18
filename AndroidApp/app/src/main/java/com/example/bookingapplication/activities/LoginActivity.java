@@ -2,6 +2,7 @@ package com.example.bookingapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,14 +37,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(emailInput.getText().toString().equals("admin") && passwordInput.getText().toString().equals("admin")) {
-                    Toast.makeText(LoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         joinNowTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
