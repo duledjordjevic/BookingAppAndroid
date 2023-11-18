@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">BookingApplication</string>
+    <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="join_now">Join Now</string>
+    <string name="sign_in_to_booking">Sign in to Booking</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_have_an_acount">Already have an acount?</string>
+    <string name="phone_number">Phone number</string>
+    <string name="home_address">Home address</string>
+    <string name="account_type">AccountType</string>
+    <string name="email">Email</string>
+    <string-array name="account_types">
+        <item>Host</item>
+        <item>Guest</item>
+    </string-array>
 </resources>
