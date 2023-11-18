@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(emailInput.getText().toString().equals("admin") && passwordInput.getText().toString().equals("admin")) {
                     Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
+                }else{
+                    openDialog();
                 }
             }
         });
@@ -48,5 +50,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void openDialog(){
+        TryAgainDialog dialog = new TryAgainDialog();
+        dialog.show(getSupportFragmentManager(), "try again dialog");
     }
 }
