@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/ic_person"
+        android:title="@string/title_account" />
+    <item
+        android:id="@+id/addedPropertiesFragment"
+        android:icon="@drawable/bed"
+        android:title="@string/title_added_properties"/>
+    <item
+        android:id="@+id/reportedUsersFragment"
+        android:icon="@drawable/flag"
+        android:title="@string/title_reported_users"/>
+    <item
+        android:id="@+id/commentsFragment"
+        android:icon="@drawable/comment"
+        android:title="@string/title_comments"/>
+</menu>

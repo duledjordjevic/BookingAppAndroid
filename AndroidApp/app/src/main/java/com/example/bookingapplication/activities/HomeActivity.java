@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
 
-        navView = findViewById(R.id.nav_view);
+        navView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -50,70 +50,20 @@ public class HomeActivity extends AppCompatActivity {
         switch (uloga) {
             case "Guest":
                 Toast.makeText(getApplicationContext(), uloga, Toast.LENGTH_SHORT).show();
-                setupBottomNavigationGuest();
+                navView.inflateMenu(R.menu.bottom_nav_menu_guest);
                 break;
             case "Host":
                 Toast.makeText(getApplicationContext(), uloga, Toast.LENGTH_SHORT).show();
-                setupBottomNavigationHost();
+                navView.inflateMenu(R.menu.bottom_nav_menu_host);
                 break;
             case "Admin":
                 Toast.makeText(getApplicationContext(), uloga, Toast.LENGTH_SHORT).show();
-                setupBottomNavigationAdmin();
+                navView.inflateMenu(R.menu.bottom_nav_menu_admin);
                 break;
             default:
                 break;
         }
     }
-
-    private void setupBottomNavigationGuest() {
-        Menu menu = navView.getMenu();
-
-        menu.add(Menu.NONE, R.id.navigation_home, Menu.NONE, "Home").setIcon(R.drawable.ic_home_black_24dp);
-        menu.add(Menu.NONE, R.id.navigation_account, Menu.NONE, "Account").setIcon(R.drawable.ic_person);
-        menu.add(Menu.NONE, R.id.navigation_notifications, Menu.NONE, "Notifications").setIcon(R.drawable.ic_notifications_black_24dp);;
-        menu.add(Menu.NONE, R.id.reservationsFragment, Menu.NONE, "Reservations").setIcon(R.drawable.calendar);
-
-        int initialItemId = determineInitialItemId();
-
-
-        navView.setSelectedItemId(initialItemId);
-
-    }
-    private void setupBottomNavigationHost() {
-        Menu menu = navView.getMenu();
-
-        menu.add(Menu.NONE, R.id.navigation_home, Menu.NONE, "").setIcon(R.drawable.ic_home_black_24dp);
-        menu.add(Menu.NONE, R.id.navigation_account, Menu.NONE, "").setIcon(R.drawable.ic_person);
-        menu.add(Menu.NONE, R.id.hostPropertiesFragment, Menu.NONE, "").setIcon(R.drawable.bed);
-        menu.add(Menu.NONE, R.id.navigation_notifications, Menu.NONE, "").setIcon(R.drawable.ic_notifications_black_24dp);;
-        menu.add(Menu.NONE, R.id.reservationsFragment, Menu.NONE, "").setIcon(R.drawable.calendar);
-
-        int initialItemId = determineInitialItemId();
-
-
-        navView.setSelectedItemId(initialItemId);
-
-    }
-    private void setupBottomNavigationAdmin() {
-        Menu menu = navView.getMenu();
-
-        menu.add(Menu.NONE, R.id.navigation_home, Menu.NONE, "Account").setIcon(R.drawable.ic_person);
-        menu.add(Menu.NONE, R.id.addedPropertiesFragment, Menu.NONE, "Properties").setIcon(R.drawable.bed);
-        menu.add(Menu.NONE, R.id.reportedUsersFragment, Menu.NONE, "Reports").setIcon(R.drawable.flag);
-        menu.add(Menu.NONE, R.id.commentsFragment, Menu.NONE, "Comments").setIcon(R.drawable.comment);;
-
-        int initialItemId = determineInitialItemId();
-
-
-        navView.setSelectedItemId(initialItemId);
-
-    }
-
-    private int determineInitialItemId() {
-        // Dodajte logiku kako biste odredili koja stavka treba biti inicijalno označena
-        // Na primjer, možete hardkodirati ID ili koristiti neku drugu logiku
-        return R.id.navigation_home;
-    }
-
+    
 
 }
