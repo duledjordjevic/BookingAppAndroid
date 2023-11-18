@@ -1,4 +1,4 @@
-package com.example.bookingapplication.activities.ui.reservations;
+package com.example.bookingapplication.activities.ui.addedProperties;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,22 +16,22 @@ import android.widget.TextView;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.activities.ui.account.AccountViewModel;
 import com.example.bookingapplication.databinding.FragmentAccountBinding;
-import com.example.bookingapplication.databinding.FragmentReservationsBinding;
+import com.example.bookingapplication.databinding.FragmentAddedPropertiesBinding;
 
-public class ReservationsFragment extends Fragment {
+public class AddedPropertiesFragment extends Fragment {
 
-    private FragmentReservationsBinding binding;
+    private FragmentAddedPropertiesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ReservationsViewModel reservationsViewModel =
-                new ViewModelProvider(this).get(ReservationsViewModel.class);
+        AddedPropertiesViewModel addedPropertiesViewModel =
+                new ViewModelProvider(this).get(AddedPropertiesViewModel.class);
 
-        binding = FragmentReservationsBinding.inflate(inflater, container, false);
+        binding = FragmentAddedPropertiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.reservationTextView;
-        reservationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.addedPropertiesTextView;
+        addedPropertiesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

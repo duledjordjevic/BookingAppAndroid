@@ -1,4 +1,4 @@
-package com.example.bookingapplication.activities.ui.reservations;
+package com.example.bookingapplication.activities.ui.reportedUsers;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,22 +16,22 @@ import android.widget.TextView;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.activities.ui.account.AccountViewModel;
 import com.example.bookingapplication.databinding.FragmentAccountBinding;
-import com.example.bookingapplication.databinding.FragmentReservationsBinding;
+import com.example.bookingapplication.databinding.FragmentReportedUsersBinding;
 
-public class ReservationsFragment extends Fragment {
+public class ReportedUsersFragment extends Fragment {
 
-    private FragmentReservationsBinding binding;
+    private FragmentReportedUsersBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ReservationsViewModel reservationsViewModel =
-                new ViewModelProvider(this).get(ReservationsViewModel.class);
+        ReportedUsersViewModel reportedUsersViewModel =
+                new ViewModelProvider(this).get(ReportedUsersViewModel.class);
 
-        binding = FragmentReservationsBinding.inflate(inflater, container, false);
+        binding = FragmentReportedUsersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.reservationTextView;
-        reservationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.reportedUsersTextView;
+        reportedUsersViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
@@ -40,6 +40,5 @@ public class ReservationsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 
 }

@@ -27,4 +27,24 @@
         android:name="com.example.bookingapplication.activities.ui.reservations.ReservationsFragment"
         android:label="@string/title_reservations"
         tools:layout="@layout/fragment_reservations" />
+    <fragment
+        android:id="@+id/reportedUsersFragment"
+        android:name="com.example.bookingapplication.activities.ui.reportedUsers.ReportedUsersFragment"
+        android:label="Reported Users"
+        tools:layout="@layout/fragment_reported_users" />
+    <fragment
+        android:id="@+id/hostPropertiesFragment"
+        android:name="com.example.bookingapplication.activities.ui.hostProperties.HostPropertiesFragment"
+        android:label="Properties"
+        tools:layout="@layout/fragment_host_properties" />
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.example.bookingapplication.activities.ui.comments.CommentsFragment"
+        android:label="Comments"
+        tools:layout="@layout/fragment_comments" />
+    <fragment
+        android:id="@+id/addedPropertiesFragment"
+        android:name="com.example.bookingapplication.activities.ui.addedProperties.AddedPropertiesFragment"
+        android:label="Added properties"
+        tools:layout="@layout/fragment_added_properties" />
 </navigation>

@@ -38,7 +38,8 @@ public class HomeActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_account, R.id.navigation_notifications,R.id.reservationsFragment)
+                R.id.navigation_home, R.id.navigation_account, R.id.navigation_notifications,R.id.reservationsFragment,
+                R.id.addedPropertiesFragment,R.id.hostPropertiesFragment,R.id.commentsFragment,R.id.reportedUsersFragment)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -83,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
 
         menu.add(Menu.NONE, R.id.navigation_home, Menu.NONE, "").setIcon(R.drawable.ic_home_black_24dp);
         menu.add(Menu.NONE, R.id.navigation_account, Menu.NONE, "").setIcon(R.drawable.ic_person);
-        menu.add(Menu.NONE, R.id.navigation_account, Menu.NONE, "").setIcon(R.drawable.bed);
+        menu.add(Menu.NONE, R.id.hostPropertiesFragment, Menu.NONE, "").setIcon(R.drawable.bed);
         menu.add(Menu.NONE, R.id.navigation_notifications, Menu.NONE, "").setIcon(R.drawable.ic_notifications_black_24dp);;
         menu.add(Menu.NONE, R.id.reservationsFragment, Menu.NONE, "").setIcon(R.drawable.calendar);
 
@@ -97,9 +98,9 @@ public class HomeActivity extends AppCompatActivity {
         Menu menu = navView.getMenu();
 
         menu.add(Menu.NONE, R.id.navigation_home, Menu.NONE, "Account").setIcon(R.drawable.ic_person);
-        menu.add(Menu.NONE, R.id.navigation_account, Menu.NONE, "Properties").setIcon(R.drawable.bed);
-        menu.add(Menu.NONE, R.id.navigation_account, Menu.NONE, "Reports").setIcon(R.drawable.flag);
-        menu.add(Menu.NONE, R.id.navigation_notifications, Menu.NONE, "Comments").setIcon(R.drawable.comment);;
+        menu.add(Menu.NONE, R.id.addedPropertiesFragment, Menu.NONE, "Properties").setIcon(R.drawable.bed);
+        menu.add(Menu.NONE, R.id.reportedUsersFragment, Menu.NONE, "Reports").setIcon(R.drawable.flag);
+        menu.add(Menu.NONE, R.id.commentsFragment, Menu.NONE, "Comments").setIcon(R.drawable.comment);;
 
         int initialItemId = determineInitialItemId();
 
