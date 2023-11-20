@@ -111,7 +111,7 @@
                     android:gravity="start"
                     >
                     <Button
-                        android:id="@+id/outlinedButton"
+                        android:id="@+id/button1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
@@ -123,7 +123,7 @@
                         />
 
                     <Button
-                        android:id="@+id/outlinedButton2"
+                        android:id="@+id/button2"
                         style="@style/CustomOutlinedButtonIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
