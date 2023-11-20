@@ -222,7 +222,17 @@
             app:layout_constraintEnd_toEndOf="@id/passwordReEnterInputLayout"
             app:layout_constraintStart_toStartOf="@id/passwordReEnterInputLayout"
             app:layout_constraintTop_toBottomOf="@id/passwordReEnterInputLayout" />
-
+        <Button
+            android:id="@+id/btnDeleteAccount"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/delete_btn"
+            app:layout_constraintEnd_toEndOf="@id/btnSaveAccount"
+            app:layout_constraintStart_toStartOf="@id/btnSaveAccount"
+            app:layout_constraintTop_toBottomOf="@id/btnSaveAccount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
