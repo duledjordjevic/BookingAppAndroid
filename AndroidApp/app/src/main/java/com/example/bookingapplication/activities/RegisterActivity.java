@@ -63,8 +63,25 @@ public class RegisterActivity extends AppCompatActivity {
                         || passwordInput.getText().toString().equals("") || passwordReEnterInput.getText().toString().equals("")) {
 
                     emptyInputFields.setText("All fields must be fill!");
+                    return;
                 }else{
                     emptyInputFields.setText("");
+                }
+                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                String accountType = accountAutoCompleteTextView.getText().toString();
+                switch (accountType){
+                    case "Host":
+                        intent.putExtra("Uloga","Host");
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case "Guest":
+                        intent.putExtra("Uloga","Guest");
+                        startActivity(intent);
+                        finish();
+                        break;
+                    default:
+                        break;
                 }
             }
         });
