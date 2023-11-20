@@ -1,5 +1,7 @@
 package com.example.bookingapplication.activities.ui.home;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -54,21 +56,21 @@ public class HomeFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        MaterialCardView card1 = view.findViewById(R.id.product_card_item1);
-        MaterialCardView card2 = view.findViewById(R.id.product_card_item2);
+        MaterialCardView card1 = binding.productCardItem1;
+        MaterialCardView card2 = binding.productCardItem2;
 
         card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Navigate to another page when card1 is clicked
-                Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
             }
         });
 
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
             }
         });
 
