@@ -44,4 +44,5 @@
         passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="amentities">- Internet\n- Parking\n- Air condition\n- Breakfast\n</string>
     <string name="delete_btn">Delete</string>
+    <string name="amenities_title">Amenities</string>
 </resources>
