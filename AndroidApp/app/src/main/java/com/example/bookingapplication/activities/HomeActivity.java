@@ -76,11 +76,13 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-        return true;
+        if(item.getItemId() == R.id.loginActivity){
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 
