@@ -25,4 +25,16 @@
     <string name="title_comments">Comments</string>
     <string name="title_logout">Logout</string>
     <string name="save_button">Save</string>
+    <string name="apartment_title">Suncev Breg</string>
+    <string name="apartment_desc">Srbija, Novi Sad\n19. - 24. may\n$202 per night</string>
+    <string name="apartment_review">Rating: 4.6\n200 reviews</string>
+    <string-array name="sort_arrays">
+        <item>ASC</item>
+        <item>DSC</item>
+    </string-array>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="filter">Filter </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
