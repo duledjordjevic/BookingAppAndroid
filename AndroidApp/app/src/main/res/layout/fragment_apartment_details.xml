@@ -13,9 +13,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
             <TextView
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="match_parent"
                 android:text="@string/apartment_title"
                 android:textColor="@color/dark_blue"
@@ -28,42 +30,181 @@
                 android:layout_margin="2dp"
                 />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/apartment_desc" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/apartment_review" />
-
         </LinearLayout>
 
-        <RelativeLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="313dp"
-                android:layout_height="233dp"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="8dp"
-                android:layout_centerInParent="true">
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/apartment_picture" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/apartment_desc"
+                        android:layout_marginBottom="16dp"/>
 
-            </com.google.android.material.card.MaterialCardView>
-        </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/dark_blue"
+                        android:layout_margin="2dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/apartment_review"
+                        android:layout_marginBottom="16dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/dark_blue"
+                        android:layout_margin="2dp"
+                        />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="313dp"
+                        android:layout_height="233dp"
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="8dp"
+                        android:layout_centerInParent="true">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/apartment_picture" />
+
+                    </com.google.android.material.card.MaterialCardView>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start"
+                    >
+                    <Button
+                        android:id="@+id/outlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="2dp"
+                        android:textColor="@color/dark_blue"
+                        android:text="@string/start_date"
+                        app:icon="@drawable/ic_date"
+                        style="@style/CustomOutlinedButtonIcon"
+                        />
+
+                    <Button
+                        android:id="@+id/outlinedButton2"
+                        style="@style/CustomOutlinedButtonIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/dark_blue"
+                        android:text="@string/end_date"
+                        app:icon="@drawable/ic_date" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linear3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="end">
+
+                    <Button
+                        android:id="@+id/containedButton"
+                        style="@style/CustomOutlinedButtonIcon"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/dark_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reserve" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="match_parent"
+                        android:text="Description"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="24sp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/dark_blue"
+                        android:layout_margin="2dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="366dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="start"
+                        android:text="@string/apartment_detail_desc" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/dark_blue"
+                        android:layout_margin="2dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView32"
+                        android:layout_width="366dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="start"
+                        android:text="@string/amentities" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+
     </LinearLayout>
 
 
