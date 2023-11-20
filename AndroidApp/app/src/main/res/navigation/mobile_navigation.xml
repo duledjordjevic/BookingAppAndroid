@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.bookingapplication.activities.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_apartmentDetailsFragment"
+            app:destination="@id/apartmentDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"
@@ -51,4 +55,9 @@
         android:id="@+id/loginActivity"
         android:name="com.example.bookingapplication.activities.LoginActivity"
         android:label="LoginActivity" />
+    <fragment
+        android:id="@+id/apartmentDetailsFragment"
+        android:name="com.example.bookingapplication.activities.ui.apartmentDetails.ApartmentDetailsFragment"
+        android:label="fragment_apartment_details"
+        tools:layout="@layout/fragment_apartment_details" />
 </navigation>

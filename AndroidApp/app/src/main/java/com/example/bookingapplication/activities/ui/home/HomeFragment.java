@@ -1,5 +1,7 @@
 package com.example.bookingapplication.activities.ui.home;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,15 +17,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.activities.HomeActivity;
+import com.example.bookingapplication.activities.ui.FragmentTransition;
+import com.example.bookingapplication.activities.ui.apartmentDetails.ApartmentDetailsFragment;
 import com.example.bookingapplication.activities.ui.datePicker.DatePickerFragment;
 import com.example.bookingapplication.databinding.FragmentHomeBinding;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
+public class HomeFragment extends Fragment{
 
     private FragmentHomeBinding binding;
 
@@ -45,6 +53,27 @@ public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSet
         // Apply the adapter to the spinner
         spinner.setAdapter(arrayAdapter);
 
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        MaterialCardView card1 = binding.productCardItem1;
+        MaterialCardView card2 = binding.productCardItem2;
+
+        card1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to another page when card1 is clicked
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
+            }
+        });
+
+        card2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
+            }
+        });
+
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
@@ -56,8 +85,4 @@ public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSet
         binding = null;
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-    }
 }
