@@ -3,6 +3,7 @@ package com.example.bookingapplication.activities.ui.home;
 import static androidx.navigation.Navigation.findNavController;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,7 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
@@ -74,6 +75,26 @@ public class HomeFragment extends Fragment{
             }
         });
 
+        Button button = binding.outlinedButton;
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openDatePicker(requireContext()); // Open date picker dialog
+
+            }
+        });
+
+        Button buttonEnd = binding.outlinedButton2;
+        buttonEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openDatePicker(requireContext()); // Open date picker dialog
+
+            }
+        });
+
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
@@ -83,6 +104,20 @@ public class HomeFragment extends Fragment{
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void openDatePicker(Context context){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, R.style.DialogTheme , new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                //Showing the picked value in the textView
+//                textView.setText(String.valueOf(year)+ "."+String.valueOf(month)+ "."+String.valueOf(day));
+
+            }
+        }, 2023, 01, 20);
+
+        datePickerDialog.show();
     }
 
 }
