@@ -18,7 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.bookingapplication.databinding.ActivityHomeBinding;
-
+import com.example.bookingapplication.model.enums.UserRole;
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
@@ -55,18 +55,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String uloga = intent.getStringExtra("Uloga");
-        switch (uloga) {
-            case "Guest":
-                Toast.makeText(getApplicationContext(), uloga, Toast.LENGTH_SHORT).show();
+        UserRole role = UserRole.valueOf(intent.getStringExtra("Role"));
+        switch (role) {
+            case GUEST:
+                Toast.makeText(getApplicationContext(), role.toString(), Toast.LENGTH_SHORT).show();
                 navView.inflateMenu(R.menu.bottom_nav_menu_guest);
                 break;
-            case "Host":
-                Toast.makeText(getApplicationContext(), uloga, Toast.LENGTH_SHORT).show();
+            case HOST:
+                Toast.makeText(getApplicationContext(), role.toString(), Toast.LENGTH_SHORT).show();
                 navView.inflateMenu(R.menu.bottom_nav_menu_host);
                 break;
-            case "Admin":
-                Toast.makeText(getApplicationContext(), uloga, Toast.LENGTH_SHORT).show();
+            case ADMIN:
+                Toast.makeText(getApplicationContext(), role.toString(), Toast.LENGTH_SHORT).show();
                 navView.inflateMenu(R.menu.bottom_nav_menu_admin);
                 break;
             default:

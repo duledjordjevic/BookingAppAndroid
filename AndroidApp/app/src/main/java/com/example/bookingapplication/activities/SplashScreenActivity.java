@@ -5,8 +5,12 @@ import androidx.core.splashscreen.SplashScreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.model.User;
+import com.example.bookingapplication.util.SharedPreferencesManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +19,18 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        User user = SharedPreferencesManager.getUserInfo(this);
+        if (user != null && !TextUtils.isEmpty(user.getEmail())) {
+            Toast.makeText(SplashScreenActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+            intent.putExtra("Role", user.getUserRole().toString());
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
         super.onCreate(savedInstanceState);
