@@ -14,7 +14,7 @@ import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.ActivityLoginBinding;
 import com.example.bookingapplication.model.User;
-import com.example.bookingapplication.model.enums.UserRole;
+import com.example.bookingapplication.model.enums.UserType;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.example.bookingapplication.util.Validator;
 import com.google.android.material.textfield.TextInputEditText;
@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -86,8 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void postLogin(User user){
-
-        Call<User> call = ClientUtils.productService.login(user);
+        Call<User> call = ClientUtils.authService.login(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
 
-                    SharedPreferencesManager.saveUserInfo(getApplicationContext(), response.body().getEmail(), UserRole.valueOf(role), id);
+                    SharedPreferencesManager.saveUserInfo(getApplicationContext(), response.body().getEmail(), UserType.valueOf(role), id);
 
                     Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

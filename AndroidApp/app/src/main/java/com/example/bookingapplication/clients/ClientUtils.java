@@ -32,5 +32,5 @@ public class ClientUtils {
             .client(test())
             .build();
 
-    public static AuthService productService = retrofit.create(AuthService.class);
+    public static AuthService authService = retrofit.create(AuthService.class);
 }

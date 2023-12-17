@@ -18,7 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.bookingapplication.databinding.ActivityHomeBinding;
-import com.example.bookingapplication.model.enums.UserRole;
+import com.example.bookingapplication.model.enums.UserType;
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        UserRole role = UserRole.valueOf(intent.getStringExtra("Role"));
+        UserType role = UserType.valueOf(intent.getStringExtra("Role"));
         switch (role) {
             case GUEST:
                 Toast.makeText(getApplicationContext(), role.toString(), Toast.LENGTH_SHORT).show();

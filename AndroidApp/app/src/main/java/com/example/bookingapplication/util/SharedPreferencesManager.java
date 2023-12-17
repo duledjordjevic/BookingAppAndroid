@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.bookingapplication.model.User;
-import com.example.bookingapplication.model.enums.UserRole;
+import com.example.bookingapplication.model.enums.UserType;
 
 public class SharedPreferencesManager {
 
@@ -17,10 +17,10 @@ public class SharedPreferencesManager {
         return context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
-    public static void saveUserInfo(Context context, String email, UserRole userRole, int id) {
+    public static void saveUserInfo(Context context, String email, UserType userType, int id) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString(KEY_EMAIL, email);
-        editor.putString(KEY_USER_ROLE, userRole.toString());
+        editor.putString(KEY_USER_ROLE, userType.toString());
         editor.putInt(KEY_ID, id);
         editor.apply();
     }
@@ -28,9 +28,9 @@ public class SharedPreferencesManager {
     public static User getUserInfo(Context context) {
         SharedPreferences preferences = getSharedPreferences(context);
         String email = preferences.getString(KEY_EMAIL, "");
-        String userRole = preferences.getString(KEY_USER_ROLE, "");
+        String userRole = preferences.getString(KEY_USER_ROLE, UserType.ADMIN.toString());
         int id = preferences.getInt(KEY_ID, 0);
-        return new User((long) id, email, "",  UserRole.valueOf(userRole), "");
+        return new User((long) id, email, "",  UserType.valueOf(userRole), "");
     }
 
     public static void clearUserInfo(Context context) {

@@ -1,6 +1,6 @@
 package com.example.bookingapplication.model.enums;
 
-public enum UserRole {
+public enum UserType {
     ADMIN,
     HOST,
     GUEST
