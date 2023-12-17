@@ -50,7 +50,6 @@
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailInput"
-            android:maxLength="20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,6 +77,29 @@
 
     <TextView
         android:id="@+id/emptyInputFields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@id/passwordInputLayout"
+        app:layout_constraintStart_toStartOf="@id/passwordInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/red"
+        />
+    <TextView
+        android:id="@+id/emailWrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@id/passwordInputLayout"
+        app:layout_constraintStart_toStartOf="@id/passwordInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/red"
+        />
+
+    <TextView
+        android:id="@+id/serverError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""

@@ -45,4 +45,8 @@
     <string name="amentities">- Internet\n- Parking\n- Air condition\n- Breakfast\n</string>
     <string name="delete_btn">Delete</string>
     <string name="amenities_title">Amenities</string>
+    <string name="street">Street</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="postal_code">Postal code</string>
 </resources>
