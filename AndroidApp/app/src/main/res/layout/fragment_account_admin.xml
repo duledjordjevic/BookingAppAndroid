@@ -86,176 +86,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/roleInputLayout"
-            app:layout_constraintStart_toStartOf="@id/roleInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/roleInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:hint="Name"
-            app:counterEnabled="true"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_person"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameInputAccount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastNameInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/nameInputLayout"
-            app:layout_constraintStart_toStartOf="@id/nameInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:hint="Lastname"
-            app:counterEnabled="true"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_person"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lastNameInputAccount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phoneInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
-            app:layout_constraintStart_toStartOf="@id/lastNameInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/lastNameInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:hint="@string/phone_number"
-            app:counterEnabled="true"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_phone"
-            app:prefixText="+381"
-            app:counterMaxLength="10"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneInputAccount"
-                android:inputType="phone"
-                android:maxLength="10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/streetInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/phoneInputLayout"
-            app:layout_constraintStart_toStartOf="@id/phoneInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/phoneInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:hint="@string/street"
-            app:counterEnabled="true"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_home"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/streetInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/cityInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/streetInputLayout"
-            app:layout_constraintStart_toStartOf="@id/streetInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/streetInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:hint="@string/city"
-            app:counterEnabled="true"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_home"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/cityInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/stateInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/cityInputLayout"
-            app:layout_constraintStart_toStartOf="@id/cityInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/cityInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:hint="@string/state"
-            app:counterEnabled="true"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_home"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/stateInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/postalCodeInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/stateInputLayout"
-            app:layout_constraintStart_toStartOf="@id/stateInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/stateInputLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:hint="@string/postal_code"
-            app:counterEnabled="true"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_home"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/postalCodeInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:digits="0123456789"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/postalCodeInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/roleInputLayout"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
@@ -270,6 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordReEnterInputLayout"
@@ -291,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/enterOldPasswordLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -346,8 +183,6 @@
             app:layout_constraintEnd_toEndOf="@id/btnSaveAccount"
             app:layout_constraintStart_toStartOf="@id/btnSaveAccount"
             app:layout_constraintTop_toBottomOf="@id/btnSaveAccount" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
-

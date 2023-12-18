@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ui.comments.CommentsFragment">
+    tools:context=".fragments.comments.CommentsFragment">
 
     <TextView
         android:id="@+id/comments_text_view"
