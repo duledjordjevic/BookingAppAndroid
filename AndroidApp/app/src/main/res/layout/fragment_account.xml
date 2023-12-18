@@ -40,16 +40,59 @@
             android:textColor="@color/dark_blue"
             android:textSize="12pt"
             android:textStyle="bold"/>
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameInputLayout"
+            android:id="@+id/emailInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/signUpTextView"
             app:layout_constraintStart_toStartOf="@id/signUpTextView"
             app:layout_constraintTop_toBottomOf="@id/signUpTextView"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:hint="@string/email"
+            app:counterEnabled="true"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_email"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailInputAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/roleInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/emailInputLayout"
+            app:layout_constraintStart_toStartOf="@id/emailInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:hint="@string/role"
+            app:counterEnabled="true"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_person"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/roleInputAcc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/roleInputLayout"
+            app:layout_constraintStart_toStartOf="@id/roleInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/roleInputLayout"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:hint="Name"
@@ -113,7 +156,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/addressInputLayout"
+            android:id="@+id/streetInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,50 +166,99 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:hint="@string/home_address"
+            android:hint="@string/street"
             app:counterEnabled="true"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic_home"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addressInputAccount"
+                android:id="@+id/streetInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailInputLayout"
+            android:id="@+id/cityInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/addressInputLayout"
-            app:layout_constraintStart_toStartOf="@id/addressInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/addressInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/streetInputLayout"
+            app:layout_constraintStart_toStartOf="@id/streetInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/streetInputLayout"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:hint="@string/email"
+            android:hint="@string/city"
             app:counterEnabled="true"
             app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_email"
+            app:startIconDrawable="@drawable/ic_home"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailInputAccount"
+                android:id="@+id/cityInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/stateInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/cityInputLayout"
+            app:layout_constraintStart_toStartOf="@id/cityInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/cityInputLayout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:hint="@string/state"
+            app:counterEnabled="true"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_home"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/stateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/postalCodeInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/stateInputLayout"
+            app:layout_constraintStart_toStartOf="@id/stateInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/stateInputLayout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:hint="@string/postal_code"
+            app:counterEnabled="true"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_home"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/postalCodeInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0123456789"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/postalCodeInputLayout"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:hint="Password"
+            android:hint="@string/new_password"
             app:counterEnabled="true"
             app:endIconMode="password_toggle"
             app:startIconDrawable="@drawable/ic_lock"
@@ -187,7 +279,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:hint="Password"
+            android:hint="@string/confirm_password"
             app:counterEnabled="true"
             app:endIconMode="password_toggle"
             app:startIconDrawable="@drawable/ic_lock"
@@ -198,15 +290,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/enterOldPasswordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/passwordReEnterInputLayout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:hint="@string/old_password"
+            app:counterEnabled="true"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_lock"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/oldPasswordInput"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/emptyInputFields"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            app:layout_constraintEnd_toEndOf="@id/passwordReEnterInputLayout"
-            app:layout_constraintStart_toStartOf="@id/passwordReEnterInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/passwordReEnterInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/enterOldPasswordLayout"
+            app:layout_constraintStart_toStartOf="@id/enterOldPasswordLayout"
+            app:layout_constraintTop_toBottomOf="@id/enterOldPasswordLayout"
             android:layout_marginTop="4dp"
             android:textColor="@color/red"
             />
@@ -219,9 +331,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:text="@string/save_button"
-            app:layout_constraintEnd_toEndOf="@id/passwordReEnterInputLayout"
-            app:layout_constraintStart_toStartOf="@id/passwordReEnterInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/passwordReEnterInputLayout" />
+            app:layout_constraintEnd_toEndOf="@id/enterOldPasswordLayout"
+            app:layout_constraintStart_toStartOf="@id/enterOldPasswordLayout"
+            app:layout_constraintTop_toBottomOf="@id/enterOldPasswordLayout" />
         <Button
             android:id="@+id/btnDeleteAccount"
             android:layout_width="200dp"

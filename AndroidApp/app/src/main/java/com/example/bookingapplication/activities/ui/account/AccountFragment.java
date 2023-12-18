@@ -29,7 +29,7 @@ public class AccountFragment extends Fragment {
         binding.nameInputAccount.setText("Dusan");
         binding.lastNameInputAccount.setText("Djordjevic");
         binding.phoneInputAccount.setText("064123123");
-        binding.addressInputAccount.setText("Banovic Strahinje 10");
+        binding.streetInput.setText("Banovic Strahinje 10");
         binding.emailInputAccount.setText("ftn@uns.ac.rs");
         binding.passwordInputAccount.setText("nekasifra123");
         binding.passwordReEnterInputAccount.setText("nekasifra123");

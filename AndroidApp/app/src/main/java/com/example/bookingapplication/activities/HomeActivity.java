@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -78,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.loginActivity){
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            SharedPreferencesManager.clearUserInfo(this);
             startActivity(intent);
             finish();
             return true;
