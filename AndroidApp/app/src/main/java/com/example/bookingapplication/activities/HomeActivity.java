@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -46,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_account, R.id.navigation_notifications,R.id.reservationsFragment,
                 R.id.addedPropertiesFragment,R.id.hostPropertiesFragment,R.id.commentsFragment,R.id.reportedUsersFragment,
-                R.id.loginActivity)
+                R.id.loginActivity,R.id.accountAdminFragment)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -78,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.loginActivity){
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            SharedPreferencesManager.clearUserInfo(this);
             startActivity(intent);
             finish();
             return true;

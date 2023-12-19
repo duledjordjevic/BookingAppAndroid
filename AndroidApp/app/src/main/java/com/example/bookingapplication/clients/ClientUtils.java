@@ -33,4 +33,5 @@ public class ClientUtils {
             .build();
 
     public static AuthService authService = retrofit.create(AuthService.class);
+    public static UpdateUserService updateUserService = retrofit.create(UpdateUserService.class);
 }
