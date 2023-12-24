@@ -1,5 +1,6 @@
 package com.example.bookingapplication.clients;
 
+import com.example.bookingapplication.model.AdminForUpdate;
 import com.example.bookingapplication.model.User;
 import com.example.bookingapplication.model.UserDelete;
 import com.example.bookingapplication.model.UserForUpdate;
@@ -30,4 +31,16 @@ public interface UpdateUserService {
     })
     @PUT("users/delete/{id}")
     Call<Boolean> deleteProfile(@Body UserDelete userDelete, @Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("users/{id}")
+    Call<User> getAdmin(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("users/admin/{id}")
+    Call<User> updateAdmin(@Path("id") Long id,@Body AdminForUpdate userForUpdate);
 }

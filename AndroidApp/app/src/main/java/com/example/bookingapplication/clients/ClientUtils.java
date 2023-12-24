@@ -1,5 +1,7 @@
 package com.example.bookingapplication.clients;
 
+import android.util.Log;
+
 import com.example.bookingapplication.BookingApp;
 import com.example.bookingapplication.BuildConfig;
 import com.example.bookingapplication.util.SharedPreferencesManager;
