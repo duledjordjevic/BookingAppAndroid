@@ -9,8 +9,8 @@
         android:icon="@drawable/bed"
         android:title=""/>
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:id="@+id/createAccommodationFragment"
+        android:icon="@drawable/plus"
         android:title="" />
     <item
         android:id="@+id/reservationsFragment"
