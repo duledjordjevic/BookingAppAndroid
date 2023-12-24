@@ -313,7 +313,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/emptyInputFields"
+            android:id="@+id/updateProfileNotValid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""

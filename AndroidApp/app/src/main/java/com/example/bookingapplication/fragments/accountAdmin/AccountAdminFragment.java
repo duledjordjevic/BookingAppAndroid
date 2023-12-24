@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
@@ -41,10 +42,19 @@ public class AccountAdminFragment extends Fragment {
         userUpdate = new User();
 
         getUserInfo();
-
+        Button adminUpdateBtn = binding.btnSaveAccount;
+        adminUpdateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateAdminProfile();
+            }
+        });
 
 //        accountViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+    private void updateAdminProfile(){
+
     }
     private void getUserInfo(){
         Long id = SharedPreferencesManager.getUserInfo(this.getContext()).getId();
