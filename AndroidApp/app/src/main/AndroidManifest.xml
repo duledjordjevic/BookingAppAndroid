@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookingApplication"
-        android:name=".application.Booking"
+        android:name=".BookingApp"
         tools:targetApi="31">
         <activity
             android:name=".activities.HomeActivity"

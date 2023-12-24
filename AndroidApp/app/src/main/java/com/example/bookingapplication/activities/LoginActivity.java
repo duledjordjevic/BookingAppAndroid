@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
 
-                    SharedPreferencesManager.saveUserInfo(getApplicationContext(), response.body().getEmail(), UserType.valueOf(role), id);
+                    SharedPreferencesManager.saveUserInfo(getApplicationContext(), response.body().getEmail(), UserType.valueOf(role), id, response.body().getJwt());
 
                     Toast.makeText(LoginActivity.this, "Successful log in", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
