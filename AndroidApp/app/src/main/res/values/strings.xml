@@ -53,4 +53,38 @@
     <string name="city">City</string>
     <string name="state">State</string>
     <string name="postal_code">Postal code</string>
+    <string name="property_name">Property name</string>
+    <string name="description">Description</string>
+    <string name="cancellation_policy">Cancellation policy</string>
+    <string name="payment_method">Payment method</string>
+    <string name="reservation_confirmation_method">Reservation confirmation method</string>
+    <string name="min_guests">Min guests</string>
+    <string name="max_guests">Max guests</string>
+    <string name="parking">Parking</string>
+    <string name="wifi">Wifi</string>
+    <string name="amenities">Amenities</string>
+    <string name="tv">TV</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="air_condition">Air condition</string>
+    <string name="kitchen">Kitchen</string>
+    <string name="create_accommodation">Create accommodation</string>
+    <string name="create">Create</string>
+    <string name="price_for_entire_accommodation">Price for entire accommodation</string>
+    <string name="accommodation_type">Accommodation type</string>
+    <string-array name="accommodation_types">
+        <item>HOTEL</item>
+        <item>APARTMENT</item>
+    </string-array>
+    <string-array name="cancellation_policies">
+        <item>HOURS24</item>
+        <item>HOURS48</item>
+        <item>HOURS72</item>
+        <item>NON_REFUNDABLE</item>
+    </string-array>
+    <string-array name="reservation_methods">
+        <item>AUTOMATIC</item>
+        <item>MANUAL</item>
+    </string-array>
 </resources>

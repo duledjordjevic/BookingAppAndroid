@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.RegisterActivity"
+    android:background="@color/white">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/createAccommodation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/create_accommodation"
+        android:textColor="@color/dark_blue"
+        android:textSize="12pt"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/propertyName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/createAccommodation"
+        app:layout_constraintStart_toStartOf="@id/createAccommodation"
+        app:layout_constraintTop_toBottomOf="@id/createAccommodation"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/property_name"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/propertyNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/state"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/propertyName"
+        app:layout_constraintStart_toStartOf="@id/propertyName"
+        app:layout_constraintTop_toBottomOf="@id/propertyName"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/state"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_home"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/stateInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/city"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/state"
+        app:layout_constraintStart_toStartOf="@id/state"
+        app:layout_constraintTop_toBottomOf="@id/state"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/city"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_home"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cityInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/postalCode"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/city"
+        app:layout_constraintStart_toStartOf="@id/city"
+        app:layout_constraintTop_toBottomOf="@id/city"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/postal_code"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_home"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/postalCodeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:digits="0123456789"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/street"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/postalCode"
+        app:layout_constraintStart_toStartOf="@id/postalCode"
+        app:layout_constraintTop_toBottomOf="@id/postalCode"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/street"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_home"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/streetInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/street"
+        app:layout_constraintStart_toStartOf="@id/street"
+        app:layout_constraintTop_toBottomOf="@id/street"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/description"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        >
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/descriptionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cancellationPolicy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/description"
+        app:layout_constraintStart_toStartOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/cancellation_policy"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/cancellationPolicyTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/isPriceForEntireAcc"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/cancellationPolicy"
+        app:layout_constraintStart_toStartOf="@id/cancellationPolicy"
+        app:layout_constraintTop_toBottomOf="@id/cancellationPolicy"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/price_for_entire_accommodation"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/isPriceForEntireAccTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/accommodationType"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/isPriceForEntireAcc"
+        app:layout_constraintStart_toStartOf="@id/isPriceForEntireAcc"
+        app:layout_constraintTop_toBottomOf="@id/isPriceForEntireAcc"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/accommodation_type"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/accommodationTypeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reservationMethod"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/accommodationType"
+        app:layout_constraintStart_toStartOf="@id/accommodationType"
+        app:layout_constraintTop_toBottomOf="@id/accommodationType"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/reservation_confirmation_method"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/reservationMethodTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/minGuests"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/reservationMethod"
+        app:layout_constraintStart_toStartOf="@id/reservationMethod"
+        app:layout_constraintTop_toBottomOf="@id/reservationMethod"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/min_guests"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_person"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/minGuestsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:digits="0123456789"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/maxGuests"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/minGuests"
+        app:layout_constraintStart_toStartOf="@id/minGuests"
+        app:layout_constraintTop_toBottomOf="@id/minGuests"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:hint="@string/max_guests"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_person"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/maxGuestsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:digits="0123456789"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/emptyInputFields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@id/maxGuests"
+        app:layout_constraintStart_toStartOf="@id/maxGuests"
+        app:layout_constraintTop_toBottomOf="@id/maxGuests"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/red"
+        />
+
+    <TextView
+        android:id="@+id/amenities"
+        app:layout_constraintEnd_toEndOf="@id/maxGuests"
+        app:layout_constraintStart_toStartOf="@id/maxGuests"
+        app:layout_constraintTop_toBottomOf="@id/maxGuests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/amenities"
+        android:textColor="@color/dark_blue"
+        android:layout_marginLeft="32dp"
+        android:textSize="10pt" />
+
+    <LinearLayout
+        android:id="@+id/firstColumn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/amenities"
+        app:layout_constraintStart_toStartOf="@id/amenities"
+        app:layout_constraintTop_toBottomOf="@id/amenities"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:id="@+id/wifiCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wifi" />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/parkingCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/parking" />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tvCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondColumn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/firstColumn"
+        app:layout_constraintStart_toStartOf="@id/firstColumn"
+        app:layout_constraintTop_toBottomOf="@id/firstColumn"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:id="@+id/breakfastCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/breakfast"
+            tools:ignore="HardcodedText" />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/lunchCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lunch" />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/dinnerCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dinner" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/thirdColumn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/secondColumn"
+        app:layout_constraintStart_toStartOf="@id/secondColumn"
+        app:layout_constraintTop_toBottomOf="@id/secondColumn"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:id="@+id/poolCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pool"
+            tools:ignore="HardcodedText" />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/airConditionCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/air_condition" />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/kitchenCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kitchen" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/createAccommodationBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"
+        android:text="@string/create"
+        app:layout_constraintEnd_toEndOf="@id/maxGuests"
+        app:layout_constraintStart_toStartOf="@id/maxGuests"
+        app:layout_constraintTop_toBottomOf="@id/maxGuests" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
