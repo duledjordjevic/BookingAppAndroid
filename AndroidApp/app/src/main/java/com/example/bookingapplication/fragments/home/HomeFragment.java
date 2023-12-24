@@ -16,14 +16,26 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.clients.ApartmentService;
+import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentHomeBinding;
+import com.example.bookingapplication.fragments.FragmentTransition;
+import com.example.bookingapplication.model.ApartmentCard;
+import com.example.bookingapplication.model.User;
 import com.google.android.material.card.MaterialCardView;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
 
 public class HomeFragment extends Fragment {
 
+    public static ArrayList<ApartmentCard> products = new ArrayList<ApartmentCard>();
+    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,6 +45,10 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        prepareApartmentCardsList(products);
+
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), searchView::setQueryHint);
 
         Spinner spinner = binding.btnSort;
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -46,24 +62,6 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        MaterialCardView card1 = binding.productCardItem1;
-        MaterialCardView card2 = binding.productCardItem2;
-
-        card1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to another page when card1 is clicked
-                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
-            }
-        });
-
-        card2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment);
-            }
-        });
 
         Button button = binding.outlinedButton;
         button.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +85,8 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        FragmentTransition.to(ApartmentCardsListFragment.newInstance(products), getActivity() , false, R.id.scroll_products_list);
+
         return root;
     }
 
@@ -108,6 +108,15 @@ public class HomeFragment extends Fragment {
         }, 2023, 01, 20);
 
         datePickerDialog.show();
+    }
+
+    private void prepareApartmentCardsList(ArrayList<ApartmentCard> products){
+//        Call<User> call = ApartmentService.
+        products.add(new ApartmentCard(1L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
+        products.add(new ApartmentCard(2L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
+        products.add(new ApartmentCard(3L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
+        products.add(new ApartmentCard(4L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
+        products.add(new ApartmentCard(5L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
     }
 
 }

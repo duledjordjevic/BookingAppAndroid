@@ -150,7 +150,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/emptyInputFields"
+            android:id="@+id/updateProfileAdminNotValid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -172,17 +172,6 @@
             app:layout_constraintEnd_toEndOf="@id/enterOldPasswordLayout"
             app:layout_constraintStart_toStartOf="@id/enterOldPasswordLayout"
             app:layout_constraintTop_toBottomOf="@id/enterOldPasswordLayout" />
-        <Button
-            android:id="@+id/btnDeleteAccount"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/red"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="@string/delete_btn"
-            app:layout_constraintEnd_toEndOf="@id/btnSaveAccount"
-            app:layout_constraintStart_toStartOf="@id/btnSaveAccount"
-            app:layout_constraintTop_toBottomOf="@id/btnSaveAccount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

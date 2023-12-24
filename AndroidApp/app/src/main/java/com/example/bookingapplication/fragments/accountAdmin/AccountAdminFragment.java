@@ -12,13 +12,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentAccountAdminBinding;
 import com.example.bookingapplication.databinding.FragmentAccountBinding;
 import com.example.bookingapplication.fragments.account.AccountViewModel;
+import com.example.bookingapplication.model.AdminForUpdate;
 import com.example.bookingapplication.model.User;
+import com.example.bookingapplication.model.UserForUpdate;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 
 import retrofit2.Call;
@@ -28,7 +33,10 @@ import retrofit2.Response;
 public class AccountAdminFragment extends Fragment {
 
     private FragmentAccountAdminBinding binding;
-    private User userUpdate;
+    private User adminInfo;
+    private User currentUser;
+    private AdminForUpdate adminForUpdate;
+    private TextView updateProfileValidator;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,26 +46,70 @@ public class AccountAdminFragment extends Fragment {
         binding = FragmentAccountAdminBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        userUpdate = new User();
+        adminInfo = new User();
+        currentUser = SharedPreferencesManager.getUserInfo(this.getContext());
+        updateProfileValidator = binding.updateProfileAdminNotValid;
 
-        getUserInfo();
+        getAdminInfo();
 
+        Button adminUpdateBtn = binding.btnSaveAccount;
+        adminUpdateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateProfileValidator.setText("");
+                String newPassword = binding.passwordInputAccount.getText().toString();
+                String newPasswordConfirmation = binding.passwordReEnterInputAccount.getText().toString();
+                String oldPassword = binding.oldPasswordInput.getText().toString();
+                if(oldPassword.equals("")){
+                    updateProfileValidator.setText("Password is required");
+                    return;
+                }
+                if(!newPassword.trim().equals(newPasswordConfirmation.trim())){
+                    updateProfileValidator.setText("Passwords do not match");
+                    return;
+                }
+                adminForUpdate = new AdminForUpdate(binding.emailInputAccount.getText().toString(),newPassword,oldPassword);
+                updateAdminProfile();
+            }
+        });
 
 //        accountViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
-    private void getUserInfo(){
+    private void updateAdminProfile(){
+        Long id = currentUser.getId();
+        Call<User> call = ClientUtils.updateUserService.updateAdmin(id,adminForUpdate);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(getContext(), "Succesfully admin updated profile", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "Can not update admin profile", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getContext(), "Can not update profile", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void getAdminInfo(){
         Long id = SharedPreferencesManager.getUserInfo(this.getContext()).getId();
-        Call<User> call = ClientUtils.updateUserService.getUser(id);
+        Call<User> call = ClientUtils.updateUserService.getAdmin(id);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200){
                     Log.d("Booking","GET BY ID");
 
-                    userUpdate = response.body();
-                    binding.emailInputAccount.setText(userUpdate.getEmail());
-                    binding.roleInputAcc.setText(String.valueOf(userUpdate.getUserRole()));
+                    adminInfo = response.body();
+                    binding.emailInputAccount.setText(adminInfo.getEmail());
+                    binding.roleInputAcc.setText(String.valueOf(adminInfo.getUserRole()));
+                    binding.passwordInputAccount.setText("");
+                    binding.passwordReEnterInputAccount.setText("");
+                    binding.oldPasswordInput.setText("");
 
                 }else{
                     Log.d("ShopApp","Meesage recieved: "+response.code());

@@ -5,10 +5,6 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="" />
     <item
-        android:id="@+id/navigation_account"
-        android:icon="@drawable/person_white"
-        android:title="" />
-    <item
         android:id="@+id/hostPropertiesFragment"
         android:icon="@drawable/bed"
         android:title=""/>
@@ -19,5 +15,9 @@
     <item
         android:id="@+id/reservationsFragment"
         android:icon="@drawable/calendar"
+        android:title="" />
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/person_white"
         android:title="" />
 </menu>
