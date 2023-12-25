@@ -19,8 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
@@ -51,6 +53,11 @@ public class ApartmentDetailsFragment extends Fragment {
     private Accommodation accommodation;
     private ImageView imageView;
     private Long id;
+    private Button containedButton;
+    private EditText guests;
+    private String dateOutput;
+    private String dateInput;
+
 
     public static ApartmentDetailsFragment newInstance() {
         return new ApartmentDetailsFragment();
@@ -66,13 +73,17 @@ public class ApartmentDetailsFragment extends Fragment {
 
 //        binding = FragmentApartmentDetailsBinding.inflate(inflater, container, false);
         Button button = binding.button1;
+        containedButton = binding.containedButton;
         title = binding.title;
         description = binding.description;
         rating = binding.rating;
         address = binding.address;
         amenities = binding.amenities;
         imageView = binding.imageView;
+        guests = binding.guests;
 
+        dateOutput = "";
+        dateInput = "";
         Bundle bundle = getArguments();
         if (bundle != null) {
             id = bundle.getLong("apartmentId");
@@ -85,7 +96,7 @@ public class ApartmentDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                openDatePicker(requireContext()); // Open date picker dialog
+                openDatePickerInput(requireContext()); // Open date picker dialog
 
             }
         });
@@ -95,7 +106,19 @@ public class ApartmentDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                openDatePicker(requireContext()); // Open date picker dialog
+                openDatePickerOutput(requireContext()); // Open date picker dialog
+
+            }
+        });
+
+        containedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getActivity(), "Reservation successfully added for " +
+                                Integer.parseInt(guests.getText().toString())
+                                + " guests",
+                        Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -111,16 +134,37 @@ public class ApartmentDetailsFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    private void openDatePicker(Context context){
+    private String openDatePickerInput(Context context){
+
+        String dateString = "";
         DatePickerDialog datePickerDialog = new DatePickerDialog(context, R.style.DialogTheme , new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
                 //Showing the picked value in the textView
+//                dateInput = year + "."+ month+ "."+ day + ".";
+//                dateString = String.valueOf(year)+ "."+String.valueOf(month)+ "."+String.valueOf(day);
 //                textView.setText(String.valueOf(year)+ "."+String.valueOf(month)+ "."+String.valueOf(day));
 
             }
-        }, 2023, 01, 20);
+        }, 2024, 01, 20);
+
+        datePickerDialog.show();
+        return dateString;
+    }
+
+    private void openDatePickerOutput(Context context){
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, R.style.DialogTheme , new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                //Showing the picked value in the textView
+//                dateOutput = String.valueOf(year)+ "."+String.valueOf(month)+ "."+String.valueOf(day);
+//                textView.setText(String.valueOf(year)+ "."+String.valueOf(month)+ "."+String.valueOf(day));
+
+            }
+        }, 2024, 01, 20);
 
         datePickerDialog.show();
     }
