@@ -23,10 +23,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
-import com.example.bookingapplication.BookingApp;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.google.android.material.card.MaterialCardView;
@@ -88,8 +84,6 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
             product_desc12.setText(card.getDescriptionRating());
             apartment_card.setOnClickListener(v -> {
                 // Handle click on the item at 'position'
-                Log.i("Booking", "Clicked: " + card.getTitle() + ", id: " +
-                        card.getId().toString());
                 Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
                         ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();

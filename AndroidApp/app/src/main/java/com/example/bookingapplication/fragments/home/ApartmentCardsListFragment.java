@@ -51,7 +51,7 @@ public class ApartmentCardsListFragment extends ListFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i("ShopApp", "onCreateView Products List Fragment");
+//        Log.i("ShopApp", "onCreateView Products List Fragment");
         binding = FragmentApartmentCardsListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         prepareApartmentCardsList();
@@ -61,7 +61,7 @@ public class ApartmentCardsListFragment extends ListFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("ShopApp", "onCreate Products List Fragment");
+//        Log.i("ShopApp", "onCreate Products List Fragment");
         if (getArguments() != null) {
             mProducts = getArguments().getParcelableArrayList(ARG_PARAM);
             adapter = new ApartmentCardsListAdapter(getActivity(), mProducts);
@@ -88,15 +88,15 @@ public class ApartmentCardsListFragment extends ListFragment {
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
                 Log.d("Response", String.valueOf(response.code()));
                 String originalString = response.body().get(0).getImage();
-                int stringLength = originalString.length();
-                int startIndex = Math.max(0, stringLength - 10); // Određivanje početnog indeksa
+//                int stringLength = originalString.length();
+//                int startIndex = Math.max(0, stringLength - 10); // Određivanje početnog indeksa
+//
+//                String last100Characters = originalString.substring(startIndex);
+//                Log.d("Duzina", String.valueOf(stringLength));
+//                Log.d("Tag", "Zadnjih 100 karaktera: " + last100Characters);
 
-                String last100Characters = originalString.substring(startIndex);
-                Log.d("Duzina", String.valueOf(stringLength));
-                Log.d("Tag", "Zadnjih 100 karaktera: " + last100Characters);
 
-
-                Log.d("Image", response.body().get(0).getImage());
+//                Log.d("Image", response.body().get(0).getImage());
                 ArrayList<ApartmentCard> cards = new ArrayList<>();
                 for (Card card : response.body()) {
                     String rate;
@@ -106,24 +106,23 @@ public class ApartmentCardsListFragment extends ListFragment {
                         rate = card.getAvgRate().toString();
                     }
                     ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage());
-                    Log.d("Slika: ", card.getImage());
+
                     cards.add(ac);
+
                 }
 
-                Log.d("Nesto", String.valueOf(cards.size()));
                 addProducts(cards);
             }
 
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
-                Log.d("Fail", "Nesto ne valja");
-                Log.d("kard", call.toString());
+
             }
         });
     }
 
     private void addProducts(ArrayList<ApartmentCard> productss){
-//        this.products.addAll(productss);
+        this.adapter.clear();
         this.adapter.addAll(productss);
     }
 

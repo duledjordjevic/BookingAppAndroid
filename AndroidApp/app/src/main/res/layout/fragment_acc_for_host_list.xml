@@ -10,6 +10,6 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/accommodation_approving_card" />
+        tools:listitem="@layout/apartment_card" />
 
 </FrameLayout>

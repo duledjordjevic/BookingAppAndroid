@@ -4,18 +4,22 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bookingapplication.R;
@@ -45,6 +49,7 @@ public class ApartmentDetailsFragment extends Fragment {
     private TextView address;
     private TextView amenities;
     private Accommodation accommodation;
+    private ImageView imageView;
     private Long id;
 
     public static ApartmentDetailsFragment newInstance() {
@@ -66,6 +71,8 @@ public class ApartmentDetailsFragment extends Fragment {
         rating = binding.rating;
         address = binding.address;
         amenities = binding.amenities;
+        imageView = binding.imageView;
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             id = bundle.getLong("apartmentId");
@@ -130,6 +137,7 @@ public class ApartmentDetailsFragment extends Fragment {
                 description.setText(accommodation.getDescription());
                 amenities.setText(mapAmenitieToString(accommodation.getAmenities()));
                 rating.setText("Rating: ");
+                imageView.setImageBitmap(convertBase64ToBitmap(accommodation.getImages().get(0)));
 //                Log.d("Accommodation", response.body().toString());
             }
 
@@ -149,6 +157,10 @@ public class ApartmentDetailsFragment extends Fragment {
                 result += "- " + amenitie.toString() + "\n";
         }
         return result;
+    }
+    private Bitmap convertBase64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
 }

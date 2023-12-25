@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         tools:ignore="MissingConstraints"
-        android:id="@+id/apartment_card_item">
+        android:id="@+id/accommodation_approving_card_item">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="194dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/apartment_picture"
-                android:id="@+id/apartment_card_image"/>
+                app:srcCompat="@drawable/apartment_picture"
+                android:id="@+id/accommodation_approving_card_image"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,15 +43,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/apartment_title"
-                        android:id="@+id/apartment_card_title"
+                        android:id="@+id/accommodation_approving_card_title"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/apartment_desc"
-                        android:id="@+id/apartment_card_desc11"
+                        android:text="@string/accommodation_address"
+                        android:id="@+id/accommodation_approving_card_address"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/accommodation_description"
+                        android:id="@+id/accommodation_approving_card_description"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="?android:attr/textColorSecondary"
                         />
@@ -60,28 +69,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="8dp"
-                    android:gravity="end">
+                    android:padding="10dp"
+                    android:gravity="center">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/apartment_review"
-                        android:id="@+id/apartment_card_desc12"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                    <ImageButton
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:background="@drawable/round_border_background"
-                        app:srcCompat="@drawable/ic_heart" />
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:backgroundTint="@color/dark_blue"
+                        android:text="@string/accommodation_approving_btn_approve"
+                        android:id="@+id/accommodation_approving_card_approve"/>
 
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="@color/red"
+                        android:text="@string/accommodation_approving_btn_decline"
+                        android:id="@+id/accommodation_approving_card_decline"/>
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.ApartmentCardsListFragment">
+    tools:context=".fragments.addedProperties.AccommodationApprovingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@android:id/list"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/accommodation_approving_card" />
+        android:layout_margin="10dp"
+        android:id="@+id/scroll_approving_accommodations_list"
+        />
 
 </FrameLayout>
