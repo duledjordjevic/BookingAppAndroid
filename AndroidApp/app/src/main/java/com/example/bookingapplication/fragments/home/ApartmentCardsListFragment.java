@@ -87,16 +87,16 @@ public class ApartmentCardsListFragment extends ListFragment {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
                 Log.d("Response", String.valueOf(response.code()));
-                String originalString = response.body().get(0).getImage();
-                int stringLength = originalString.length();
-                int startIndex = Math.max(0, stringLength - 10); // Određivanje početnog indeksa
+//                String originalString = response.body().get(0).getImage();
+//                int stringLength = originalString.length();
+//                int startIndex = Math.max(0, stringLength - 10); // Određivanje početnog indeksa
+//
+//                String last100Characters = originalString.substring(startIndex);
+//                Log.d("Duzina", String.valueOf(stringLength));
+//                Log.d("Tag", "Zadnjih 100 karaktera: " + last100Characters);
 
-                String last100Characters = originalString.substring(startIndex);
-                Log.d("Duzina", String.valueOf(stringLength));
-                Log.d("Tag", "Zadnjih 100 karaktera: " + last100Characters);
 
-
-                Log.d("Image", response.body().get(0).getImage());
+//                Log.d("Image", response.body().get(0).getImage());
                 ArrayList<ApartmentCard> cards = new ArrayList<>();
                 for (Card card : response.body()) {
                     String rate;
@@ -105,8 +105,7 @@ public class ApartmentCardsListFragment extends ListFragment {
                     } else {
                         rate = card.getAvgRate().toString();
                     }
-                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage());
-                    Log.d("Slika: ", card.getImage());
+                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, null);
                     cards.add(ac);
                 }
 

@@ -15,15 +15,15 @@ import androidx.annotation.Nullable;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.model.AccommodationApprovingCard;
-import com.example.bookingapplication.model.ApartmentCard;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
 public class AccommodationApprovingListAdapter extends ArrayAdapter<AccommodationApprovingCard> {
     private ArrayList<AccommodationApprovingCard> aProducts;
-    public AccommodationApprovingListAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
+    public AccommodationApprovingListAdapter(@NonNull Context context, ArrayList<AccommodationApprovingCard> resource) {
+        super(context, R.layout.accommodation_approving_card, resource);
+        aProducts = resource;
     }
     @Override
     public int getCount() {

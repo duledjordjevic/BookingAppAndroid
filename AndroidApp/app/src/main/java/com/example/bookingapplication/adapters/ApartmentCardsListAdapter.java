@@ -20,10 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
-import com.example.bookingapplication.BookingApp;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.google.android.material.card.MaterialCardView;
@@ -87,7 +83,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
 //                    .into(imageView);
 
             String dusan = "data:image/jpeg;base64,";
-            imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
+//            imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
