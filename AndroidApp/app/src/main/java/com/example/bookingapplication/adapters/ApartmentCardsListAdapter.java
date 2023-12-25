@@ -73,19 +73,10 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         TextView product_desc12 = convertView.findViewById(R.id.apartment_card_desc12);
 
         if(card != null){
-
-//            // Dekodiranje Base64 Stringa u byte[]
-//            byte[] imageBytes = Base64.decode(card.getImage(), Base64.DEFAULT);
-//
-//// Pretvaranje byte[] u Bitmap
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-//
-//// Postavljanje Bitmapa u ImageView koristeći Glide
-//            Glide.with(BookingApp.getContext())
-//                    .load(Base64.decode(card.getImage(), Base64.DEFAULT))
-//                    .into(imageView);
-
-            String dusan = "data:image/jpeg;base64,";
+//            String base64Image = card.getImage();
+//            Log.d("Img", card.getImage());
+//            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+//            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
 
             productTitle.setText(card.getTitle());
@@ -106,16 +97,6 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         return convertView;
     }
 
-    public Bitmap StringToBitMap(String encodedString) {
-        try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
     private Bitmap convertBase64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
