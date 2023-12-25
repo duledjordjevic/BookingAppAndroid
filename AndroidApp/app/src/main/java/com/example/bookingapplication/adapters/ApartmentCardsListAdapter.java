@@ -1,11 +1,14 @@
 package com.example.bookingapplication.adapters;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,20 +77,12 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         TextView product_desc12 = convertView.findViewById(R.id.apartment_card_desc12);
 
         if(card != null){
-
-//            // Dekodiranje Base64 Stringa u byte[]
-//            byte[] imageBytes = Base64.decode(card.getImage(), Base64.DEFAULT);
-//
-//// Pretvaranje byte[] u Bitmap
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-//
-//// Postavljanje Bitmapa u ImageView koristeći Glide
-//            Glide.with(BookingApp.getContext())
-//                    .load(Base64.decode(card.getImage(), Base64.DEFAULT))
-//                    .into(imageView);
-
-            String dusan = "data:image/jpeg;base64,";
+//            String base64Image = card.getImage();
+//            Log.d("Img", card.getImage());
+//            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+//            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
+
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
@@ -97,24 +92,17 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
                         card.getId().toString());
                 Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
                         ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putLong("apartmentId", card.getId());
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
             });
         }
 
         return convertView;
     }
 
-    public Bitmap StringToBitMap(String encodedString) {
-        try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
     private Bitmap convertBase64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64, 0);
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 }

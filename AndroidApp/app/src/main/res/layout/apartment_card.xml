@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="194dp"
                 android:scaleType="centerCrop"
+                app:srcCompat="@drawable/apartment_picture"
                 android:id="@+id/apartment_card_image"/>
 
             <LinearLayout
