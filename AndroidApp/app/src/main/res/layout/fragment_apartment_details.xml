@@ -145,6 +145,15 @@
                     android:layout_marginTop="10dp"
                     android:gravity="end">
 
+                    <EditText
+                        android:id="@+id/guests"
+                        android:textColor="@color/dark_blue"
+                        android:layout_width="155dp"
+                        android:layout_height="48dp"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:hint="Number of guests: " />
+
                     <Button
                         android:id="@+id/containedButton"
                         style="@style/CustomOutlinedButtonIcon"
