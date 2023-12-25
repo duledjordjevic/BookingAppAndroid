@@ -1,6 +1,12 @@
 package com.example.bookingapplication.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +20,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.example.bookingapplication.BookingApp;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.google.android.material.card.MaterialCardView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
@@ -61,7 +74,20 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         TextView product_desc12 = convertView.findViewById(R.id.apartment_card_desc12);
 
         if(card != null){
-            imageView.setImageResource(card.getImage());
+
+//            // Dekodiranje Base64 Stringa u byte[]
+//            byte[] imageBytes = Base64.decode(card.getImage(), Base64.DEFAULT);
+//
+//// Pretvaranje byte[] u Bitmap
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+//
+//// Postavljanje Bitmapa u ImageView koristeći Glide
+//            Glide.with(BookingApp.getContext())
+//                    .load(Base64.decode(card.getImage(), Base64.DEFAULT))
+//                    .into(imageView);
+
+            String dusan = "data:image/jpeg;base64,";
+            imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
@@ -75,5 +101,20 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         }
 
         return convertView;
+    }
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+    private Bitmap convertBase64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64, 0);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 }
