@@ -1,11 +1,14 @@
 package com.example.bookingapplication.adapters;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,6 +87,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
 
             String dusan = "data:image/jpeg;base64,";
             imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
+
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
@@ -93,6 +97,9 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
                         card.getId().toString());
                 Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
                         ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putLong("apartmentId", card.getId());
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
             });
         }
 
@@ -110,7 +117,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         }
     }
     private Bitmap convertBase64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64, 0);
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 }
