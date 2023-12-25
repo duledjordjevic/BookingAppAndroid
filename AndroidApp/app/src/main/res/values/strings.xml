@@ -32,6 +32,11 @@
     <string name="apartment_title">Suncev Breg</string>
     <string name="apartment_desc">Srbija, Novi Sad\n19. - 24. may\n$202 per night</string>
     <string name="apartment_review">Rating: 4.6\n200 reviews</string>
+    <string name="accommodation_address">Srbija, Novi Sad, Banovic Strahinje 13</string>
+    <string name="accommodation_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation </string>
+    <string name="accommodation_approving_btn_approve">Approve</string>
+    <string name="accommodation_approving_btn_decline">Decline</string>
     <string-array name="sort_arrays">
         <item>ASC</item>
         <item>DSC</item>

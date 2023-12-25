@@ -26,8 +26,6 @@ public class AddedPropertiesFragment extends Fragment {
         binding = FragmentAddedPropertiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.addedPropertiesTextView;
-        addedPropertiesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
