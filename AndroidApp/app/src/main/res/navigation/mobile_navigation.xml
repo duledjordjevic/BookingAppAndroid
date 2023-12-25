@@ -67,5 +67,9 @@
     <fragment
         android:id="@+id/createAccommodationFragment"
         android:name="com.example.bookingapplication.fragments.createAccommodation.CreateAccommodationFragment"
-        android:label="Create your property" />
+        android:label="Create your property" >
+        <action
+            android:id="@+id/action_createAccommodationFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>
