@@ -1,36 +1,48 @@
-package com.example.bookingapplication.fragments.addedProperties;
+package com.example.bookingapplication.fragments.accommodationsForHost;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import com.example.bookingapplication.adapters.AccommodationApprovingListAdapter;
+
+import com.example.bookingapplication.R;
+import com.example.bookingapplication.adapters.ApartmentCardsListAdapter;
 import com.example.bookingapplication.clients.ClientUtils;
-import com.example.bookingapplication.databinding.FragmentAddedPropertiesBinding;
-import com.example.bookingapplication.model.AccommodationApprovingCard;
-import com.example.bookingapplication.model.Address;
+import com.example.bookingapplication.databinding.FragmentAccForHostListBinding;
+import com.example.bookingapplication.databinding.FragmentAccommodationsForHostBinding;
+import com.example.bookingapplication.databinding.FragmentApartmentCardsListBinding;
+import com.example.bookingapplication.fragments.home.ApartmentCardsListFragment;
+import com.example.bookingapplication.model.ApartmentCard;
 import com.example.bookingapplication.model.Card;
+import com.example.bookingapplication.util.SharedPreferencesManager;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddedPropertiesFragment  extends ListFragment {
+public class AccForHostListFragment extends ListFragment {
 
-    public static ArrayList<AccommodationApprovingCard> products = new ArrayList<AccommodationApprovingCard>();
-    private AccommodationApprovingListAdapter adapter;
+    public static ArrayList<ApartmentCard> products = new ArrayList<ApartmentCard>();
+    private ApartmentCardsListAdapter adapter;
     private static final String ARG_PARAM = "param";
-    private ArrayList<AccommodationApprovingCard> mProducts;
-    private FragmentAddedPropertiesBinding binding;
+    private ArrayList<ApartmentCard> mProducts;
+    private FragmentAccForHostListBinding binding;
 
-    public static AddedPropertiesFragment newInstance(ArrayList<AccommodationApprovingCard> products){
-        AddedPropertiesFragment fragment = new AddedPropertiesFragment();
+    public static AccForHostListFragment newInstance(ArrayList<ApartmentCard> products){
+        AccForHostListFragment fragment = new AccForHostListFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_PARAM, products);
         fragment.setArguments(args);
@@ -41,7 +53,7 @@ public class AddedPropertiesFragment  extends ListFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.i("ShopApp", "onCreateView Products List Fragment");
-        binding = FragmentAddedPropertiesBinding.inflate(inflater, container, false);
+        binding = FragmentAccForHostListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         prepareApartmentCardsList();
         return root;
@@ -50,14 +62,12 @@ public class AddedPropertiesFragment  extends ListFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("ShopApp", "onCreate Productsss List Fragment");
+        Log.i("ShopApp", "onCreate Products List Fragment");
         if (getArguments() != null) {
             mProducts = getArguments().getParcelableArrayList(ARG_PARAM);
-            adapter = new AccommodationApprovingListAdapter(getActivity(), mProducts);
+            adapter = new ApartmentCardsListAdapter(getActivity(), mProducts);
             setListAdapter(adapter);
-            Log.i("ShopApp", "Adapter Products List Fragment");
         }
-
     }
 
     @Override
@@ -73,41 +83,41 @@ public class AddedPropertiesFragment  extends ListFragment {
     }
 
     private void prepareApartmentCardsList(){
-        Call<List<Card>> call = ClientUtils.accommodationService.getAccommodationsForApproving();
+        Long id = SharedPreferencesManager.getUserInfo(getContext()).getId();
+        Call<List<Card>> call = ClientUtils.accommodationService.getAccommodationsForHosts(id);
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
-                Log.d("Response", String.valueOf(response.code()));
-                Log.d("Response", String.valueOf(response.body().get(0).getImage()));
-                ArrayList<AccommodationApprovingCard> cards = new ArrayList<>();
+                ArrayList<ApartmentCard> cards = new ArrayList<>();
+                Log.i("ShopApp", String.valueOf(response.code()));
                 for (Card card : response.body()) {
                     String rate;
-
-
                     if(card.getAvgRate() == null){
                         rate = "";
                     } else {
                         rate = card.getAvgRate().toString();
                     }
-                    AccommodationApprovingCard ac = new AccommodationApprovingCard(card.getId(),card.getTitle(),card.getAddress(), card.getImage(),card.getDescription());
+                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage());
+
                     cards.add(ac);
 
                 }
+
                 addProducts(cards);
-                Log.d("NestoPosle", String.valueOf(cards.size()));
 
             }
 
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
-
+                Log.i("ShopApp", "USOOOO");
             }
         });
     }
 
-    private void addProducts(ArrayList<AccommodationApprovingCard> products){
+    private void addProducts(ArrayList<ApartmentCard> products){
         this.adapter.clear();
         this.adapter.addAll(products);
     }
+
 
 }

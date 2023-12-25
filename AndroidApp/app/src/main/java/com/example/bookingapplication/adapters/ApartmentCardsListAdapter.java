@@ -1,6 +1,15 @@
 package com.example.bookingapplication.adapters;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +27,9 @@ import com.example.bookingapplication.R;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.google.android.material.card.MaterialCardView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
@@ -61,19 +73,30 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         TextView product_desc12 = convertView.findViewById(R.id.apartment_card_desc12);
 
         if(card != null){
-            imageView.setImageResource(card.getImage());
+//            String base64Image = card.getImage();
+//            Log.d("Img", card.getImage());
+//            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+//            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
+
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
             apartment_card.setOnClickListener(v -> {
                 // Handle click on the item at 'position'
-                Log.i("Booking", "Clicked: " + card.getTitle() + ", id: " +
-                        card.getId().toString());
                 Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
                         ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putLong("apartmentId", card.getId());
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
             });
         }
 
         return convertView;
+    }
+
+    private Bitmap convertBase64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 }

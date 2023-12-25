@@ -15,10 +15,17 @@ import android.widget.ListView;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.adapters.ApartmentCardsListAdapter;
+import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentApartmentCardsListBinding;
 import com.example.bookingapplication.model.ApartmentCard;
+import com.example.bookingapplication.model.Card;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +34,7 @@ import java.util.ArrayList;
  */
 public class ApartmentCardsListFragment extends ListFragment {
 
+    public static ArrayList<ApartmentCard> products = new ArrayList<ApartmentCard>();
     private ApartmentCardsListAdapter adapter;
     private static final String ARG_PARAM = "param";
     private ArrayList<ApartmentCard> mProducts;
@@ -43,16 +51,17 @@ public class ApartmentCardsListFragment extends ListFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i("ShopApp", "onCreateView Products List Fragment");
+//        Log.i("ShopApp", "onCreateView Products List Fragment");
         binding = FragmentApartmentCardsListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        prepareApartmentCardsList();
         return root;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("ShopApp", "onCreate Products List Fragment");
+//        Log.i("ShopApp", "onCreate Products List Fragment");
         if (getArguments() != null) {
             mProducts = getArguments().getParcelableArrayList(ARG_PARAM);
             adapter = new ApartmentCardsListAdapter(getActivity(), mProducts);
@@ -71,5 +80,51 @@ public class ApartmentCardsListFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
     }
+
+    private void prepareApartmentCardsList(){
+        Call<List<Card>> call = ClientUtils.apartmentService.getAccommodationsCards();
+        call.enqueue(new Callback<List<Card>>() {
+            @Override
+            public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
+                Log.d("Response", String.valueOf(response.code()));
+                String originalString = response.body().get(0).getImage();
+//                int stringLength = originalString.length();
+//                int startIndex = Math.max(0, stringLength - 10); // Određivanje početnog indeksa
+//
+//                String last100Characters = originalString.substring(startIndex);
+//                Log.d("Duzina", String.valueOf(stringLength));
+//                Log.d("Tag", "Zadnjih 100 karaktera: " + last100Characters);
+
+
+//                Log.d("Image", response.body().get(0).getImage());
+                ArrayList<ApartmentCard> cards = new ArrayList<>();
+                for (Card card : response.body()) {
+                    String rate;
+                    if(card.getAvgRate() == null){
+                        rate = "";
+                    } else {
+                        rate = card.getAvgRate().toString();
+                    }
+                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage());
+
+                    cards.add(ac);
+
+                }
+
+                addProducts(cards);
+            }
+
+            @Override
+            public void onFailure(Call<List<Card>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void addProducts(ArrayList<ApartmentCard> productss){
+        this.adapter.clear();
+        this.adapter.addAll(productss);
+    }
+
 
 }

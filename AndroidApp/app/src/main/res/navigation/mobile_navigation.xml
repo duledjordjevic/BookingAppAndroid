@@ -67,6 +67,16 @@
     <fragment
         android:id="@+id/createAccommodationFragment"
         android:name="com.example.bookingapplication.fragments.createAccommodation.CreateAccommodationFragment"
+        android:label="Create your property" />
+    <fragment
+        android:id="@+id/accommodationApprovingFragment"
+        android:name="com.example.bookingapplication.fragments.addedProperties.AccommodationApprovingFragment"
+        android:label="Approve properties"
+        tools:layout="@layout/fragment_accommodation_approving" />
+    <fragment
+        android:id="@+id/accommodationsForHostFragment"
+        android:name="com.example.bookingapplication.fragments.accommodationsForHost.AccommodationsForHostFragment"
+        android:label="Your properties" />
         android:label="Create your property" >
         <action
             android:id="@+id/action_createAccommodationFragment_to_navigation_home"

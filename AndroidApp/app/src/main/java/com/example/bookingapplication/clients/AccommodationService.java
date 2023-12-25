@@ -1,10 +1,14 @@
 package com.example.bookingapplication.clients;
 
 import com.example.bookingapplication.model.Accommodation;
+import com.example.bookingapplication.model.Card;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -26,4 +30,25 @@ public interface AccommodationService {
     @Multipart
     @POST("images/{accommodation_id}")
     Call<Void> createAccommodationImages(@Path("accommodation_id") Long accommodation_id,   @Part List<MultipartBody.Part> image);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/{id}")
+    Call<Accommodation> getAccommodationDetails(@Path("id") Long id);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/adminApproving")
+    Call<List<Card>> getAccommodationsForApproving();
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/host/{host_id}")
+    Call<List<Card>> getAccommodationsForHosts(@Path("host_id") Long host_id);
+
 }
