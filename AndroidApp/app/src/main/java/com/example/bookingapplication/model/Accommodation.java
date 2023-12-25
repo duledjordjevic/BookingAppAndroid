@@ -140,33 +140,4 @@ public class Accommodation {
     public void setHostId(Long hostId) {
         this.hostId = hostId;
     }
-
-    public Set<PriceList> getPrices() {
-        return prices;
-    }
-
-    public void setPrices(Set<PriceList> prices) {
-        this.prices = prices;
-    }
-
-    @Override
-    public String toString() {
-        return "Accommodation{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", address=" + address +
-                ", amenities=" + amenities +
-                ", images=" + images +
-                ", minGuest=" + minGuest +
-                ", maxGuest=" + maxGuest +
-                ", type=" + type +
-                ", cancellationPolicy=" + cancellationPolicy +
-                ", reservationMethod=" + reservationMethod +
-                ", accommodationApprovalStatus=" + accommodationApprovalStatus +
-                ", isPriceForEntireAcc=" + isPriceForEntireAcc +
-                ", prices=" + prices +
-                ", hostId=" + hostId +
-                '}';
-    }
 }
