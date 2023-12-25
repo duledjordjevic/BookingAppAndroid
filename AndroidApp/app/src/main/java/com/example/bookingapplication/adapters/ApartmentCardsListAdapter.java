@@ -84,8 +84,6 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
             product_desc12.setText(card.getDescriptionRating());
             apartment_card.setOnClickListener(v -> {
                 // Handle click on the item at 'position'
-                Log.i("Booking", "Clicked: " + card.getTitle() + ", id: " +
-                        card.getId().toString());
                 Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
                         ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
