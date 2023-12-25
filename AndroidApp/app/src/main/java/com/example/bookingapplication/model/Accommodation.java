@@ -15,7 +15,7 @@ public class Accommodation {
     private String description;
     private Address address;
     private List<Amenities> amenities;
-    private List<byte[]> images;
+    private List<String> images;
     private int minGuest;
     private int maxGuest;
     private AccommodationType type;
@@ -23,7 +23,7 @@ public class Accommodation {
     private ReservationMethod reservationMethod;
     private AccommodationApprovalStatus accommodationApprovalStatus;
     private boolean isPriceForEntireAcc;
-//    private Set<PriceList> prices;
+    private Set<PriceList> prices;
     private Long hostId;
 
     public Accommodation() {
@@ -69,11 +69,11 @@ public class Accommodation {
         this.amenities = amenities;
     }
 
-    public List<byte[]> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(List<byte[]> images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 

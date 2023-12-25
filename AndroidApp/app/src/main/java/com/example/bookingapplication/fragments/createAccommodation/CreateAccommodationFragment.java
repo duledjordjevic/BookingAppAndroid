@@ -304,7 +304,7 @@ public class CreateAccommodationFragment extends Fragment {
                     Log.d("IMAGES", "Successful");
                      Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
                     NavController navController = Navigation.findNavController(getView());
-                    navController.navigate(R.id.action_createAccommodationFragment_to_navigation_home);
+                    navController.navigate(R.id.action_createAccommodationFragment_to_accommodationsForHostFragment);
                 }else{
                     Log.d("IMAGES", "Some other code status");
                 }
