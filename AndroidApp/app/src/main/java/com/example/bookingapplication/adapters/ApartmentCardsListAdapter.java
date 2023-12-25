@@ -77,11 +77,11 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         TextView product_desc12 = convertView.findViewById(R.id.apartment_card_desc12);
 
         if(card != null){
-            String base64Image = card.getImage();
-            Log.d("Img", card.getImage());
-            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            imageView.setImageBitmap(decodedBitmap);
+//            String base64Image = card.getImage();
+//            Log.d("Img", card.getImage());
+//            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+//            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
 
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
@@ -101,16 +101,6 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         return convertView;
     }
 
-    public Bitmap StringToBitMap(String encodedString) {
-        try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
     private Bitmap convertBase64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);

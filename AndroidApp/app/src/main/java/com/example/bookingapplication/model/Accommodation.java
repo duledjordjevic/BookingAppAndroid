@@ -15,7 +15,7 @@ public class Accommodation {
     private String description;
     private Address address;
     private List<Amenities> amenities;
-    private List<byte[]> images;
+    private List<String> images;
     private int minGuest;
     private int maxGuest;
     private AccommodationType type;
@@ -23,7 +23,7 @@ public class Accommodation {
     private ReservationMethod reservationMethod;
     private AccommodationApprovalStatus accommodationApprovalStatus;
     private boolean isPriceForEntireAcc;
-//    private Set<PriceList> prices;
+    private Set<PriceList> prices;
     private Long hostId;
 
     public Accommodation() {
@@ -69,11 +69,11 @@ public class Accommodation {
         this.amenities = amenities;
     }
 
-    public List<byte[]> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(List<byte[]> images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 
@@ -139,5 +139,34 @@ public class Accommodation {
 
     public void setHostId(Long hostId) {
         this.hostId = hostId;
+    }
+
+    public Set<PriceList> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(Set<PriceList> prices) {
+        this.prices = prices;
+    }
+
+    @Override
+    public String toString() {
+        return "Accommodation{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", address=" + address +
+                ", amenities=" + amenities +
+                ", images=" + images +
+                ", minGuest=" + minGuest +
+                ", maxGuest=" + maxGuest +
+                ", type=" + type +
+                ", cancellationPolicy=" + cancellationPolicy +
+                ", reservationMethod=" + reservationMethod +
+                ", accommodationApprovalStatus=" + accommodationApprovalStatus +
+                ", isPriceForEntireAcc=" + isPriceForEntireAcc +
+                ", prices=" + prices +
+                ", hostId=" + hostId +
+                '}';
     }
 }
