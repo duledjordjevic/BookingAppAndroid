@@ -25,6 +25,8 @@ import com.example.bookingapplication.clients.ApartmentService;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentHomeBinding;
 import com.example.bookingapplication.fragments.FragmentTransition;
+import com.example.bookingapplication.fragments.addedProperties.AddedPropertiesFragment;
+import com.example.bookingapplication.model.AccommodationApprovingCard;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.model.User;

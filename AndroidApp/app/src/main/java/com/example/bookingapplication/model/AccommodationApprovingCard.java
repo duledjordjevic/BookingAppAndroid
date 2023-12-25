@@ -9,10 +9,10 @@ public class AccommodationApprovingCard  implements Parcelable {
     private Long id;
     private String title;
     private Address address;
-    private int image;
+    private String image;
     private String description;
 
-    public AccommodationApprovingCard(Long id, String title, Address address, int image, String description) {
+    public AccommodationApprovingCard(Long id, String title, Address address, String image, String description) {
         this.id = id;
         this.title = title;
         this.address = address;
@@ -27,6 +27,7 @@ public class AccommodationApprovingCard  implements Parcelable {
         address.setState(in.readString());
         address.setCity(in.readString());
         address.setStreet(in.readString());
+        image = in.readString();
     }
     public Long getId() {
         return id;
@@ -40,7 +41,7 @@ public class AccommodationApprovingCard  implements Parcelable {
         return address;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -56,7 +57,7 @@ public class AccommodationApprovingCard  implements Parcelable {
         this.address = address;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -81,6 +82,7 @@ public class AccommodationApprovingCard  implements Parcelable {
         dest.writeString(address.getState());
         dest.writeString(address.getCity());
         dest.writeString(address.getStreet());
+        dest.writeString(image);
     }
     public static final Creator<AccommodationApprovingCard> CREATOR = new Creator<AccommodationApprovingCard>() {
         @Override
@@ -93,4 +95,15 @@ public class AccommodationApprovingCard  implements Parcelable {
             return new AccommodationApprovingCard[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "AccommodationApprovingCard{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", address=" + address +
+                ", image=" + image +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

@@ -78,7 +78,8 @@
                         android:layout_weight="1"
                         android:layout_marginRight="10dp"
                         android:backgroundTint="@color/dark_blue"
-                        android:text="@string/accommodation_approving_btn_approve" />
+                        android:text="@string/accommodation_approving_btn_approve"
+                        android:id="@+id/accommodation_approving_card_approve"/>
 
                     <Button
                         android:layout_width="wrap_content"
@@ -86,7 +87,8 @@
                         android:layout_weight="1"
                         android:layout_marginLeft="10dp"
                         android:backgroundTint="@color/red"
-                        android:text="@string/accommodation_approving_btn_decline" />
+                        android:text="@string/accommodation_approving_btn_decline"
+                        android:id="@+id/accommodation_approving_card_decline"/>
                 </LinearLayout>
             </LinearLayout>
 

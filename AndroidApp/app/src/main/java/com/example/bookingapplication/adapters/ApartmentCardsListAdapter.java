@@ -83,7 +83,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
 //                    .into(imageView);
 
             String dusan = "data:image/jpeg;base64,";
-//            imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
+            imageView.setImageBitmap(convertBase64ToBitmap(card.getImage()));
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());

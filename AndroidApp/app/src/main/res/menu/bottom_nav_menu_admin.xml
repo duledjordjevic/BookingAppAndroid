@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/addedPropertiesFragment"
+        android:id="@+id/accommodationApprovingFragment"
         android:icon="@drawable/bed"
         android:title="@string/title_added_properties"/>
     <item
