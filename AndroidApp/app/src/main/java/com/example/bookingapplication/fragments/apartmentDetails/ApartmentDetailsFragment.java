@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ public class ApartmentDetailsFragment extends Fragment {
     private ApartmentDetailsViewModel mViewModel;
     private FragmentApartmentDetailsBinding binding;
 
+    private Long id;
+
     public static ApartmentDetailsFragment newInstance() {
         return new ApartmentDetailsFragment();
     }
@@ -35,6 +38,14 @@ public class ApartmentDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_apartment_details, container, false);
         binding = FragmentApartmentDetailsBinding.inflate(inflater, container, false);
         Button button = binding.button1;
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            id = bundle.getLong("apartmentId");
+            Log.e("Id", String.valueOf(id));
+            // Koristite apartmentId kako je potrebno
+        }
+        Log.e("Id", String.valueOf(id));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
