@@ -5,19 +5,19 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="" />
     <item
-        android:id="@+id/navigation_account"
-        android:icon="@drawable/person_white"
-        android:title="" />
-    <item
         android:id="@+id/hostPropertiesFragment"
         android:icon="@drawable/bed"
         android:title=""/>
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:id="@+id/createAccommodationFragment"
+        android:icon="@drawable/plus"
         android:title="" />
     <item
         android:id="@+id/reservationsFragment"
         android:icon="@drawable/calendar"
+        android:title="" />
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/person_white"
         android:title="" />
 </menu>

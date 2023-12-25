@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordNotMatch = binding.passwordNotMatch;
 
         String[] accountTypes = getResources().getStringArray(R.array.account_types);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.account_type_dropdown_item, accountTypes);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_item, accountTypes);
         accountAutoCompleteTextView.setAdapter(arrayAdapter);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
