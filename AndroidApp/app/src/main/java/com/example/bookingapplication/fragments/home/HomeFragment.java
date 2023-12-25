@@ -5,6 +5,7 @@ import static androidx.navigation.Navigation.findNavController;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,16 @@ import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentHomeBinding;
 import com.example.bookingapplication.fragments.FragmentTransition;
 import com.example.bookingapplication.model.ApartmentCard;
+import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.model.User;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
@@ -45,8 +50,6 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        prepareApartmentCardsList(products);
 
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), searchView::setQueryHint);
 
@@ -110,13 +113,5 @@ public class HomeFragment extends Fragment {
         datePickerDialog.show();
     }
 
-    private void prepareApartmentCardsList(ArrayList<ApartmentCard> products){
-//        Call<User> call = ApartmentService.
-        products.add(new ApartmentCard(1L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
-        products.add(new ApartmentCard(2L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
-        products.add(new ApartmentCard(3L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
-        products.add(new ApartmentCard(4L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
-        products.add(new ApartmentCard(5L, "Suncev Breg", "Description 1", "Description 1", R.drawable.apartment_picture));
-    }
 
 }

@@ -1,6 +1,10 @@
 package com.example.bookingapplication.clients;
 
+import com.example.bookingapplication.model.ApartmentCard;
+import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.model.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,5 +16,5 @@ public interface ApartmentService {
             "Content-Type:application/json"
     })
     @GET("accommodations/cards")
-    Call<User> getAccommodationsCards();
+    Call<List<Card>> getAccommodationsCards();
 }
