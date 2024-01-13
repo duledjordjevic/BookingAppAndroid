@@ -27,10 +27,10 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/reservationsFragment"
-        android:name="com.example.bookingapplication.fragments.reservations.ReservationsFragment"
+        android:id="@+id/guestReservationsFragment"
+        android:name="com.example.bookingapplication.fragments.guestReservations.GuestReservationsFragment"
         android:label="@string/title_reservations"
-        tools:layout="@layout/fragment_reservations" />
+        tools:layout="@layout/fragment_guest_reservations" />
     <fragment
         android:id="@+id/reportedUsersFragment"
         android:name="com.example.bookingapplication.fragments.reportedUsers.ReportedUsersFragment"
@@ -82,4 +82,9 @@
         android:name="com.example.bookingapplication.fragments.accommodationsForHost.AccommodationsForHostFragment"
         android:label="Your properties">
     </fragment>
+    <fragment
+        android:id="@+id/hostReservationsFragment"
+        android:name="com.example.bookingapplication.fragments.hostReservations.HostReservationsFragment"
+        android:label="@string/title_reservations"
+        tools:layout="@layout/fragment_host_reservations" />
 </navigation>
