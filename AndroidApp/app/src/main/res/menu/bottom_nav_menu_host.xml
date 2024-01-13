@@ -13,7 +13,7 @@
         android:icon="@drawable/plus"
         android:title="" />
     <item
-        android:id="@+id/reservationsFragment"
+        android:id="@+id/hostReservationsFragment"
         android:icon="@drawable/calendar"
         android:title="" />
     <item

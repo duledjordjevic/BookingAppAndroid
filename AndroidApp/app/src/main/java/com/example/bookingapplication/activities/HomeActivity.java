@@ -45,9 +45,10 @@ public class HomeActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_account, R.id.navigation_notifications,R.id.reservationsFragment,
+                R.id.navigation_home, R.id.navigation_account, R.id.navigation_notifications,R.id.guestReservationsFragment,
                 R.id.addedPropertiesFragment,R.id.hostPropertiesFragment,R.id.commentsFragment,R.id.reportedUsersFragment,
-                R.id.loginActivity,R.id.accountAdminFragment, R.id.createAccommodationFragment,R.id.accommodationApprovingFragment,R.id.accommodationsForHostFragment)
+                R.id.loginActivity,R.id.accountAdminFragment, R.id.createAccommodationFragment,R.id.accommodationApprovingFragment,
+                R.id.accommodationsForHostFragment, R.id.guestReservationsFragment, R.id.hostReservationsFragment)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

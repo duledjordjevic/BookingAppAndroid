@@ -78,6 +78,12 @@
     <string name="create">Create</string>
     <string name="price_for_entire_accommodation">Price for entire accommodation</string>
     <string name="accommodation_type">Accommodation type</string>
+    <string name="title">Title</string>
+    <string name="address">Address</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
     <string-array name="accommodation_types">
         <item>HOTEL</item>
         <item>APARTMENT</item>

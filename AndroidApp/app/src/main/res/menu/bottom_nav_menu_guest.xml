@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_notifications" />
     <item
-        android:id="@+id/reservationsFragment"
+        android:id="@+id/guestReservationsFragment"
         android:icon="@drawable/calendar"
         android:title="@string/title_reservations" />
     <item
