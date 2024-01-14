@@ -2,6 +2,7 @@ package com.example.bookingapplication.clients;
 
 import com.example.bookingapplication.model.Reservation;
 import com.example.bookingapplication.model.User;
+import com.example.bookingapplication.model.enums.ReservationStatus;
 
 import java.util.Collection;
 import java.util.List;
@@ -44,6 +45,14 @@ public interface ReservationService {
     })
     @PUT("reservations/cancelAccepted/{reservationId}")
     Call<Reservation> cancelAcceptedReservation(@Path("reservationId") Long reservationId);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("reservations/{reservationId}/{reservationStatus}")
+    Call<Reservation> updateReservationStatus(@Path("reservationId") Long reservationId,
+                                              @Path("reservationStatus")ReservationStatus reservationStatus);
 
 
 }

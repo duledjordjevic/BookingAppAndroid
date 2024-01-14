@@ -171,14 +171,14 @@ public class ReservationsHostCardsListFragment extends ListFragment {
         Log.i("Booking", "onCreate Products List Fragment");
         if (getArguments() != null) {
             cards = getArguments().getParcelableArrayList(ARG_PARAM);
-            adapter = new ReservationsHostCardListAdapter(getActivity(), cards);
+            adapter = new ReservationsHostCardListAdapter(getActivity(), this, cards);
             setListAdapter(adapter);
             Log.i("Booking", "Adapter Products List Fragment");
         }
 
     }
 
-    private void prepareCardsList(Map<String, String> queryParams){
+    public void prepareCardsList(Map<String, String> queryParams){
         Log.d("PARAMS", queryParams.toString());
         queryParams.put("hostId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
         Call<Collection<Reservation>> call = ClientUtils.reservationService.getFilteredReservationsForHost( queryParams);
@@ -223,4 +223,5 @@ public class ReservationsHostCardsListFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
     }
+
 }
