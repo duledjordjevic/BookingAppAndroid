@@ -13,9 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.bookingapplication.R;
-import com.example.bookingapplication.databinding.ReservationGuestCardBinding;
 import com.example.bookingapplication.databinding.ReservationHostCardBinding;
-import com.example.bookingapplication.model.ReservationGuestCard;
 import com.example.bookingapplication.model.ReservationHostCard;
 
 import java.time.format.DateTimeFormatter;
