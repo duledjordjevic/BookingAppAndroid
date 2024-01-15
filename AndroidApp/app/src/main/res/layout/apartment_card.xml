@@ -71,12 +71,12 @@
                         android:id="@+id/apartment_card_desc12"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="?android:attr/textColorSecondary" />
-                    <ImageButton
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:background="@drawable/round_border_background"
-                        app:srcCompat="@drawable/ic_heart" />
+                        android:id="@+id/heart_button"
+                         />
 
                 </LinearLayout>
             </LinearLayout>

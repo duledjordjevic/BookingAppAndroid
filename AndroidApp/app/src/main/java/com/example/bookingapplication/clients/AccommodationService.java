@@ -51,4 +51,7 @@ public interface AccommodationService {
     @GET("accommodations/host/{host_id}")
     Call<List<Card>> getAccommodationsForHosts(@Path("host_id") Long host_id);
 
+
+
+
 }

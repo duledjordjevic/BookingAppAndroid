@@ -9,6 +9,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 
 public interface ApartmentService {
     @Headers({
@@ -17,4 +18,10 @@ public interface ApartmentService {
     })
     @GET("accommodations/cards")
     Call<List<Card>> getAccommodationsCards();
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("guests/favourites/{id}")
+    Call<List<Card>> getAllAccommodations(@Path("id") Long id);
 }

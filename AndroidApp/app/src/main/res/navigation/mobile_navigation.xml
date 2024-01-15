@@ -87,4 +87,9 @@
         android:name="com.example.bookingapplication.fragments.hostReservations.HostReservationsFragment"
         android:label="@string/title_reservations"
         tools:layout="@layout/fragment_host_reservations" />
+    <fragment
+        android:id="@+id/guestFavouritesFragment"
+        android:name="com.example.bookingapplication.fragments.guestFavourites.GuestFavouritesFragment"
+        android:label="Favourites"
+        tools:layout="@layout/fragment_guest_favourites" />
 </navigation>
