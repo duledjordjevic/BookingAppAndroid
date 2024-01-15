@@ -12,10 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.bookingapplication.activities.HomeActivity;
 import com.example.bookingapplication.activities.LoginActivity;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentAccountBinding;
@@ -109,7 +107,7 @@ public class AccountFragment extends Fragment {
     }
     private void updateUserProfile(){
         Long id = currentUser.getId();
-        Call<User> call = ClientUtils.updateUserService.updateProfile(id,userForUpdate);
+        Call<User> call = ClientUtils.userService.updateProfile(id,userForUpdate);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -128,7 +126,7 @@ public class AccountFragment extends Fragment {
     }
     private void deleteUserProfile(){
         Long id = currentUser.getId();
-        Call<Boolean> call = ClientUtils.updateUserService.deleteProfile(userDelete,id);
+        Call<Boolean> call = ClientUtils.userService.deleteProfile(userDelete,id);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -150,7 +148,7 @@ public class AccountFragment extends Fragment {
     }
     private void getUserInfo(){
         Long id = currentUser.getId();
-        Call<User> call = ClientUtils.updateUserService.getUser(id);
+        Call<User> call = ClientUtils.userService.getUser(id);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
