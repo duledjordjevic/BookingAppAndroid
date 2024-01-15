@@ -20,6 +20,7 @@
     </string-array>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
+    <string name="title_heart">Favourites</string>
     <string name="title_account">Account</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_reservations">Reservations</string>

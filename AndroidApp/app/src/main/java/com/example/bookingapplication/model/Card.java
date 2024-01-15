@@ -12,8 +12,9 @@ public class Card {
     private Double pricePerNight;
     private Double totalPrice;
     private String image;
+    private Boolean isFavourite;
 
-    public Card(Long id, String title, String description, Address address, Double avgRate, Double pricePerNight, Double totalPrice, String image) {
+    public Card(Long id, String title, String description, Address address, Double avgRate, Double pricePerNight, Double totalPrice, String image,Boolean isFavourite) {
         this.id = id;
         this.title = title;
         Log.d("Title: ", String.valueOf(this.title));
@@ -23,6 +24,7 @@ public class Card {
         this.pricePerNight = pricePerNight;
         this.totalPrice = totalPrice;
         this.image = image;
+        this.isFavourite = isFavourite;
 //        Log.d("NovaSlika: ", String.valueOf(this.image));
     }
 
@@ -89,5 +91,7 @@ public class Card {
     public void setImage(String image) {
         this.image = image;
     }
+    public Boolean getIsFavourite() {return isFavourite;}
+    public void setIsFavourite(Boolean isFavourite){ this.isFavourite = isFavourite;}
 
 }

@@ -87,6 +87,7 @@ public class AccommodationApprovingListAdapter extends ArrayAdapter<Accommodatio
                 }
             });
 
+
         }
 
         return convertView;

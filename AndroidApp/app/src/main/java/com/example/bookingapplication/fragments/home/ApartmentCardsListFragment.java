@@ -19,6 +19,9 @@ import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentApartmentCardsListBinding;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.example.bookingapplication.model.Card;
+import com.example.bookingapplication.model.User;
+import com.example.bookingapplication.model.enums.UserType;
+import com.example.bookingapplication.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,7 @@ public class ApartmentCardsListFragment extends ListFragment {
     private static final String ARG_PARAM = "param";
     private ArrayList<ApartmentCard> mProducts;
     private FragmentApartmentCardsListBinding binding;
+    private ArrayList<ApartmentCard> cards = new ArrayList<>();
 
     public static ApartmentCardsListFragment newInstance(ArrayList<ApartmentCard> products){
         ApartmentCardsListFragment fragment = new ApartmentCardsListFragment();
@@ -82,22 +86,24 @@ public class ApartmentCardsListFragment extends ListFragment {
     }
 
     private void prepareApartmentCardsList(){
-        Call<List<Card>> call = ClientUtils.apartmentService.getAccommodationsCards();
+        getAccommodations();
+        Log.d("PrintKartica","alooo");
+    }
+
+    private void getAccommodations(){
+        User user = SharedPreferencesManager.getUserInfo(getContext());
+        if(user.getUserRole().equals(UserType.GUEST)){
+            getAccommodationsForGuest(user.getId());
+        }else{
+            getAccommodationsWithoutLike();
+        }
+    }
+    private void getAccommodationsForGuest(Long id){
+        Call<List<Card>> call = ClientUtils.apartmentService.getAllAccommodations(id);
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
-                Log.d("Response", String.valueOf(response.code()));
-                String originalString = response.body().get(0).getImage();
-//                int stringLength = originalString.length();
-//                int startIndex = Math.max(0, stringLength - 10); // Određivanje početnog indeksa
-//
-//                String last100Characters = originalString.substring(startIndex);
-//                Log.d("Duzina", String.valueOf(stringLength));
-//                Log.d("Tag", "Zadnjih 100 karaktera: " + last100Characters);
 
-
-//                Log.d("Image", response.body().get(0).getImage());
-                ArrayList<ApartmentCard> cards = new ArrayList<>();
                 for (Card card : response.body()) {
                     String rate;
                     if(card.getAvgRate() == null){
@@ -105,18 +111,63 @@ public class ApartmentCardsListFragment extends ListFragment {
                     } else {
                         rate = card.getAvgRate().toString();
                     }
-                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage());
-
+                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage(),card.getIsFavourite());
+//                    markFavouriteAcc(ac);
+                    Log.d("VrednostBul",ac.getTitle());
+                    Log.d("VrednostBul",String.valueOf(card.getIsFavourite()));
                     cards.add(ac);
-
                 }
 
                 addProducts(cards);
-            }
 
+            }
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
+            }
+        });
+    }
+    private void getAccommodationsWithoutLike(){
+        Call<List<Card>> call = ClientUtils.apartmentService.getAccommodationsCards();
+        call.enqueue(new Callback<List<Card>>() {
+            @Override
+            public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
 
+                for (Card card : response.body()) {
+                    String rate;
+                    if(card.getAvgRate() == null){
+                        rate = "";
+                    } else {
+                        rate = card.getAvgRate().toString();
+                    }
+                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage(),card.getIsFavourite());
+                    Log.d("VrednostBul",ac.getTitle());
+                    Log.d("VrednostBul",String.valueOf(card.getIsFavourite()));
+                    cards.add(ac);
+                }
+
+                addProducts(cards);
+
+            }
+            @Override
+            public void onFailure(Call<List<Card>> call, Throwable t) {
+            }
+        });
+    }
+    private void markFavouriteAcc(ApartmentCard card){
+        Long userId = SharedPreferencesManager.getUserInfo(getContext()).getId();
+        Call<Boolean> call = ClientUtils.guestService.isFavourite(userId,card.getId());
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("ResponseIsLike",String.valueOf(response.code()));
+                if(response.code() == 200){
+                    card.setIsLiked(true);
+                }else{
+                    card.setIsLiked(false);
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
             }
         });
     }
