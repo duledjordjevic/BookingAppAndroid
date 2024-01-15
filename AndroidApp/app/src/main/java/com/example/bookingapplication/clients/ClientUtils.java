@@ -55,4 +55,5 @@ public class ClientUtils {
     public static UpdateUserService updateUserService = retrofit.create(UpdateUserService.class);
     public static ApartmentService apartmentService = retrofit.create(ApartmentService.class);
     public static ReservationService reservationService = retrofit.create(ReservationService.class);
+    public static AnalyticsService analyticsService = retrofit.create(AnalyticsService.class);
 }

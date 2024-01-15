@@ -86,6 +86,9 @@
     <string name="decline">Decline</string>
     <string name="search">Search</string>
     <string name="reservation_status">Reservation status</string>
+    <string name="accommodation">Accommodation</string>
+    <string name="annual_analytic">Annual analytic</string>
+    <string name="year">Year</string>
     <string-array name="accommodation_types">
         <item>HOTEL</item>
         <item>APARTMENT</item>

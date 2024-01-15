@@ -87,4 +87,9 @@
         android:name="com.example.bookingapplication.fragments.hostReservations.HostReservationsFragment"
         android:label="@string/title_reservations"
         tools:layout="@layout/fragment_host_reservations" />
+    <fragment
+        android:id="@+id/analyticsAnnualFragment"
+        android:name="com.example.bookingapplication.fragments.analyticsAnnual.AnalyticsFragment"
+        android:label="Annalytics"
+        tools:layout="@layout/fragment_analytics" />
 </navigation>

@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_account, R.id.navigation_notifications,R.id.guestReservationsFragment,
                 R.id.addedPropertiesFragment,R.id.hostPropertiesFragment,R.id.commentsFragment,R.id.reportedUsersFragment,
                 R.id.loginActivity,R.id.accountAdminFragment, R.id.createAccommodationFragment,R.id.accommodationApprovingFragment,
-                R.id.accommodationsForHostFragment, R.id.guestReservationsFragment, R.id.hostReservationsFragment)
+                R.id.accommodationsForHostFragment, R.id.guestReservationsFragment, R.id.hostReservationsFragment, R.id.analyticsAnnualFragment)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
