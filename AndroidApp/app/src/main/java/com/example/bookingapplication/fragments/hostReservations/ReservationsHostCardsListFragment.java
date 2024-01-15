@@ -1,17 +1,24 @@
 package com.example.bookingapplication.fragments.hostReservations;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
 
+import com.example.bookingapplication.R;
 import com.example.bookingapplication.adapters.ReservationGuestCardListAdapter;
 import com.example.bookingapplication.adapters.ReservationsHostCardListAdapter;
 import com.example.bookingapplication.clients.ClientUtils;
@@ -22,8 +29,12 @@ import com.example.bookingapplication.model.Reservation;
 import com.example.bookingapplication.model.ReservationGuestCard;
 import com.example.bookingapplication.model.ReservationHostCard;
 import com.example.bookingapplication.util.SharedPreferencesManager;
+import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +48,15 @@ public class ReservationsHostCardsListFragment extends ListFragment {
     private static final String ARG_PARAM = "param";
     private ReservationsHostCardListAdapter adapter;
     private ArrayList<ReservationHostCard> cards;
+
+    private TextInputEditText searchInput;
+    private AutoCompleteTextView statusTextView;
+    private Button startDateBtn;
+    private Button endDateBtn;
+    private Button searchBtn;
+    private LocalDate startDate;
+    private LocalDate endDate;
+
 
     public static ReservationsHostCardsListFragment newInstance(ArrayList<ReservationHostCard> cards){
         ReservationsHostCardsListFragment fragment = new ReservationsHostCardsListFragment();
@@ -52,8 +72,97 @@ public class ReservationsHostCardsListFragment extends ListFragment {
 
         binding = FragmentReservationHostListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        prepareCardsList();
+
+        searchInput = binding.searchInput;
+        startDateBtn = binding.startDateBtn;
+        endDateBtn = binding.endDateBtn;
+        searchBtn = binding.searchBtn;
+        statusTextView = binding.statusTextView;
+        startDateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog("startDate");
+            }
+        });
+        endDateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog("endDate");
+            }
+        });
+
+        String[] reservationStatusArray = getResources().getStringArray(R.array.reservation_status);
+        ArrayAdapter<String> reservationStatusAdapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_item, reservationStatusArray);
+        statusTextView.setAdapter(reservationStatusAdapter);
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterCards();
+            }
+        });
+
+        prepareCardsList(new HashMap<>());
         return root;
+    }
+
+    private void filterCards(){
+        Map<String, String> queryParams = new HashMap<>();
+
+        if(!searchInput.getText().toString().isEmpty()){
+            queryParams.put("title", searchInput.getText().toString());
+        }
+        if(startDate != null){
+            if(endDate != null){
+                if (startDate.isBefore(endDate) || startDate.isEqual(endDate)){
+                    queryParams.put("startDate", startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                    queryParams.put("endDate", endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                }else{
+                    Toast.makeText(getContext(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }else{
+                Toast.makeText(getContext(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }else if(endDate != null){
+            Toast.makeText(getContext(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(!(statusTextView.getText().toString().isEmpty() || statusTextView.getText().toString().equals("ALL"))){
+            queryParams.put("status", statusTextView.getText().toString());
+        }
+
+//        queryParams.put("hostId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
+
+        prepareCardsList(queryParams);
+    }
+    private void showDatePickerDialog(String datePicker) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                        if (datePicker.equals("startDate")){
+                            startDateBtn.setText(selectedDate);
+                            startDate = LocalDate.of(year, month + 1, dayOfMonth);
+                        }else{
+                            endDateBtn.setText(selectedDate);
+                            endDate = LocalDate.of(year, month + 1, dayOfMonth);
+                        }
+
+                    }
+                },
+                year, month, day);
+
+        datePickerDialog.show();
     }
 
     @Override
@@ -62,17 +171,16 @@ public class ReservationsHostCardsListFragment extends ListFragment {
         Log.i("Booking", "onCreate Products List Fragment");
         if (getArguments() != null) {
             cards = getArguments().getParcelableArrayList(ARG_PARAM);
-            adapter = new ReservationsHostCardListAdapter(getActivity(), cards);
+            adapter = new ReservationsHostCardListAdapter(getActivity(), this, cards);
             setListAdapter(adapter);
             Log.i("Booking", "Adapter Products List Fragment");
         }
 
     }
 
-    private void prepareCardsList(){
-        Log.d("USAO", "USAO");
-        Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("guestId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
+    public void prepareCardsList(Map<String, String> queryParams){
+        Log.d("PARAMS", queryParams.toString());
+        queryParams.put("hostId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
         Call<Collection<Reservation>> call = ClientUtils.reservationService.getFilteredReservationsForHost( queryParams);
         call.enqueue(new Callback<Collection<Reservation>>() {
             @Override
@@ -80,12 +188,14 @@ public class ReservationsHostCardsListFragment extends ListFragment {
                 Log.d("USAO", "USAO1");
                 Log.d("Response", String.valueOf(response.code()));
 //                Log.d("Response", response.body().toString());
-                ArrayList<ReservationHostCard> cards = new ArrayList<>();
-                for (Reservation reservation : response.body()) {
-                    ReservationHostCard card = new ReservationHostCard(reservation);
-                    cards.add(card);
+                if(response.code() == 200){
+                    ArrayList<ReservationHostCard> cards = new ArrayList<>();
+                    for (Reservation reservation : response.body()) {
+                        ReservationHostCard card = new ReservationHostCard(reservation);
+                        cards.add(card);
+                    }
+                    addProducts(cards);
                 }
-                addProducts(cards);
             }
 
             @Override
@@ -113,4 +223,5 @@ public class ReservationsHostCardsListFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
     }
+
 }
