@@ -81,7 +81,7 @@ public class AnalyticsFragment extends Fragment {
         exportAnnualBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveCharts(lineAnnualChartEarnings, lineAnnualChartReservations);
+                saveCharts(lineAnnualChartEarnings, lineAnnualChartReservations, "Annual earnings");
             }
         });
 
@@ -93,13 +93,10 @@ public class AnalyticsFragment extends Fragment {
         return root;
     }
 
-    private void saveCharts(LineChart lineChartEarnings, LineChart lineChartReservations) {
+    private void saveCharts(LineChart lineChartEarnings, LineChart lineChartReservations, String fileName) {
         Bitmap chartBitmap1 = getChartBitmap(lineChartEarnings);
-        PdfExporter.exportToPdf(requireContext(), chartBitmap1, "Earnings");
-
-
         Bitmap chartBitmap2 = getChartBitmap(lineChartReservations);
-        PdfExporter.exportToPdf(requireContext(), chartBitmap2, "Reservations");
+        PdfExporter.exportToPdf(requireContext(), chartBitmap1, chartBitmap2, fileName);
     }
 
     private Bitmap getChartBitmap(LineChart lineChart) {

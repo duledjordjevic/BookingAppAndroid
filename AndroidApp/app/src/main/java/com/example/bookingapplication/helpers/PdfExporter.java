@@ -20,17 +20,20 @@ import java.io.IOException;
 
 public class PdfExporter {
 
-    public static void exportToPdf(Context context, Bitmap chartBitmap, String fileName) {
+    public static void exportToPdf(Context context, Bitmap chartBitmap1, Bitmap chartBitmap2, String fileName) {
         File pdfFile = createPdfFile(context, fileName);
-        Log.d("PdfExporter", "PDF file path: " + pdfFile.getAbsolutePath());
+
         if (pdfFile != null) {
             try {
                 PdfWriter writer = new PdfWriter(pdfFile);
                 PdfDocument pdfDocument = new PdfDocument(writer);
                 Document document = new Document(pdfDocument);
 
-                Image chartImage = createImageFromBitmap(chartBitmap);
-                document.add(chartImage);
+                Image chartImage1 = createImageFromBitmap(chartBitmap1);
+                Image chartImage2 = createImageFromBitmap(chartBitmap2);
+
+                document.add(chartImage1);
+                document.add(chartImage2);
 
                 document.close();
 
