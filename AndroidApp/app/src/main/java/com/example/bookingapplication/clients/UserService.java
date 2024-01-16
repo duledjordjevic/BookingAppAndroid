@@ -2,9 +2,13 @@ package com.example.bookingapplication.clients;
 
 import com.example.bookingapplication.model.AdminForUpdate;
 import com.example.bookingapplication.model.User;
+import com.example.bookingapplication.model.UserBlock;
+import com.example.bookingapplication.model.UserBlockCard;
 import com.example.bookingapplication.model.UserDelete;
 import com.example.bookingapplication.model.UserForUpdate;
 import com.example.bookingapplication.model.UserReport;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -51,4 +55,17 @@ public interface UserService {
     })
     @POST("users/report")
     Call<UserReport> createUserReport(@Body UserReport userReport);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("users/reported")
+    Call<List<UserBlock>> getReportedUsers();
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("users/block/{id}")
+    Call<User> blockUser(@Path("id") Long id);
+
 }
