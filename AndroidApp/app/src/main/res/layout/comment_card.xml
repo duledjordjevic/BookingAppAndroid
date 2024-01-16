@@ -68,17 +68,16 @@
                 style="@style/CustomOutlinedButtonIcon"
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_weight="1"
                 android:textSize="12sp"
                 android:backgroundTint="@color/dark_blue"
                 android:text="@string/approve" />
 
             <View
-                android:layout_width="10dp"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="0" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
@@ -90,7 +89,7 @@
                     android:id="@+id/deleteButton"
                     style="@style/CustomContainedButtonIcon"
                     android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:textSize="12sp"
                     android:text="@string/delete_comment"
@@ -101,7 +100,7 @@
                     android:id="@+id/reportButton"
                     style="@style/CustomContainedButtonIcon"
                     android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:text="@string/report_comment"
                     android:textSize="12sp"
@@ -109,6 +108,7 @@
                     app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
+
 
 
 
