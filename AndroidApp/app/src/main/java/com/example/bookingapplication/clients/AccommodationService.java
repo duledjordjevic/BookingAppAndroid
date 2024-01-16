@@ -1,7 +1,9 @@
 package com.example.bookingapplication.clients;
 
+import com.example.bookingapplication.model.AccApprovalStatus;
 import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Card;
+import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import java.util.List;
@@ -50,5 +53,13 @@ public interface AccommodationService {
     })
     @GET("accommodations/host/{host_id}")
     Call<List<Card>> getAccommodationsForHosts(@Path("host_id") Long host_id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("accommodations/{id}/approvalStatus")
+    Call<Accommodation> changeAccApprovalStatus(@Path("id") Long id,@Body AccApprovalStatus approvalStatus);
+
+
 
 }
