@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -73,11 +74,14 @@ public class CommentCardListFragment extends ListFragment {
         }
 
         commentTextView = binding.commentTextView;
+
         String[] commentInputArray = getResources().getStringArray(R.array.spinner_options);
         ArrayAdapter<String> commentInputAdapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_item, commentInputArray);
         commentTextView.setAdapter(commentInputAdapter);
+
         commentTextView.setText(commentInputArray[0], false);
         prepareCardsAccList();
+
         commentTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
