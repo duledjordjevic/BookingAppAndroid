@@ -94,7 +94,11 @@
     <string name="reason">Reason: </string>
     <string name="reporting_user">Reporting user: </string>
     <string name="report_user_btn">Report user</string>
-    <string name="accommodation">Accommodation: </string>
+    <string name="accommodation">Accommodation</string>
+    <string name="annual_analytic">Annual analytic</string>
+    <string name="year">Year</string>
+    <string name="analytics_for_all_accommodations">Analytics for all accommodations</string>
+    <string name="analytics">Analytics</string>
     <string-array name="accommodation_types">
         <item>HOTEL</item>
         <item>APARTMENT</item>
