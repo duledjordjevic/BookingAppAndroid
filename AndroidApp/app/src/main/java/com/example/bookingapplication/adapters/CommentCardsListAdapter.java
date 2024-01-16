@@ -1,8 +1,12 @@
 package com.example.bookingapplication.adapters;
 
+import static android.app.PendingIntent.getActivity;
+import static android.content.Intent.getIntent;
+import static android.content.Intent.getIntentOld;
 import static androidx.navigation.Navigation.findNavController;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -27,6 +32,7 @@ import com.example.bookingapplication.fragments.comments.CommentCardListFragment
 import com.example.bookingapplication.model.ApartmentCard;
 import com.example.bookingapplication.model.CommentCard;
 import com.example.bookingapplication.model.User;
+import com.example.bookingapplication.model.enums.UserType;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.card.MaterialCardView;
 
@@ -76,6 +82,27 @@ public class CommentCardsListAdapter extends ArrayAdapter<CommentCard> {
         TextView title = binding.title;
         TextView date = binding.date;
         RatingBar rating = binding.ratingBar;
+
+        Button approveButton = binding.approveButton;
+        approveButton.setVisibility(View.GONE);
+
+        Button deleteButton = binding.deleteButton;
+        deleteButton.setVisibility(View.GONE);
+
+        Button reportButton = binding.reportButton;
+
+        UserType role = SharedPreferencesManager.getUserInfo(getContext()).getUserRole();
+        switch (role) {
+            case GUEST:
+            case ADMIN:
+                reportButton.setVisibility(View.GONE);
+                break;
+            case HOST:
+                reportButton.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
 
         if(card != null){
             content.setText(card.getContent());
