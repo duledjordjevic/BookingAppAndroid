@@ -1,7 +1,14 @@
 package com.example.bookingapplication.fragments.analyticsAnnual;
 
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -11,10 +18,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentAnalyticsBinding;
+import com.example.bookingapplication.helpers.PdfExporter;
 import com.example.bookingapplication.model.AnnualAnalytics;
 import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.util.SharedPreferencesManager;
@@ -43,7 +50,9 @@ public class AnalyticsFragment extends Fragment {
     private AutoCompleteTextView accommodationsTextView;
     private AutoCompleteTextView yearsTextView;
     private Button filterAnnualBtn;
+    private Button exportAnnualBtn;
     private HashMap<String, Long> accommodationIds;
+    private static final int STORAGE_PERMISSION_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +64,7 @@ public class AnalyticsFragment extends Fragment {
         accommodationsTextView = binding.accommodationsTextView;
         yearsTextView = binding.yearsTextView;
         filterAnnualBtn = binding.filterAnnualBtn;
+        exportAnnualBtn = binding.exportAnnualBtn;
         lineAnnualChartEarnings = binding.lineAnnualChartEarnings;
         lineAnnualChartReservations = binding.lineAnnualChartReservations;
 
@@ -68,6 +78,12 @@ public class AnalyticsFragment extends Fragment {
                 }
             }
         });
+        exportAnnualBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveCharts(lineAnnualChartEarnings, lineAnnualChartReservations);
+            }
+        });
 
         getAccommodationsForHost();
 
@@ -77,6 +93,23 @@ public class AnalyticsFragment extends Fragment {
         return root;
     }
 
+    private void saveCharts(LineChart lineChartEarnings, LineChart lineChartReservations) {
+        Bitmap chartBitmap1 = getChartBitmap(lineChartEarnings);
+        PdfExporter.exportToPdf(requireContext(), chartBitmap1, "Earnings");
+
+
+        Bitmap chartBitmap2 = getChartBitmap(lineChartReservations);
+        PdfExporter.exportToPdf(requireContext(), chartBitmap2, "Reservations");
+    }
+
+    private Bitmap getChartBitmap(LineChart lineChart) {
+        int width = lineChart.getWidth();
+        int height = lineChart.getHeight();
+        Bitmap chartBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(chartBitmap);
+        lineChart.draw(canvas);
+        return chartBitmap;
+    }
     private void setYears(){
         yearsTextView.setText(String.valueOf(LocalDate.now().getYear()));
         List<String> years = new ArrayList<>();

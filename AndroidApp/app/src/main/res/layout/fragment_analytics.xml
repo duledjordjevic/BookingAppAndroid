@@ -118,5 +118,20 @@
         app:layout_constraintTop_toBottomOf="@id/lineAnnualChartEarnings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/exportAnnualBtn"
+        android:layout_width="220dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Export to pdf"
+        app:layout_constraintTop_toBottomOf="@id/lineAnnualChartReservations"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
