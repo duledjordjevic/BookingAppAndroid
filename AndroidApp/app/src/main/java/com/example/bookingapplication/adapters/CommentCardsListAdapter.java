@@ -33,25 +33,25 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.ArrayList;
 
 public class CommentCardsListAdapter extends ArrayAdapter<CommentCard> {
-    private ArrayList<CommentCard> aProducts;
+    private ArrayList<CommentCard> comments;
     private CommentCardBinding binding;
     private CommentCard card;
     public CommentCardsListAdapter(Context context, ArrayList<CommentCard> products){
         super(context, R.layout.comment_card, products);
-        aProducts = products;
+        comments = products;
 
     }
 
     @Override
     public int getCount() {
-        return aProducts.size();
+        return comments.size();
     }
 
 
     @Nullable
     @Override
     public CommentCard getItem(int position) {
-        return aProducts.get(position);
+        return comments.get(position);
     }
 
     @Override
@@ -72,21 +72,17 @@ public class CommentCardsListAdapter extends ArrayAdapter<CommentCard> {
             binding = (CommentCardBinding) convertView.getTag();
         }
 
-        CardView commentCard = binding.commentCard;
         TextView content = binding.content;
         TextView title = binding.title;
         TextView date = binding.date;
         RatingBar rating = binding.ratingBar;
 
-//        user = SharedPreferencesManager.getUserInfo(getContext());
-
         if(card != null){
-
             content.setText(card.getContent());
-            title.setText(card.getAccommodation().getTitle());
             date.setText(card.getDate().toString());
             rating.setRating(card.getRating());
-
+            title.setText(card.getAccommodationTitle() == null ? card.getHostNameSurname() :
+                    card.getAccommodationTitle());
         }
 
         return convertView;
