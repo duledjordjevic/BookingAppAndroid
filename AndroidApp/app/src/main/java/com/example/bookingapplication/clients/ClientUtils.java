@@ -1,5 +1,7 @@
 package com.example.bookingapplication.clients;
 
+import android.util.Log;
+
 import com.example.bookingapplication.BookingApp;
 import com.example.bookingapplication.BuildConfig;
 import com.example.bookingapplication.util.SharedPreferencesManager;
@@ -53,6 +55,7 @@ public class ClientUtils {
     public static UserService userService = retrofit.create(UserService.class);
     public static ApartmentService apartmentService = retrofit.create(ApartmentService.class);
     public static ReservationService reservationService = retrofit.create(ReservationService.class);
+    public static AnalyticsService analyticsService = retrofit.create(AnalyticsService.class);
     public static GuestService guestService = retrofit.create(GuestService.class);
     public static CommentsService commentsService = retrofit.create(CommentsService.class);
 }

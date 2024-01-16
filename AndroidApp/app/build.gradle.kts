@@ -39,6 +39,10 @@ android {
 }
 
 dependencies {
+//    compile("com.github.AnyChart:AnyChart-Android:0.0.3")
+//    implementation("com.anychart:AnyChart-Android:1.1.2")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.0.3")
+    implementation("com.itextpdf:itext7-core:7.1.16")
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
