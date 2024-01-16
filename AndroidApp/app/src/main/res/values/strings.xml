@@ -85,8 +85,11 @@
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
+    <string name="report">Report</string>
     <string name="search">Search</string>
     <string name="reservation_status">Reservation status</string>
+    <string name="host">Host: </string>
+    <string name="report_user_btn">Report user</string>
     <string-array name="accommodation_types">
         <item>HOTEL</item>
         <item>APARTMENT</item>

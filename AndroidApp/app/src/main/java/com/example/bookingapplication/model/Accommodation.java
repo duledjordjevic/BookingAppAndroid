@@ -25,6 +25,7 @@ public class Accommodation {
     private boolean isPriceForEntireAcc;
     private Set<PriceList> prices;
     private Long hostId;
+    private Host host;
 
     public Accommodation() {
     }
@@ -140,4 +141,6 @@ public class Accommodation {
     public void setHostId(Long hostId) {
         this.hostId = hostId;
     }
+    public Host getHost(){return host;}
+    public void setHost(Host host){this.host = host;}
 }

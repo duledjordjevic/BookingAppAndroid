@@ -4,15 +4,17 @@ import com.example.bookingapplication.model.AdminForUpdate;
 import com.example.bookingapplication.model.User;
 import com.example.bookingapplication.model.UserDelete;
 import com.example.bookingapplication.model.UserForUpdate;
+import com.example.bookingapplication.model.UserReport;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface UpdateUserService {
+public interface UserService {
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
@@ -43,4 +45,10 @@ public interface UpdateUserService {
     })
     @PUT("users/admin/{id}")
     Call<User> updateAdmin(@Path("id") Long id,@Body AdminForUpdate userForUpdate);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST("users/report")
+    Call<UserReport> createUserReport(@Body UserReport userReport);
 }
