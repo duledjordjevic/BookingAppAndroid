@@ -3,6 +3,7 @@ package com.example.bookingapplication.clients;
 import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.model.CommentCard;
 
+import java.util.Collection;
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,13 +17,13 @@ public interface CommentsService {
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
-    @GET("commentsAboutHost/host{hostUserid}")
-    Call<List<CommentCard>> getCommentsAboutHost(@Path("id") Long id);
+    @GET("commentsAboutHost/host/{hostUserid}")
+    Call<Collection<CommentCard>> getCommentsAboutHost(@Path("hostUserid") Long id);
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
     @GET("commentsAboutAcc/acc/{id}")
-    Call<List<CommentCard>> getCommentsAboutAcc(@Path("id") Long id);
+    Call<Collection<CommentCard>> getCommentsAboutAcc(@Path("id") Long id);
 
 }
