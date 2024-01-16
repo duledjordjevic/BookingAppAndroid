@@ -133,5 +133,112 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+
+    <TextView
+        android:id="@+id/AnalyticsForALlAccTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/analytics_for_all_accommodations"
+        android:textColor="@color/dark_blue"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/exportAnnualBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <LinearLayout
+        android:id="@+id/dates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toBottomOf="@id/AnalyticsForALlAccTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="top">
+        <Button
+            android:id="@+id/startDateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginRight="2dp"
+            android:textColor="@color/dark_blue"
+            android:text="@string/start_date"
+            app:icon="@drawable/ic_date"
+            style="@style/CustomOutlinedButtonIcon"
+            />
+
+        <Button
+            android:id="@+id/endDateBtn"
+            style="@style/CustomOutlinedButtonIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/dark_blue"
+            android:text="@string/end_date"
+            app:icon="@drawable/ic_date" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/filterAllAnalyticBtn"
+        android:layout_width="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/filter"
+        app:layout_constraintTop_toBottomOf="@id/dates"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieAllAnalyticChartEarnings"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toBottomOf="@id/filterAllAnalyticBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieAllAnalyticChartReservations"
+        android:layout_width="0dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/pieAllAnalyticChartEarnings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <Button
+        android:id="@+id/exportAllAnalyticBtn"
+        android:layout_width="220dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Export to pdf"
+        app:layout_constraintTop_toBottomOf="@id/pieAllAnalyticChartReservations"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

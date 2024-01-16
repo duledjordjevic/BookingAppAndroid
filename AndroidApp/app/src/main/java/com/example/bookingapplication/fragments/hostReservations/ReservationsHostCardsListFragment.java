@@ -25,6 +25,8 @@ import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentReservationGuestListBinding;
 import com.example.bookingapplication.databinding.FragmentReservationHostListBinding;
 import com.example.bookingapplication.fragments.guestReservations.ReservationsGuestCardsListFragment;
+import com.example.bookingapplication.helpers.DatePickerDialogHelper;
+import com.example.bookingapplication.model.DateRange;
 import com.example.bookingapplication.model.Reservation;
 import com.example.bookingapplication.model.ReservationGuestCard;
 import com.example.bookingapplication.model.ReservationHostCard;
@@ -54,8 +56,8 @@ public class ReservationsHostCardsListFragment extends ListFragment {
     private Button startDateBtn;
     private Button endDateBtn;
     private Button searchBtn;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private DateRange dateRange;
+    private DatePickerDialogHelper datePickerDialogHelper;
 
 
     public static ReservationsHostCardsListFragment newInstance(ArrayList<ReservationHostCard> cards){
@@ -73,21 +75,25 @@ public class ReservationsHostCardsListFragment extends ListFragment {
         binding = FragmentReservationHostListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        this.dateRange = new DateRange();
+        
         searchInput = binding.searchInput;
         startDateBtn = binding.startDateBtn;
         endDateBtn = binding.endDateBtn;
         searchBtn = binding.searchBtn;
         statusTextView = binding.statusTextView;
+
+        datePickerDialogHelper = new DatePickerDialogHelper(startDateBtn, endDateBtn, dateRange);
         startDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog("startDate");
+                datePickerDialogHelper.showDatePickerDialog(getContext(), "startDate");
             }
         });
         endDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog("endDate");
+                datePickerDialogHelper.showDatePickerDialog(getContext(), "endDate");
             }
         });
 
@@ -112,21 +118,24 @@ public class ReservationsHostCardsListFragment extends ListFragment {
         if(!searchInput.getText().toString().isEmpty()){
             queryParams.put("title", searchInput.getText().toString());
         }
-        if(startDate != null){
-            if(endDate != null){
-                if (startDate.isBefore(endDate) || startDate.isEqual(endDate)){
-                    queryParams.put("startDate", startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-                    queryParams.put("endDate", endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        if(dateRange.getStartDate() != null){
+            if(dateRange.getEndDate() != null){
+                if (dateRange.getStartDate().isBefore(dateRange.getEndDate()) || dateRange.getStartDate().isEqual(dateRange.getEndDate())){
+                    queryParams.put("startDate", dateRange.getStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                    queryParams.put("endDate", dateRange.getEndDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 }else{
-                    Toast.makeText(getContext(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
                     return;
                 }
             }else{
-                Toast.makeText(getContext(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
                 return;
             }
-        }else if(endDate != null){
-            Toast.makeText(getContext(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
+        }else if(dateRange.getEndDate() != null){
+            Toast.makeText(getActivity(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
+            return;
+        }else{
+            Toast.makeText(getActivity(), "Date wrong. Start date must be before end date", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -137,32 +146,6 @@ public class ReservationsHostCardsListFragment extends ListFragment {
 //        queryParams.put("hostId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
 
         prepareCardsList(queryParams);
-    }
-    private void showDatePickerDialog(String datePicker) {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getContext(),
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        if (datePicker.equals("startDate")){
-                            startDateBtn.setText(selectedDate);
-                            startDate = LocalDate.of(year, month + 1, dayOfMonth);
-                        }else{
-                            endDateBtn.setText(selectedDate);
-                            endDate = LocalDate.of(year, month + 1, dayOfMonth);
-                        }
-
-                    }
-                },
-                year, month, day);
-
-        datePickerDialog.show();
     }
 
     @Override

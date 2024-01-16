@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.fragments.FragmentTransition;
+import com.example.bookingapplication.fragments.analytics.AnalyticsFragment;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -48,7 +50,8 @@ public class HomeActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_account, R.id.navigation_notifications,R.id.guestReservationsFragment,
                 R.id.addedPropertiesFragment,R.id.hostPropertiesFragment,R.id.commentsFragment,R.id.reportedUsersFragment,
                 R.id.loginActivity,R.id.accountAdminFragment, R.id.createAccommodationFragment,R.id.accommodationApprovingFragment,
-                R.id.accommodationsForHostFragment, R.id.guestReservationsFragment, R.id.hostReservationsFragment, R.id.analyticsAnnualFragment)
+                R.id.accommodationsForHostFragment, R.id.guestReservationsFragment, R.id.hostReservationsFragment,
+                R.id.analyticsAnnualFragment)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -84,6 +87,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
             return true;
+        }else if(item.getItemId() == R.id.analyticsAnnualFragment){
+            navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+            navController.navigate(R.id.analyticsAnnualFragment);
+            return true;
         }
         return super.onOptionsItemSelected(item);
 
@@ -92,7 +99,22 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        Intent intent = getIntent();
+        UserType role = UserType.valueOf(intent.getStringExtra("Role"));
+        switch (role) {
+            case GUEST:
+                getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+                break;
+            case HOST:
+                getMenuInflater().inflate(R.menu.toolbar_menu_host, menu);
+                break;
+            case ADMIN:
+                getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+                break;
+            default:
+                break;
+        }
+
         return true;
     }
 

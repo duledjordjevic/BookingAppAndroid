@@ -9,7 +9,7 @@
         android:icon="@drawable/bed"
         android:title=""/>
     <item
-        android:id="@+id/analyticsAnnualFragment"
+        android:id="@+id/createAccommodationFragment"
         android:icon="@drawable/plus"
         android:title="" />
     <item
