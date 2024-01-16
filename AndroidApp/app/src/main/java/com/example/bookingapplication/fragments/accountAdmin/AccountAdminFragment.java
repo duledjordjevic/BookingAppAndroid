@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -16,14 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentAccountAdminBinding;
-import com.example.bookingapplication.databinding.FragmentAccountBinding;
-import com.example.bookingapplication.fragments.account.AccountViewModel;
 import com.example.bookingapplication.model.AdminForUpdate;
 import com.example.bookingapplication.model.User;
-import com.example.bookingapplication.model.UserForUpdate;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 
 import retrofit2.Call;
@@ -78,11 +73,11 @@ public class AccountAdminFragment extends Fragment {
     }
     private void updateAdminProfile(){
         Long id = currentUser.getId();
-        Call<User> call = ClientUtils.updateUserService.updateAdmin(id,adminForUpdate);
+        Call<User> call = ClientUtils.userService.updateAdmin(id,adminForUpdate);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() == 200) {
+                if (response.code() == 201) {
                     Toast.makeText(getContext(), "Succesfully admin updated profile", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getContext(), "Can not update admin profile", Toast.LENGTH_SHORT).show();
@@ -97,7 +92,7 @@ public class AccountAdminFragment extends Fragment {
     }
     private void getAdminInfo(){
         Long id = SharedPreferencesManager.getUserInfo(this.getContext()).getId();
-        Call<User> call = ClientUtils.updateUserService.getAdmin(id);
+        Call<User> call = ClientUtils.userService.getAdmin(id);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

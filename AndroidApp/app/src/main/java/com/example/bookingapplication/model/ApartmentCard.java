@@ -16,6 +16,7 @@ public class ApartmentCard implements Parcelable {
     private String descriptionInfo;
     private String descriptionRating;
     private  String  image;
+    private Boolean isLiked;
 //    private Bitmap bitmap;
 
     public ApartmentCard() {
@@ -26,8 +27,18 @@ public class ApartmentCard implements Parcelable {
         this.descriptionInfo = descriptionInfo;
         this.descriptionRating = descriptionRating;
         this.image = image;
+//        this.isLiked = isLiked;
 //        Log.d("Slika: ", String.valueOf(this.image));
 //        this.bitmap = BitmapFactory.decodeByteArray(this.image, 0, this.image.length);
+    }
+    public ApartmentCard(Long id, String title, String descriptionInfo, String descriptionRating,  String  image,Boolean isLiked) {
+        this.id = id;
+        this.title = title;
+        this.descriptionInfo = descriptionInfo;
+        this.descriptionRating = descriptionRating;
+        this.image = image;
+        this.isLiked = isLiked;
+
     }
 
     public ApartmentCard(Card card){
@@ -35,6 +46,7 @@ public class ApartmentCard implements Parcelable {
         this.title = card.getTitle();
         this.descriptionInfo = card.getAddress().toString();
         this.descriptionRating = card.getAvgRate().toString();
+        this.isLiked = false;
 //        this.image = card.getImage();
     }
     protected ApartmentCard(Parcel in) {
@@ -43,6 +55,7 @@ public class ApartmentCard implements Parcelable {
         descriptionInfo = in.readString();
         descriptionRating = in.readString();
         image = in.readString();
+        isLiked = in.readBoolean();
     }
 
     public Long getId() {
@@ -84,6 +97,8 @@ public class ApartmentCard implements Parcelable {
     public void setImage(String image) {
         this.image = image;
     }
+    public Boolean getIsLiked(){return isLiked;}
+    public void setIsLiked(Boolean isLiked){this.isLiked = isLiked;}
 
     @Override
     public int describeContents() {
@@ -97,6 +112,7 @@ public class ApartmentCard implements Parcelable {
         dest.writeString(descriptionInfo);
         dest.writeString(descriptionRating);
         dest.writeString(image);
+        dest.writeBoolean(isLiked);
     }
 
 //    public Bitmap getBitmap() {

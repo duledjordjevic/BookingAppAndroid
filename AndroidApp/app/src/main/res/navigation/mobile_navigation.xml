@@ -92,4 +92,9 @@
         android:name="com.example.bookingapplication.fragments.analytics.AnalyticsFragment"
         android:label="Annalytics"
         tools:layout="@layout/fragment_analytics" />
+    <fragment
+        android:id="@+id/guestFavouritesFragment"
+        android:name="com.example.bookingapplication.fragments.guestFavourites.GuestFavouritesFragment"
+        android:label="Favourites"
+        tools:layout="@layout/fragment_guest_favourites" />
 </navigation>

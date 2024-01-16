@@ -18,6 +18,13 @@ public class ReservationHostCard implements Parcelable {
     private ReservationStatus status;
     private Guest guest;
     private double price;
+    private boolean isGuestReported;
+    public boolean isGuestReported() {
+        return isGuestReported;
+    }
+    public void setGuestReported(boolean guestReported) {
+        isGuestReported = guestReported;
+    }
 
     public ReservationHostCard(){}
     public ReservationHostCard(Long id, Accommodation accommodation, LocalDate startDate, LocalDate endDate, ReservationStatus status, Guest guest, double price) {
@@ -38,6 +45,7 @@ public class ReservationHostCard implements Parcelable {
         this.status = reservation.getStatus();
         this.price = reservation.getPrice();
         this.guest = reservation.getGuest();
+        this.isGuestReported = reservation.isGuestReported();
     }
 
 

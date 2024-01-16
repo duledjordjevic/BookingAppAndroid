@@ -166,14 +166,14 @@ public class ReservationsGuestCardsListFragment extends ListFragment {
         Log.i("Booking", "onCreate Products List Fragment");
         if (getArguments() != null) {
             cards = getArguments().getParcelableArrayList(ARG_PARAM);
-            adapter = new ReservationGuestCardListAdapter(getActivity(), cards);
+            adapter = new ReservationGuestCardListAdapter(getActivity(), cards,this);
             setListAdapter(adapter);
             Log.i("Booking", "Adapter Products List Fragment");
         }
 
     }
 
-    private void prepareCardsList(Map<String, String> queryParams){
+    public void prepareCardsList(Map<String, String> queryParams){
 
         queryParams.put("guestId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
         Log.d("USAO", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());

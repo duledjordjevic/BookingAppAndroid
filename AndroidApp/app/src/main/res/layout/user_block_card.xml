@@ -8,9 +8,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
         tools:ignore="MissingConstraints"
-        android:id="@+id/reservation_card_item">
+        android:id="@+id/user_block_card_item">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,32 +21,53 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/title"
-                    android:id="@+id/titleTextView"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:id="@+id/reportedUserTextView"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="3dp">
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/reporting_user"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="8dp"
+                        android:text=""
+                        android:id="@+id/reportingUserTextView"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Guest: "
+                        android:text="@string/accommodation"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="?android:attr/textColorSecondary" />
 
                     <TextView
-                        android:id="@+id/guestTextView"
+                        android:id="@+id/titleTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -54,45 +75,35 @@
                         android:text=""
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="?android:attr/textColorSecondary" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/report"
-                        android:backgroundTint="@color/dark_blue"
-                        android:id="@+id/report_button"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="3dp">
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Guest cancellations:  "
+                        android:text="@string/reason"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
+                        android:textColor="?android:attr/textColorSecondary" />
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/reasonTextView"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_weight="1"
                         android:text=""
-                        android:id="@+id/guestCancellationsTextView"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
+                        android:textColor="?android:attr/textColorSecondary" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="3dp">
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -128,81 +139,21 @@
                         android:textColor="?android:attr/textColorSecondary"
                         />
                 </LinearLayout>
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="3dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Status:  "
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text=""
-                        android:id="@+id/statusTextView"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
+                    android:gravity="center">
+
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="@color/dark_blue"
+                        android:text="@string/block"
+                        android:id="@+id/blockBtn"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="3dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Price:  "
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text=""
-                        android:id="@+id/priceTextView"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
-                </LinearLayout>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:gravity="center">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/dark_blue"
-                    android:text="@string/accept"
-                    android:id="@+id/acceptBtn"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:backgroundTint="@color/red"
-                    android:text="@string/decline"
-                    android:id="@+id/declineBtn"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -1,10 +1,14 @@
 package com.example.bookingapplication.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,14 +21,18 @@ import androidx.annotation.Nullable;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.ReservationGuestCardBinding;
+import com.example.bookingapplication.dialog.UserReportDialog;
+import com.example.bookingapplication.fragments.guestReservations.ReservationsGuestCardsListFragment;
 import com.example.bookingapplication.model.AccommodationApprovingCard;
 import com.example.bookingapplication.model.Reservation;
 import com.example.bookingapplication.model.ReservationGuestCard;
 import com.example.bookingapplication.model.ReservationHostCard;
 import com.example.bookingapplication.model.enums.CancellationPolicy;
 import com.example.bookingapplication.model.enums.ReservationStatus;
+import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.card.MaterialCardView;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,9 +43,12 @@ import retrofit2.Response;
 
 public class ReservationGuestCardListAdapter  extends ArrayAdapter<ReservationGuestCard> {
     private ArrayList<ReservationGuestCard> reservations;
-    public ReservationGuestCardListAdapter(@NonNull Context context, ArrayList<ReservationGuestCard> resource) {
+    private ReservationsGuestCardsListFragment reservationFragment;
+    public ReservationGuestCardListAdapter(@NonNull Context context, ArrayList<ReservationGuestCard> resource,
+                                           ReservationsGuestCardsListFragment reservationFragment) {
         super(context, R.layout.reservation_guest_card, resource);
-        reservations = resource;
+        this.reservations = resource;
+        this.reservationFragment = reservationFragment;
     }
 
     @Override
@@ -86,8 +97,10 @@ public class ReservationGuestCardListAdapter  extends ArrayAdapter<ReservationGu
         TextView endDateTextView = binding.endDateTextView;
         TextView statusTextView = binding.statusTextView;
         TextView priceTextView = binding.priceTextView;
+        TextView hostTextView = binding.hostTextView;
         Button deleteBtn = binding.deleteBtn;
         Button cancelBtn = binding.cancelBtn;
+        Button reportBtn = binding.reportButton;
 
         if(card != null){
             titleTextView.setText(card.getAccommodation().getTitle());
@@ -96,6 +109,7 @@ public class ReservationGuestCardListAdapter  extends ArrayAdapter<ReservationGu
             endDateTextView.setText(card.getEndDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             statusTextView.setText(card.getStatus().toString());
             priceTextView.setText(Double.toString(card.getPrice()));
+            hostTextView.setText(" " + card.getAccommodation().getHost().getName() +" " +  card.getAccommodation().getHost().getLastName());
 
             if(!card.getStatus().equals(ReservationStatus.PENDING)){
                 deleteBtn.setEnabled(false);
@@ -120,6 +134,17 @@ public class ReservationGuestCardListAdapter  extends ArrayAdapter<ReservationGu
                 cancelBtn.setTextColor(getContext().getColor(R.color.white));
                 cancelBtn.setAlpha(1f);
             }
+            Log.d("ReservationId",String.valueOf(card.getId()));
+            Log.d("IsHostReported",String.valueOf(card.isHostReported()));
+            if(card.getEndDate().isBefore(LocalDate.now()) && card.getStatus().equals(ReservationStatus.ACCEPTED) && !card.isHostReported()){
+                reportBtn.setEnabled(true);
+                reportBtn.setAlpha(1f);
+                reportBtn.setTextColor(getContext().getColor(R.color.white));
+            }else{
+                reportBtn.setEnabled(false);
+                reportBtn.setAlpha(0.5f);
+                reportBtn.setTextColor(getContext().getColor(R.color.white));
+            }
 
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -132,6 +157,22 @@ public class ReservationGuestCardListAdapter  extends ArrayAdapter<ReservationGu
                 @Override
                 public void onClick(View v) {
                     cancelAcceptedReservation(card.getId(), getPosition(card));
+                }
+            });
+
+            reportBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dialog reportDialog =new UserReportDialog(getContext(),R.style.CustomDialog,card.getAccommodation().getHost().getUser().getId(),
+                            SharedPreferencesManager.getUserInfo(getContext()).getId(),card.getId(),reservationFragment);
+                    reportDialog.setCancelable(true);
+                    reportDialog.setCanceledOnTouchOutside(true);
+                    WindowManager.LayoutParams lp=reportDialog.getWindow().getAttributes();
+                    lp.dimAmount=0.6f;  // dimAmount between 0.0f and 1.0f, 1.0f is completely dark
+                    reportDialog.getWindow().setAttributes(lp);
+                    reportDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                    reportDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    reportDialog.show();
                 }
             });
         }
