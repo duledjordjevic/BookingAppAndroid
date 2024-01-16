@@ -134,7 +134,10 @@ public class ApartmentDetailsFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putLong("accommodationId", accommodation.getId());
-//                bundle.putLong("hostId", accommodation.);
+                bundle.putLong("hostId", accommodation.getHost().getUser().getId());
+                Log.d("ACCcom", accommodation.getId().toString());
+                Log.d("ACChost", accommodation.getHost().getUser().getId().toString());
+//                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
                 findNavController(view).navigate(R.id.action_apartmentDetailsFragment_to_commentsFragment, bundle);
 
             }
