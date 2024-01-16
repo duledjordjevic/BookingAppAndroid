@@ -10,5 +10,17 @@
 
     <style name="DialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
         <item name="colorAccent">@color/dark_blue</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="Theme_Dialog_Light" parent="android:Theme.Holo.Light.Dialog.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--        <item name="android:windowMinWidthMinor">40%</item>-->
+<!--        <item name="android:windowMinWidthMajor">40%</item>-->
+    </style>
+    <style name="CustomDialog" parent="@style/ThemeOverlay.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@drawable/reportpopupbg</item>
     </style>
 </resources>

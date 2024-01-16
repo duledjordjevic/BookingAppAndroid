@@ -20,8 +20,24 @@ public class Reservation {
         private ReservationStatus status;
         private Guest guest;
         private Accommodation accommodation;
+        private boolean hostReported;
+        private boolean guestReported;
 
+        public boolean isHostReported() {
+                return hostReported;
+        }
 
+        public void setHostReported(boolean hostReported) {
+                hostReported = hostReported;
+        }
+
+        public boolean isGuestReported() {
+                return guestReported;
+        }
+
+        public void setGuestReported(boolean guestReported) {
+                guestReported = guestReported;
+        }
         public Long getId() {
                 return id;
         }

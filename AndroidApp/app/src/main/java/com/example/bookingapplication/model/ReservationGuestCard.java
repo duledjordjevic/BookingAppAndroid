@@ -18,6 +18,13 @@ public class ReservationGuestCard implements Parcelable {
     private Integer numberOfGuests;
     private ReservationStatus status;
     private double price;
+    private boolean isHostReported;
+    public boolean isHostReported() {
+        return isHostReported;
+    }
+    public void setHostReported(boolean hostReported) {
+        isHostReported = hostReported;
+    }
 
     public ReservationGuestCard(){}
 
@@ -51,6 +58,7 @@ public class ReservationGuestCard implements Parcelable {
         this.numberOfGuests = reservation.getNumberOfGuests();
         this.status = reservation.getStatus();
         this.price = reservation.getPrice();
+        this.isHostReported = reservation.isHostReported();
     }
 
 

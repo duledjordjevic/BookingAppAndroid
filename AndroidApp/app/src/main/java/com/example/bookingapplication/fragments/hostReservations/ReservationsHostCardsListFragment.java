@@ -171,7 +171,7 @@ public class ReservationsHostCardsListFragment extends ListFragment {
         Log.i("Booking", "onCreate Products List Fragment");
         if (getArguments() != null) {
             cards = getArguments().getParcelableArrayList(ARG_PARAM);
-            adapter = new ReservationsHostCardListAdapter(getActivity(), this, cards);
+            adapter = new ReservationsHostCardListAdapter(getActivity(), this, cards,this);
             setListAdapter(adapter);
             Log.i("Booking", "Adapter Products List Fragment");
         }
