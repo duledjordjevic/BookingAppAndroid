@@ -28,13 +28,15 @@ public class CommentCard implements Parcelable {
     private String guestLastName;
     private String guestEmail;
     private String hostNameSurname;
+    private Long accommodationId;
 
     public CommentCard(){
 
     }
     public CommentCard(Long id, int rating, LocalDate date, String reportMessage, String hostNameSurname,
                        String accommodationTitle, boolean isReported, String content,
-                       boolean isApproved, String guestName, String guestLastName, String guestEmail) {
+                       boolean isApproved, String guestName, String guestLastName, String guestEmail,
+                       Long accommodationId) {
         this.id = id;
         this.rating = rating;
         this.date = date;
@@ -47,6 +49,7 @@ public class CommentCard implements Parcelable {
         this.guestName = guestName;
         this.guestLastName = guestLastName;
         this.guestEmail = guestEmail;
+        this.accommodationId = accommodationId;
     }
 
     public CommentCard(Parcel in) {
@@ -56,6 +59,7 @@ public class CommentCard implements Parcelable {
         content = in.readString();
         accommodationTitle = in.readString();
         hostNameSurname = in.readString();
+        accommodationId = in.readLong();
     }
 
 
@@ -105,6 +109,9 @@ public class CommentCard implements Parcelable {
     public String getHostNameSurname() {
         return hostNameSurname;
     }
+    public Long getAccommodationId() {
+        return accommodationId;
+    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -152,6 +159,10 @@ public class CommentCard implements Parcelable {
         this.hostNameSurname = hostNameSurname;
     }
 
+    public void setAccommodationId(Long accommodationId) {
+        this.accommodationId = accommodationId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -165,6 +176,7 @@ public class CommentCard implements Parcelable {
         parcel.writeString(content);
         parcel.writeString(accommodationTitle);
         parcel.writeString(hostNameSurname);
+        parcel.writeLong(accommodationId);
     }
 
     public static final Creator<CommentCard> CREATOR = new Creator<CommentCard>() {
@@ -194,6 +206,7 @@ public class CommentCard implements Parcelable {
                 ", guestLastName='" + guestLastName + '\'' +
                 ", guestEmail='" + guestEmail + '\'' +
                 ", hostNameSurname='" + hostNameSurname + '\'' +
+                ", accommodationId=" + accommodationId +
                 '}';
     }
 }
