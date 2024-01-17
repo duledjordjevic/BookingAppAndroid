@@ -11,6 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -174,6 +175,8 @@ public class ReservationsGuestCardsListFragment extends ListFragment {
     }
 
     public void prepareCardsList(Map<String, String> queryParams){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanelGuestReservations);
+        loadingProgressBar.setVisibility(View.VISIBLE);
 
         queryParams.put("guestId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
         Log.d("USAO", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
@@ -181,6 +184,8 @@ public class ReservationsGuestCardsListFragment extends ListFragment {
         call.enqueue(new Callback<Collection<Reservation>>() {
             @Override
             public void onResponse(Call<Collection<Reservation>> call, Response<Collection<Reservation>> response) {
+                loadingProgressBar.setVisibility(View.GONE);
+
                 Log.d("USAO", "USAO1");
                 Log.d("Response", String.valueOf(response.code()));
 //                Log.d("Response", response.body().toString());
@@ -194,6 +199,7 @@ public class ReservationsGuestCardsListFragment extends ListFragment {
 
             @Override
             public void onFailure(Call<Collection<Reservation>> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
                 Log.d("USAO", "USAO2");
                 Log.d("Fail", t.toString());
                 Log.d("Fail", "Hello");

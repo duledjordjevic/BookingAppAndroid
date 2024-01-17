@@ -159,7 +159,10 @@
             android:id="@+id/descriptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"/>
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:maxLines="10"
+            android:scrollbars="vertical"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

@@ -76,7 +76,9 @@
     <string name="air_condition">Air condition</string>
     <string name="kitchen">Kitchen</string>
     <string name="create_accommodation">Create accommodation</string>
+    <string name="update_accommodation">Update accommodation</string>
     <string name="create">Create</string>
+    <string name="update">Update</string>
     <string name="price_for_entire_accommodation">Price for entire accommodation</string>
     <string name="accommodation_type">Accommodation type</string>
     <string name="title">Title</string>

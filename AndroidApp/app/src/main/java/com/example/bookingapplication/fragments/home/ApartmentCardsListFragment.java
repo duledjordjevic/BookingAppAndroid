@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.adapters.ApartmentCardsListAdapter;
@@ -99,11 +100,14 @@ public class ApartmentCardsListFragment extends ListFragment {
         }
     }
     private void getAccommodationsForGuest(Long id){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanel);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
         Call<List<Card>> call = ClientUtils.apartmentService.getAllAccommodations(id);
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
-
+                loadingProgressBar.setVisibility(View.GONE);
                 for (Card card : response.body()) {
                     String rate;
                     if(card.getAvgRate() == null){
@@ -123,14 +127,19 @@ public class ApartmentCardsListFragment extends ListFragment {
             }
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
             }
         });
     }
     private void getAccommodationsWithoutLike(){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanel);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
         Call<List<Card>> call = ClientUtils.apartmentService.getAccommodationsCards();
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
+                loadingProgressBar.setVisibility(View.GONE);
 
                 for (Card card : response.body()) {
                     String rate;
@@ -150,6 +159,7 @@ public class ApartmentCardsListFragment extends ListFragment {
             }
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
             }
         });
     }

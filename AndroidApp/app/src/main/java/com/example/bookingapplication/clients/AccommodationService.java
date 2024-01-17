@@ -59,7 +59,11 @@ public interface AccommodationService {
     })
     @PUT("accommodations/{id}/approvalStatus")
     Call<Accommodation> changeAccApprovalStatus(@Path("id") Long id,@Body AccApprovalStatus approvalStatus);
-
-
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("accommodations/{id}")
+    Call<Accommodation> updateAccommodation(@Body Accommodation accommodation,@Path("id") Long id);
 
 }

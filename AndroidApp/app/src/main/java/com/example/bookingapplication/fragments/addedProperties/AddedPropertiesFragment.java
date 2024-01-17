@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+
+import com.example.bookingapplication.R;
 import com.example.bookingapplication.adapters.AccommodationApprovingListAdapter;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentAddedPropertiesBinding;
@@ -73,10 +76,14 @@ public class AddedPropertiesFragment  extends ListFragment {
     }
 
     private void prepareApartmentCardsList(){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanelAccApproving);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
         Call<List<Card>> call = ClientUtils.accommodationService.getAccommodationsForApproving();
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
+                loadingProgressBar.setVisibility(View.GONE);
                 Log.d("Response", String.valueOf(response.code()));
                 Log.d("Response", String.valueOf(response.body().get(0).getImage()));
                 ArrayList<AccommodationApprovingCard> cards = new ArrayList<>();
@@ -100,7 +107,7 @@ public class AddedPropertiesFragment  extends ListFragment {
 
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
-
+                loadingProgressBar.setVisibility(View.GONE);
             }
         });
     }

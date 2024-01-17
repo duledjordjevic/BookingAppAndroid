@@ -97,4 +97,12 @@
         android:name="com.example.bookingapplication.fragments.guestFavourites.GuestFavouritesFragment"
         android:label="Favourites"
         tools:layout="@layout/fragment_guest_favourites" />
+    <fragment
+        android:id="@+id/updateAccommodationFragment"
+        android:name="com.example.bookingapplication.fragments.updateAccommodation.UpdateAccommodationFragment"
+        android:label="Update property" >
+        <action
+            android:id="@+id/action_updateAccommodationFragment_to_accommodationsForHostFragment"
+            app:destination="@id/accommodationsForHostFragment" />
+    </fragment>
 </navigation>
