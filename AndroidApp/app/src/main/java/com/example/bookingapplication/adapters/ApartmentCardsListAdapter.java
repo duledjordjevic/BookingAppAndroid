@@ -93,7 +93,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         ImageView likeBtnImage = binding.heartButton;
         Animation zoomInAnim = AnimationUtils.loadAnimation(getContext(),R.anim.zoom_in);
         Animation zoomOutAnim = AnimationUtils.loadAnimation(getContext(),R.anim.zoom_out);
-        user = SharedPreferencesManager.getUserInfo(getContext());
+        user = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext());
 
         if(card != null){
             Log.d("Kartica",String.valueOf(card.getIsLiked()));

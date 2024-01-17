@@ -198,7 +198,7 @@ public class AnalyticsFragment extends Fragment {
 
 
     private void getAnnualAnalytics(int year, Long accommodationId){
-        Call<AnnualAnalytics> call = ClientUtils.analyticsService.getAnnualAnalytics(2024, accommodationId,SharedPreferencesManager.getUserInfo(getContext()).getId());
+        Call<AnnualAnalytics> call = ClientUtils.analyticsService.getAnnualAnalytics(2024, accommodationId,SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId());
         call.enqueue(new Callback<AnnualAnalytics>() {
             @Override
             public void onResponse(Call<AnnualAnalytics> call, Response<AnnualAnalytics> response) {
@@ -220,7 +220,7 @@ public class AnalyticsFragment extends Fragment {
     }
 
     private void getAnalyticsForAll(Map<String, String> queryParams){
-        Call<Collection<Analytics>> call = ClientUtils.analyticsService.getAnalyticsForAll(SharedPreferencesManager.getUserInfo(getContext()).getId(), queryParams);
+        Call<Collection<Analytics>> call = ClientUtils.analyticsService.getAnalyticsForAll(SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId(), queryParams);
         call.enqueue(new Callback<Collection<Analytics>>() {
             @Override
             public void onResponse(Call<Collection<Analytics>> call, Response<Collection<Analytics>> response) {
@@ -253,7 +253,7 @@ public class AnalyticsFragment extends Fragment {
 
 
     private void getAccommodationsForHost(){
-        Call<List<Card>> call = ClientUtils.accommodationService.getAccommodationsForHosts(SharedPreferencesManager.getUserInfo(getContext()).getId());
+        Call<List<Card>> call = ClientUtils.accommodationService.getAccommodationsForHosts(SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId());
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {

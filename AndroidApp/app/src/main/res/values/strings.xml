@@ -131,4 +131,5 @@
     <string name="report_comment">Report</string>
     <string name="delete_comment">Delete</string>
     <string name="report_comment_title">Report comment</string>
+    <string name="date_range">Date range</string>
 </resources>

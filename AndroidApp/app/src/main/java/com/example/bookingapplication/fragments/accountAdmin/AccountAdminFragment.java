@@ -42,7 +42,7 @@ public class AccountAdminFragment extends Fragment {
         View root = binding.getRoot();
 
         adminInfo = new User();
-        currentUser = SharedPreferencesManager.getUserInfo(this.getContext());
+        currentUser = SharedPreferencesManager.getUserInfo(this.getActivity().getApplicationContext());
         updateProfileValidator = binding.updateProfileAdminNotValid;
 
         getAdminInfo();
@@ -91,7 +91,7 @@ public class AccountAdminFragment extends Fragment {
         });
     }
     private void getAdminInfo(){
-        Long id = SharedPreferencesManager.getUserInfo(this.getContext()).getId();
+        Long id = SharedPreferencesManager.getUserInfo(this.getContext().getApplicationContext()).getId();
         Call<User> call = ClientUtils.userService.getAdmin(id);
         call.enqueue(new Callback<User>() {
             @Override

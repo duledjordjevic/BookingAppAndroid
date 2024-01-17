@@ -22,7 +22,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         Log.d("share", "hello1");
-        User user = SharedPreferencesManager.getUserInfo(this);
+        User user = SharedPreferencesManager.getUserInfo(getApplicationContext());
         Log.d("share", "hello2");
         if (user != null && !TextUtils.isEmpty(user.getEmail())) {
             Log.d("share", "hello3");
