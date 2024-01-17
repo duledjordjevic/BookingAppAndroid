@@ -5,13 +5,17 @@ import static android.content.Intent.getIntent;
 import static android.content.Intent.getIntentOld;
 import static androidx.navigation.Navigation.findNavController;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
@@ -28,7 +32,10 @@ import androidx.cardview.widget.CardView;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.databinding.ApartmentCardBinding;
 import com.example.bookingapplication.databinding.CommentCardBinding;
+import com.example.bookingapplication.dialog.CommentReportDialog;
+import com.example.bookingapplication.dialog.UserReportDialog;
 import com.example.bookingapplication.fragments.comments.CommentCardListFragment;
+import com.example.bookingapplication.fragments.guestReservations.ReservationsGuestCardsListFragment;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.example.bookingapplication.model.CommentCard;
 import com.example.bookingapplication.model.User;
@@ -45,7 +52,6 @@ public class CommentCardsListAdapter extends ArrayAdapter<CommentCard> {
     public CommentCardsListAdapter(Context context, ArrayList<CommentCard> products){
         super(context, R.layout.comment_card, products);
         comments = products;
-
     }
 
     @Override
@@ -99,6 +105,23 @@ public class CommentCardsListAdapter extends ArrayAdapter<CommentCard> {
                 break;
             case HOST:
                 reportButton.setVisibility(View.VISIBLE);
+                reportButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CommentCard cardComm = getItem(position);
+                        Log.d("OVO je ID", cardComm.getId().toString());
+                        Dialog reportDialog = new CommentReportDialog(getContext(),R.style.CustomDialog, cardComm.getAccommodationId(),
+                                cardComm.getId(), CommentCardsListAdapter.this);
+                        reportDialog.setCancelable(true);
+                        reportDialog.setCanceledOnTouchOutside(true);
+                        WindowManager.LayoutParams lp=reportDialog.getWindow().getAttributes();
+                        lp.dimAmount=0.6f;  // dimAmount between 0.0f and 1.0f, 1.0f is completely dark
+                        reportDialog.getWindow().setAttributes(lp);
+                        reportDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                        reportDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        reportDialog.show();
+                    }
+                });
                 break;
             default:
                 break;
