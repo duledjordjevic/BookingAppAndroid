@@ -43,24 +43,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
-    private ArrayList<ApartmentCard> aProducts;
+    private ArrayList<ApartmentCard> accommodations;
 
     public ApartmentCardsListAdapter(Context context, ArrayList<ApartmentCard> products){
         super(context, R.layout.apartment_card, products);
-        aProducts = products;
+        accommodations = products;
 
     }
 
     @Override
     public int getCount() {
-        return aProducts.size();
+        return accommodations.size();
     }
 
 
     @Nullable
     @Override
     public ApartmentCard getItem(int position) {
-        return aProducts.get(position);
+        return accommodations.get(position);
     }
 
     @Override
@@ -84,6 +84,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         }else{
             binding = (ApartmentCardBinding) convertView.getTag();
         }
+
         MaterialCardView apartment_card = binding.apartmentCardItem;
         ImageView imageView = binding.apartmentCardImage;
         TextView productTitle = binding.apartmentCardTitle;
@@ -109,13 +110,20 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
             productTitle.setText(card.getTitle());
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
-            apartment_card.setOnClickListener(v -> {
-                Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
-                        ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
-                Bundle bundle = new Bundle();
-                bundle.putLong("apartmentId", card.getId());
-                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
+
+            apartment_card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ApartmentCard cardAcc = getItem(position);
+                    Toast.makeText(getContext(), "Clicked: " + cardAcc.getTitle()  +
+                            ", id: " + cardAcc.getId(), Toast.LENGTH_SHORT).show();
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("apartmentId", cardAcc.getId());
+                    findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
+                }
             });
+
+
             likeBtnImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

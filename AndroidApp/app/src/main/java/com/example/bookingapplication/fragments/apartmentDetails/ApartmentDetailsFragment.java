@@ -1,5 +1,7 @@
 package com.example.bookingapplication.fragments.apartmentDetails;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
@@ -84,12 +86,14 @@ public class ApartmentDetailsFragment extends Fragment {
 
         dateOutput = "";
         dateInput = "";
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             id = bundle.getLong("apartmentId");
             Log.e("Id", String.valueOf(id));
-            // Koristite apartmentId kako je potrebno
+
         }
+
         Log.e("Id", String.valueOf(id));
         setValues();
         button.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +128,20 @@ public class ApartmentDetailsFragment extends Fragment {
         });
 
 
+        Button commentButton = binding.commentButton;
+        commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("accommodationId", accommodation.getId());
+                bundle.putLong("hostId", accommodation.getHost().getUser().getId());
+                Log.d("ACCcom", accommodation.getId().toString());
+                Log.d("ACChost", accommodation.getHost().getUser().getId().toString());
+//                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                findNavController(view).navigate(R.id.action_apartmentDetailsFragment_to_commentsFragment, bundle);
+
+            }
+        });
         return root;
     }
 

@@ -4,8 +4,6 @@
         <item name="strokeColor">@color/dark_blue</item>
         <item name="android:fillColor">@color/dark_blue</item>
         <item name="iconTint">@color/dark_blue</item>
-<!--        <item name="android:backgroundTint">@color/dark_blue</item>-->
-        <!-- Add other attributes if needed -->
     </style>
 
     <style name="DialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
@@ -23,4 +21,10 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:background">@drawable/reportpopupbg</item>
     </style>
+    <style name="CustomContainedButtonIcon" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/red</item>
+    </style>
+
+
+
 </resources>

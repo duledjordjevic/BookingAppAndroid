@@ -94,6 +94,7 @@
     <string name="reason">Reason: </string>
     <string name="reporting_user">Reporting user: </string>
     <string name="report_user_btn">Report user</string>
+    <string name="approve">Approve</string>
     <string name="accommodation">Accommodation</string>
     <string name="annual_analytic">Annual analytic</string>
     <string name="year">Year</string>
@@ -121,4 +122,13 @@
         <item>DECLINED</item>
         <item>CANCELLED</item>
     </string-array>
+    <string-array name="spinner_options">
+        <item>Accommodation</item>
+        <item>Host</item>
+    </string-array>
+    <string name="comments_title">Comments</string>
+    <string name="options">Options</string>
+    <string name="report_comment">Report</string>
+    <string name="delete_comment">Delete</string>
+    <string name="report_comment_title">Report comment</string>
 </resources>
