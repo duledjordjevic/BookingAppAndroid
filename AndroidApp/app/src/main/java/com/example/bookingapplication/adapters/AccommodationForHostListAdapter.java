@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.databinding.ApartmentCardBinding;
@@ -103,7 +104,9 @@ public class AccommodationForHostListAdapter  extends ArrayAdapter<ApartmentCard
                         ", id: " + getItem(position).getId().toString(), Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
                 bundle.putLong("apartmentId", getItem(position).getId());
+
                 findNavController(v).navigate(R.id.updateAccommodationFragment,bundle);
+
             });
         }
 

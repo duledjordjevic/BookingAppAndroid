@@ -1,5 +1,7 @@
 package com.example.bookingapplication.fragments.updateAccommodation;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -91,6 +93,7 @@ public class UpdateAccommodationFragment extends Fragment {
 
         binding = FragmentUpdateAccommodationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         propertyNameInput = binding.propertyNameInput;
         stateInput = binding.stateInput;

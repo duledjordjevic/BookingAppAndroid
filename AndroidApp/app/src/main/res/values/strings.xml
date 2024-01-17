@@ -60,7 +60,7 @@
     <string name="state">State</string>
     <string name="postal_code">Postal code</string>
     <string name="property_name">Property name</string>
-    <string name="description">Description</string>
+    <string name="description">Description: </string>
     <string name="cancellation_policy">Cancellation policy</string>
     <string name="payment_method">Payment method</string>
     <string name="reservation_confirmation_method">Reservation confirmation method</string>
@@ -87,6 +87,7 @@
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="block">Block</string>
+    <string name="mark_as_read">Mark as read</string>
     <string name="decline">Decline</string>
     <string name="report">Report</string>
     <string name="search">Search</string>
@@ -95,6 +96,7 @@
     <string name="reported_user">Reported user: </string>
     <string name="reason">Reason: </string>
     <string name="reporting_user">Reporting user: </string>
+    <string name="date">Date: </string>
     <string name="report_user_btn">Report user</string>
     <string name="accommodation">Accommodation</string>
     <string name="annual_analytic">Annual analytic</string>

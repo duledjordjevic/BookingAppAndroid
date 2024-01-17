@@ -1,5 +1,7 @@
 package com.example.bookingapplication.fragments.accommodationsForHost;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +43,7 @@ public class AccommodationsForHostFragment extends Fragment {
 
         binding = FragmentAccommodationsForHostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         FragmentTransition.to(AccForHostListFragment.newInstance(products), getActivity() , false, R.id.scroll_accommodations_for_host_list);
 
