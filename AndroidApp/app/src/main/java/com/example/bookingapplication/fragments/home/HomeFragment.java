@@ -30,6 +30,7 @@ import com.example.bookingapplication.model.AccommodationApprovingCard;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.model.User;
+import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -49,6 +50,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+
+        Log.d("login1" , SharedPreferencesManager.getUserInfo(getActivity().getApplicationContext()).getJwt() + " "  + SharedPreferencesManager.getUserInfo(getActivity().getApplicationContext()).getId());
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

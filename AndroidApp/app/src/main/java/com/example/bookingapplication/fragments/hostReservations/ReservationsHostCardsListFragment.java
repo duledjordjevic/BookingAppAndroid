@@ -108,6 +108,7 @@ public class ReservationsHostCardsListFragment extends ListFragment {
             }
         });
 
+        Log.d("login1" , SharedPreferencesManager.getUserInfo(getActivity().getApplicationContext()).getJwt() + " id:"  + SharedPreferencesManager.getUserInfo(getActivity().getApplicationContext()).getId());
         prepareCardsList(new HashMap<>());
         return root;
     }
@@ -143,7 +144,6 @@ public class ReservationsHostCardsListFragment extends ListFragment {
             queryParams.put("status", statusTextView.getText().toString());
         }
 
-//        queryParams.put("hostId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
 
         prepareCardsList(queryParams);
     }
@@ -163,7 +163,7 @@ public class ReservationsHostCardsListFragment extends ListFragment {
 
     public void prepareCardsList(Map<String, String> queryParams){
         Log.d("PARAMS", queryParams.toString());
-        queryParams.put("hostId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
+        queryParams.put("hostId", SharedPreferencesManager.getUserInfo(getActivity().getApplicationContext()).getId().toString());
         Call<Collection<Reservation>> call = ClientUtils.reservationService.getFilteredReservationsForHost( queryParams);
         call.enqueue(new Callback<Collection<Reservation>>() {
             @Override

@@ -21,7 +21,7 @@ public class ClientUtils {
 
     public static final String SERVICE_API_PATH = "http://"+ BuildConfig.IP_ADDR +":8080/api/";
 
-    public static OkHttpClient authenticatedClient(final String authToken) {
+    public static OkHttpClient authenticatedClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -35,7 +35,7 @@ public class ClientUtils {
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 Request.Builder builder = originalRequest.newBuilder()
-                        .header("Authorization", "Bearer " + authToken);
+                        .header("Authorization", "Bearer " + SharedPreferencesManager.getUserInfo(BookingApp.getContext()).getJwt());
                 Request newRequest = builder.build();
                 return chain.proceed(newRequest);
             }
@@ -47,7 +47,7 @@ public class ClientUtils {
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(SERVICE_API_PATH)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(authenticatedClient(SharedPreferencesManager.getUserInfo(BookingApp.getContext()).getJwt()))
+            .client(authenticatedClient())
             .build();
 
     public static AuthService authService = retrofit.create(AuthService.class);

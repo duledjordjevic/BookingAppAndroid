@@ -46,7 +46,7 @@ public class AccountFragment extends Fragment {
         View root = binding.getRoot();
 
         userInfo = new User();
-        currentUser = SharedPreferencesManager.getUserInfo(this.getContext());
+        currentUser = SharedPreferencesManager.getUserInfo(this.getContext().getApplicationContext());
         updateProfileValidator = binding.updateProfileNotValid;
 
         getUserInfo();
@@ -132,7 +132,7 @@ public class AccountFragment extends Fragment {
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.code() == 200) {
                     Intent intent = new Intent(getContext(), LoginActivity.class);
-                    SharedPreferencesManager.clearUserInfo(getContext());
+                    SharedPreferencesManager.clearUserInfo(getActivity().getApplicationContext());
                     startActivity(intent);
                     Toast.makeText(getContext(), "Succesfully deleted profile", Toast.LENGTH_SHORT).show();
                 }else{
