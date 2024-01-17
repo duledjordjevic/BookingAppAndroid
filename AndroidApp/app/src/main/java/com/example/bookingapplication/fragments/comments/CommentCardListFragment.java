@@ -147,6 +147,9 @@ public class CommentCardListFragment extends ListFragment {
     }
     private void addProducts(ArrayList<CommentCard> products){
         this.adapter.clear();
+        for (CommentCard commentCard: products) {
+            Log.d("PRIMIO", commentCard.getId().toString());
+        }
         this.adapter.addAll(products);
     }
 
