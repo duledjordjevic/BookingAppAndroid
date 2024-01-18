@@ -2,65 +2,144 @@ package com.example.bookingapplication.fragments.addComments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.adapters.AddCommentsCardsListAdapter;
+import com.example.bookingapplication.adapters.MyCommentsCardsListAdapter;
+import com.example.bookingapplication.clients.ClientUtils;
+import com.example.bookingapplication.databinding.FragmentAddCommentsCardListBinding;
+import com.example.bookingapplication.databinding.FragmentMyCommentsCardListBinding;
+import com.example.bookingapplication.fragments.myComments.MyCommentsCardListFragment;
+import com.example.bookingapplication.model.Accommodation;
+import com.example.bookingapplication.model.CommentCard;
+import com.example.bookingapplication.util.SharedPreferencesManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddCommentsCardListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AddCommentsCardListFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Collection;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class AddCommentsCardListFragment extends ListFragment {
 
+    private AddCommentsCardsListAdapter addCommentsCardsListAdapter;
+    private static final String ARG_PARAM = "param";
+    private ArrayList<Accommodation> cards;
+    private FragmentAddCommentsCardListBinding binding;
+    public Long guestUserId;
+    private AutoCompleteTextView commentTextView;
     public AddCommentsCardListFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddCommentsCardListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddCommentsCardListFragment newInstance(String param1, String param2) {
+    public Long getGuestUserId() {
+        return guestUserId;
+    }
+
+    public void setGuestUserId(Long guestUserId) {
+        this.guestUserId = guestUserId;
+    }
+
+    public static AddCommentsCardListFragment newInstance(ArrayList<Accommodation> cards){
         AddCommentsCardListFragment fragment = new AddCommentsCardListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelableArrayList(ARG_PARAM, cards);
         fragment.setArguments(args);
         return fragment;
     }
 
+
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        this.guestUserId = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId();
+
+        binding = FragmentAddCommentsCardListBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+
+        commentTextView = binding.commentTextView;
+
+        String[] commentInputArray = getResources().getStringArray(R.array.comment_type_options);
+        ArrayAdapter<String> commentInputAdapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_item, commentInputArray);
+        commentTextView.setAdapter(commentInputAdapter);
+
+        commentTextView.setText(commentInputArray[0], false);
+        prepareAccommodations();
+
+        commentTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String newText = editable.toString();
+                if (newText.equals("Accommodation")){
+                    addCommentsCardsListAdapter.setCommentForAcc(true);
+                } else {
+                    addCommentsCardsListAdapter.setCommentForAcc(false);
+                }
+                prepareAccommodations();
+            }
+        });
+        return root;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_comments_card_list, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        cards = new ArrayList<>();
+        addCommentsCardsListAdapter = new AddCommentsCardsListAdapter(getActivity(), new ArrayList<>(),
+                AddCommentsCardListFragment.this);
+        setListAdapter(addCommentsCardsListAdapter);
+    }
+
+    public void prepareAccommodations(){
+        Call<Collection<Accommodation>> call = ClientUtils.commentsService.getAccommodationsForComment(this.guestUserId);
+        call.enqueue(new Callback<Collection<Accommodation>>() {
+            @Override
+            public void onResponse(Call<Collection<Accommodation>> call, Response<Collection<Accommodation>> response) {
+                Log.d("VRATIO", response.body().toString());
+                addAccommodations((ArrayList<Accommodation>) response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Collection<Accommodation>> call, Throwable t) {
+                Log.d("Fail", t.toString());
+            }
+        });
+    }
+
+    private void addAccommodations(ArrayList<Accommodation> accommodations){
+        this.addCommentsCardsListAdapter.clear();
+        this.addCommentsCardsListAdapter.addAll(accommodations);
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
     }
 }

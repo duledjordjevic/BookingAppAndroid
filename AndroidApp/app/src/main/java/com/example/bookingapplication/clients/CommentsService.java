@@ -1,6 +1,9 @@
 package com.example.bookingapplication.clients;
 
+import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Card;
+import com.example.bookingapplication.model.CommentAboutAcc;
+import com.example.bookingapplication.model.CommentAboutHost;
 import com.example.bookingapplication.model.CommentCard;
 import com.example.bookingapplication.model.UserReport;
 
@@ -94,4 +97,34 @@ public interface CommentsService {
     })
     @PUT("commentsAboutAcc/{id}/approve/{isApproved}")
     Call<CommentCard> approveCommentAboutAcc(@Path("id") Long id, @Path("isApproved") Boolean isApproved);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("commentsAboutAcc/guest/{id}")
+    Call<Collection<CommentCard>> getCommentsAboutAccForGuest(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("commentsAboutHost/guest/{id}")
+    Call<Collection<CommentCard>> getCommentsAboutHostForGuest(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/guest/comment/{id}")
+    Call<Collection<Accommodation>> getAccommodationsForComment(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST("commentsAboutHost")
+    Call<CommentAboutHost> createCommentAboutHost(@Body CommentAboutHost commentAboutHost);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST("commentsAboutAcc")
+    Call<CommentAboutAcc> createCommentAboutAcc(@Body CommentAboutAcc commentAboutAcc);
 }

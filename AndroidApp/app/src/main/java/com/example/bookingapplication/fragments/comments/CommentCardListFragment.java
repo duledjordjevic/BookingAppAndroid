@@ -113,6 +113,7 @@ public class CommentCardListFragment extends ListFragment {
 
     private void prepareCardsAccList(){
 
+        Log.d("ACCID", accommodationId.toString());
         Call<Collection<CommentCard>> call = ClientUtils.commentsService.getCommentsAboutAcc(accommodationId);
         call.enqueue(new Callback<Collection<CommentCard>>() {
             @Override

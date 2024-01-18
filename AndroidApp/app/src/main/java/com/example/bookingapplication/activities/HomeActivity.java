@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
                 R.id.addedPropertiesFragment,R.id.hostPropertiesFragment,R.id.commentsFragment,R.id.reportedUsersFragment,
                 R.id.loginActivity,R.id.accountAdminFragment, R.id.createAccommodationFragment,R.id.accommodationApprovingFragment,
                 R.id.accommodationsForHostFragment, R.id.guestReservationsFragment, R.id.hostReservationsFragment,
-                R.id.analyticsAnnualFragment, R.id.guestFavouritesFragment, R.id.approveCommentsFragment)
+                R.id.analyticsAnnualFragment, R.id.guestFavouritesFragment, R.id.approveCommentsFragment, R.id.myCommentsFragment)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -93,6 +93,16 @@ public class HomeActivity extends AppCompatActivity {
             navController.navigate(R.id.analyticsAnnualFragment);
             return true;
         }
+        else if(item.getItemId() == R.id.myCommentsFragment){
+            navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+            navController.navigate(R.id.myCommentsFragment);
+            return true;
+        }
+        else if(item.getItemId() == R.id.addCommentsFragment){
+            navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+            navController.navigate(R.id.addCommentsFragment2);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
 
     }
@@ -104,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         UserType role = UserType.valueOf(intent.getStringExtra("Role"));
         switch (role) {
             case GUEST:
-                getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+                getMenuInflater().inflate(R.menu.toolbar_menu_guest, menu);
                 break;
             case HOST:
                 getMenuInflater().inflate(R.menu.toolbar_menu_host, menu);

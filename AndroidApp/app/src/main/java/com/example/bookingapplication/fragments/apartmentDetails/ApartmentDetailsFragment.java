@@ -29,6 +29,8 @@ import android.widget.Toast;
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentApartmentDetailsBinding;
+import com.example.bookingapplication.fragments.FragmentTransition;
+import com.example.bookingapplication.fragments.comments.CommentCardListFragment;
 import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Address;
 import com.example.bookingapplication.model.ApartmentCard;
