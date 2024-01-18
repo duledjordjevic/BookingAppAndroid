@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.adapters.AccommodationForHostListAdapter;
 import com.example.bookingapplication.adapters.ApartmentCardsListAdapter;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentAccForHostListBinding;
@@ -36,7 +38,7 @@ import retrofit2.Response;
 public class AccForHostListFragment extends ListFragment {
 
     public static ArrayList<ApartmentCard> products = new ArrayList<ApartmentCard>();
-    private ApartmentCardsListAdapter adapter;
+    private AccommodationForHostListAdapter adapter;
     private static final String ARG_PARAM = "param";
     private ArrayList<ApartmentCard> mProducts;
     private FragmentAccForHostListBinding binding;
@@ -65,7 +67,7 @@ public class AccForHostListFragment extends ListFragment {
         Log.i("ShopApp", "onCreate Products List Fragment");
         if (getArguments() != null) {
             mProducts = getArguments().getParcelableArrayList(ARG_PARAM);
-            adapter = new ApartmentCardsListAdapter(getActivity(), mProducts);
+            adapter = new AccommodationForHostListAdapter(getActivity(), mProducts);
             setListAdapter(adapter);
         }
     }
@@ -83,11 +85,15 @@ public class AccForHostListFragment extends ListFragment {
     }
 
     private void prepareApartmentCardsList(){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanelAccForHost);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
         Long id = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId();
         Call<List<Card>> call = ClientUtils.accommodationService.getAccommodationsForHosts(id);
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
+                loadingProgressBar.setVisibility(View.GONE);
                 ArrayList<ApartmentCard> cards = new ArrayList<>();
                 Log.i("ShopApp", String.valueOf(response.code()));
                 for (Card card : response.body()) {
@@ -109,6 +115,7 @@ public class AccForHostListFragment extends ListFragment {
 
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
                 Log.i("ShopApp", "USOOOO");
             }
         });

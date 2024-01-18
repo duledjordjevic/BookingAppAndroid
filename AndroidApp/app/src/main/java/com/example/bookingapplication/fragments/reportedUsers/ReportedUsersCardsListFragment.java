@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
+import com.example.bookingapplication.R;
 import com.example.bookingapplication.adapters.ReportedUserListAdapter;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentReportedUsersCardsListBinding;
@@ -77,11 +79,14 @@ public class ReportedUsersCardsListFragment extends ListFragment {
     }
 
     public void prepareApartmentCardsList(){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanelReportedUsers);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
         Call<List<UserBlock>> call = ClientUtils.userService.getReportedUsers();
         call.enqueue(new Callback<List<UserBlock>>() {
             @Override
             public void onResponse(Call<List<UserBlock>> call, Response<List<UserBlock>> response) {
-
+                loadingProgressBar.setVisibility(View.GONE);
                 Log.d("Odgovor",String.valueOf(response.code()));
 
                 ArrayList<UserBlockCard> cards = new ArrayList<>();
@@ -99,7 +104,7 @@ public class ReportedUsersCardsListFragment extends ListFragment {
 
             @Override
             public void onFailure(Call<List<UserBlock>> call, Throwable t) {
-
+                loadingProgressBar.setVisibility(View.GONE);
             }
         });
     }

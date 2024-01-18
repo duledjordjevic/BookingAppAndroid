@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -23,27 +24,44 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.adapters.DateRangeCardAdapter;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentCreateAccommodationBinding;
+import com.example.bookingapplication.fragments.FragmentTransition;
+import com.example.bookingapplication.fragments.dateRange.DateRangeCardsListFragment;
+import com.example.bookingapplication.fragments.guestReservations.ReservationsGuestCardsListFragment;
 import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Address;
+import com.example.bookingapplication.model.DateRangeCard;
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 import com.example.bookingapplication.model.enums.AccommodationType;
 import com.example.bookingapplication.model.enums.Amenities;
 import com.example.bookingapplication.model.enums.CancellationPolicy;
 import com.example.bookingapplication.model.enums.ReservationMethod;
 import com.example.bookingapplication.util.SharedPreferencesManager;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -83,6 +101,12 @@ public class CreateAccommodationFragment extends Fragment {
     private Button buttonPickImage;
     private List<Uri> imagesAccommodation = new ArrayList<>();
     private TextView imagesMessage;
+    private ArrayList<DateRangeCard> dates;
+    private Button dateRangeBtn;
+    private LocalDate selectedStartDate;
+    private LocalDate selectedEndDate;
+    private TextInputEditText priceInput;
+    private Button setDateRangeBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -91,6 +115,12 @@ public class CreateAccommodationFragment extends Fragment {
         binding = FragmentCreateAccommodationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        dates = new ArrayList<>();
+        FragmentTransition.to(DateRangeCardsListFragment.newInstance(dates), getActivity() , false, R.id.scroll_date_range_cards_list);
+
+        priceInput = binding.priceInput;
+        setDateRangeBtn = binding.setDateRangeBtn;
+        dateRangeBtn = binding.dateRangeBtn;
         propertyNameInput = binding.propertyNameInput;
         stateInput = binding.stateInput;
         cityInput = binding.cityInput;
@@ -151,6 +181,43 @@ public class CreateAccommodationFragment extends Fragment {
             }
         });
 
+        dateRangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+                        .setTitleText("Select dates")
+                        .setSelection(getDefaultDateSelection())
+                        .setCalendarConstraints(getCalendarConstraints())
+                        .build();
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+                    @Override
+                    public void onPositiveButtonClick(Pair<Long, Long> selection) {
+                        String date1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date(selection.first));
+                        String date2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date(selection.second));
+                        selectedStartDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        selectedEndDate = LocalDate.parse(date2, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        dateRangeBtn.setText(date1 + " - " + date2);
+                    }
+                });
+                materialDatePicker.show(getParentFragmentManager(), "tag");
+
+            }
+        });
+        setDateRangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!priceInput.getText().toString().isEmpty() && selectedStartDate != null && selectedEndDate != null){
+                    dates.add(new DateRangeCard(selectedStartDate, selectedEndDate, Double.parseDouble(priceInput.getText().toString())));
+                    FragmentTransition.to(DateRangeCardsListFragment.newInstance(dates), getActivity() , false, R.id.scroll_date_range_cards_list);
+                    selectedStartDate = null;
+                    selectedEndDate = null;
+                    priceInput.setText("");
+                    dateRangeBtn.setText("Date range");
+                }else{
+                    Toast.makeText(getActivity(), "Select price and dates!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
         String[] cancellationPoliciesArray = getResources().getStringArray(R.array.cancellation_policies);
@@ -242,6 +309,32 @@ public class CreateAccommodationFragment extends Fragment {
         return root;
     }
 
+    public static CalendarConstraints getCalendarConstraints() {
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        long tomorrow = calendar.getTimeInMillis();
+
+        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+        constraintsBuilder.setStart(tomorrow);
+        constraintsBuilder.setValidator(DateValidatorPointForward.from(tomorrow));
+
+        return constraintsBuilder.build();
+    }
+
+    public static Pair<Long, Long> getDefaultDateSelection() {
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        long tomorrow = calendar.getTimeInMillis();
+
+        return new Pair<>(tomorrow, tomorrow + TimeUnit.DAYS.toMillis(1));
+    }
+
     private void createAccommodation(Accommodation accommodation){
         Call<Accommodation> call = ClientUtils.accommodationService.createAccommodation(accommodation);
         call.enqueue(new Callback<Accommodation>() {
@@ -302,11 +395,38 @@ public class CreateAccommodationFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 200){
                     Log.d("IMAGES", "Successful");
-                     Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
+                    if(dates != null && dates.size() != 0){
+                        postDateRanges(accommodationId);
+                    }else{
+                        Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
+                        NavController navController = Navigation.findNavController(getView());
+                        navController.navigate(R.id.action_createAccommodationFragment_to_accommodationsForHostFragment);
+                    }
+                }else{
+                    Log.d("IMAGES", "Some other code status");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("IMAGES", t.getMessage() != null?t.getMessage():"error");
+                Log.d("IMAGES", "FAIL");
+            }
+        });
+    }
+
+    private void postDateRanges(Long accommodationId){
+        Call<Void> call = ClientUtils.accommodationService.addPriceList(accommodationId, dates);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200){
+                    Log.d("PRICELIST", "Successful");
+                    Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
                     NavController navController = Navigation.findNavController(getView());
                     navController.navigate(R.id.action_createAccommodationFragment_to_accommodationsForHostFragment);
                 }else{
-                    Log.d("IMAGES", "Some other code status");
+                    Log.d("PRICELIST", "Some other code status");
                 }
             }
 

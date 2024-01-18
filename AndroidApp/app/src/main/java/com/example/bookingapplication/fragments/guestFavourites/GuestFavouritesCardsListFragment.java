@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.bookingapplication.R;
 import com.example.bookingapplication.adapters.ApartmentCardsListAdapter;
@@ -81,12 +82,15 @@ public class GuestFavouritesCardsListFragment extends ListFragment {
     }
 
     private void prepareApartmentCardsList(){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanelGuestFavourites);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
         Long id = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId();
         Call<List<Card>> call = ClientUtils.guestService.getFavouritesAccommodations(id);
         call.enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
-
+                loadingProgressBar.setVisibility(View.GONE);
                 Log.d("Odgovor",String.valueOf(response.code()));
 
                 ArrayList<ApartmentCard> cards = new ArrayList<>();
@@ -108,6 +112,7 @@ public class GuestFavouritesCardsListFragment extends ListFragment {
 
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
 
             }
         });
