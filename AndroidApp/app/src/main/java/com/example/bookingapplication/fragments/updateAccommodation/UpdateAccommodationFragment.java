@@ -2,7 +2,11 @@ package com.example.bookingapplication.fragments.updateAccommodation;
 
 import static androidx.navigation.Navigation.findNavController;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +38,7 @@ import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentCreateAccommodationBinding;
 import com.example.bookingapplication.databinding.FragmentUpdateAccommodationBinding;
+import com.example.bookingapplication.helpers.ImageHelper;
 import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Address;
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
@@ -43,6 +49,7 @@ import com.example.bookingapplication.model.enums.ReservationMethod;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +93,8 @@ public class UpdateAccommodationFragment extends Fragment {
     private TextView imagesMessage;
     private Accommodation accommodation;
     private Long id;
+    private List<String> existingImagesAccommodation = new ArrayList<>();
+    private List<Uri> existingImagesUri = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -134,9 +143,6 @@ public class UpdateAccommodationFragment extends Fragment {
         ActivityResultLauncher<PickVisualMediaRequest> pickMultipleMedia =
                 registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(10), uris -> {
                     if (!uris.isEmpty()) {
-                        if(uris.size() >= 5){
-                            linearLayoutImages.removeAllViews();
-                            imagesAccommodation.clear();
                             for(Uri imageUri : uris){
                                 imagesAccommodation.add(imageUri);
                                 ImageView imageView = new ImageView(getContext());
@@ -147,10 +153,15 @@ public class UpdateAccommodationFragment extends Fragment {
                                 imageView.setImageURI(imageUri);
 
                                 linearLayoutImages.addView(imageView);
+                                imageView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        imagesAccommodation.remove(imageUri);
+                                        linearLayoutImages.removeView(imageView);
+                                    }
+                                });
                             }
-                        }else {
-                            Toast.makeText(getContext(), "5 images are minimum", Toast.LENGTH_SHORT).show();
-                        }
+
                     } else {
                         Log.d("PhotoPicker", "No media selected");
                     }
@@ -214,7 +225,7 @@ public class UpdateAccommodationFragment extends Fragment {
                     emptyInputFields.setText("*All fields must be filled");
                 }else if(minGuests < 1 || maxGuests > 10 || minGuests > maxGuests){
                     emptyInputFields.setText("*Max guests is 10. Max guests must be grater or equal than min!");
-                }else if(imagesAccommodation.size() < 5){
+                }else if((existingImagesAccommodation.size() + imagesAccommodation.size()) < 5){
                     imagesMessage.setText("*Images are required.Min is 5, max is 10.");
                 }
                 else{
@@ -246,6 +257,7 @@ public class UpdateAccommodationFragment extends Fragment {
                     accommodation.setAmenities(amenities);
                     accommodation.setAccommodationApprovalStatus(AccommodationApprovalStatus.PENDING);
                     accommodation.setHostId(SharedPreferencesManager.getUserInfo(getActivity()).getId());
+
                     updateAccommodation(accommodation);
                 }
             }
@@ -309,6 +321,27 @@ public class UpdateAccommodationFragment extends Fragment {
                 if(accommodation.getAmenities().contains(Amenities.PARKING)){
                     parkingCheckBox.setChecked(true);
                 }
+                for(String image: accommodation.getImages()){
+                    existingImagesAccommodation.add(image);
+                    Bitmap imageBitMap = convertBase64ToBitmap(image);
+                    ImageView imageView = new ImageView(getContext());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(800,  800);
+                    layoutParams.setMargins(5, 10, 5, 5);
+                    imageView.setLayoutParams(layoutParams);
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                    imageView.setImageBitmap(imageBitMap);
+
+                    linearLayoutImages.addView(imageView);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            existingImagesAccommodation.remove(image);
+                            linearLayoutImages.removeView(imageView);
+                        }
+                    });
+                }
+
 
 //                amenities.setText(mapAmenitieToString(accommodation.getAmenities()));
 //                rating.setText("Rating: ");
@@ -352,6 +385,8 @@ public class UpdateAccommodationFragment extends Fragment {
 
     private  List<MultipartBody.Part> convertImages(){
         List<MultipartBody.Part> imageParts = new ArrayList<>();
+        convertStringToUri();
+        imagesAccommodation.addAll(existingImagesUri);
         for (Uri imageUri : imagesAccommodation) {
             Log.d("IMAGES", imageUri.getEncodedPath());
             File file = new File(getRealPathFromUri(imageUri));
@@ -385,6 +420,7 @@ public class UpdateAccommodationFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 200){
                     Log.d("IMAGES", "Successful");
+                    deleteAddedImages();
                     Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
                     NavController navController = Navigation.findNavController(getView());
                     navController.navigate(R.id.action_updateAccommodationFragment_to_accommodationsForHostFragment);
@@ -399,6 +435,28 @@ public class UpdateAccommodationFragment extends Fragment {
                 Log.d("IMAGES", "FAIL");
             }
         });
+    }
+    private void deleteAddedImages() {
+        ContentResolver resolver = getContext().getContentResolver();
+        for (Uri image : existingImagesUri) {
+            resolver.delete(image, null, null);
+        }
+    }
+    private void convertStringToUri(){
+        existingImagesUri = new ArrayList<>();
+        for(String imageString: existingImagesAccommodation){
+            existingImagesUri.add(getImageUri(getContext(),convertBase64ToBitmap(imageString)));
+        }
+    }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+    private Bitmap convertBase64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
     @Override
