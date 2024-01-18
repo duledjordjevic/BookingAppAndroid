@@ -75,7 +75,7 @@ public class CommentCardListFragment extends ListFragment {
 
         commentTextView = binding.commentTextView;
 
-        String[] commentInputArray = getResources().getStringArray(R.array.spinner_options);
+        String[] commentInputArray = getResources().getStringArray(R.array.comment_type_options);
         ArrayAdapter<String> commentInputAdapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_item, commentInputArray);
         commentTextView.setAdapter(commentInputAdapter);
 

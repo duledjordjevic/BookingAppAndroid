@@ -122,13 +122,18 @@
         <item>DECLINED</item>
         <item>CANCELLED</item>
     </string-array>
-    <string-array name="spinner_options">
+    <string-array name="comment_type_options">
         <item>Accommodation</item>
         <item>Host</item>
+    </string-array>
+    <string-array name="approve_comments_options">
+        <item>Approve</item>
+        <item>View reported</item>
     </string-array>
     <string name="comments_title">Comments</string>
     <string name="options">Options</string>
     <string name="report_comment">Report</string>
     <string name="delete_comment">Delete</string>
     <string name="report_comment_title">Report comment</string>
+    <string name="report_reason_text">Report reason:  </string>
 </resources>

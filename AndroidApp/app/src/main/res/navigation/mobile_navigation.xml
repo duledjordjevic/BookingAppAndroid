@@ -101,4 +101,9 @@
         android:name="com.example.bookingapplication.fragments.guestFavourites.GuestFavouritesFragment"
         android:label="Favourites"
         tools:layout="@layout/fragment_guest_favourites" />
+    <fragment
+        android:id="@+id/approveCommentsFragment"
+        android:name="com.example.bookingapplication.fragments.approveComments.ApproveCommentsFragment"
+        android:label="Comments"
+        tools:layout="@layout/fragment_approve_comments" />
 </navigation>

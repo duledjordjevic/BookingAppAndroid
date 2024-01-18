@@ -13,7 +13,7 @@
         android:icon="@drawable/flag"
         android:title="@string/title_reported_users"/>
     <item
-        android:id="@+id/commentsFragment"
+        android:id="@+id/approveCommentsFragment"
         android:icon="@drawable/comment"
         android:title="@string/title_comments"/>
     <item

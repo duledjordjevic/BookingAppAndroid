@@ -9,6 +9,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -57,4 +58,40 @@ public interface CommentsService {
     })
     @PUT("commentsAboutHost/reportMessage/{id}")
     Call<CommentCard> setReportMessageHost(@Path("id") Long id, @Body String message);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("commentsAboutAcc/approving")
+    Call<Collection<CommentCard>> getCommentsForApproving();
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("commentsAboutHost/reported")
+    Call<Collection<CommentCard>> getReportedCommentsHost();
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("commentsAboutAcc/reported")
+    Call<Collection<CommentCard>> getReportedCommentsAcc();
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @DELETE("commentsAboutAcc/{id}")
+    Call<CommentCard> deleteCommentAcc(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @DELETE("commentsAboutHost/{id}")
+    Call<CommentCard> deleteCommentHost(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("commentsAboutAcc/{id}/approve/{isApproved}")
+    Call<CommentCard> approveCommentAboutAcc(@Path("id") Long id, @Path("isApproved") Boolean isApproved);
 }

@@ -88,6 +88,11 @@ public class CommentCardsListAdapter extends ArrayAdapter<CommentCard> {
         TextView title = binding.title;
         TextView date = binding.date;
         RatingBar rating = binding.ratingBar;
+        TextView reportReasonLabel = binding.reportReasonLabel;
+        TextView reportReason = binding.reportReasonText;
+
+        reportReasonLabel.setVisibility(View.GONE);
+        reportReason.setVisibility(View.GONE);
 
         Button approveButton = binding.approveButton;
         approveButton.setVisibility(View.GONE);
