@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.RegisterActivity"
+    android:fillViewport="true"
     android:background="@color/white">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/white">
 
 
@@ -466,11 +467,85 @@
         app:layout_constraintStart_toStartOf="@id/linearlayoutImages"
         app:layout_constraintTop_toBottomOf="@id/linearlayoutImages"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
         android:textColor="@color/red"
         />
+
+    <Button
+        android:id="@+id/dateRangeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="2dp"
+        android:textColor="@color/dark_blue"
+        android:text="Date range"
+        app:icon="@drawable/ic_date"
+        style="@style/CustomOutlinedButtonIcon"
+        app:layout_constraintEnd_toEndOf="@id/linearlayoutImages"
+        app:layout_constraintStart_toStartOf="@id/linearlayoutImages"
+        app:layout_constraintTop_toBottomOf="@id/linearlayoutImages"
+        />
+
+    <LinearLayout
+        android:id="@+id/setPriceLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/dateRangeBtn"
+        app:layout_constraintStart_toStartOf="@id/dateRangeBtn"
+        app:layout_constraintTop_toBottomOf="@id/dateRangeBtn"
+        android:orientation="horizontal">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/priceInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="Price"
+            android:layout_weight="0.3"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/money"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/priceInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0123456789"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/setDateRangeBtn"
+            android:layout_weight="0.5"
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue"
+            android:layout_centerHorizontal="true"
+            android:text="Add"
+            />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/scroll_date_range_cards_list"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintEnd_toEndOf="@id/setPriceLinearLayout"
+        app:layout_constraintStart_toStartOf="@id/setPriceLinearLayout"
+        app:layout_constraintTop_toBottomOf="@id/setPriceLinearLayout"/>
+
 
     <Button
         android:id="@+id/createAccommodationBtn"
@@ -478,11 +553,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/dark_blue"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="@string/create"
-        app:layout_constraintEnd_toEndOf="@id/linearlayoutImages"
-        app:layout_constraintStart_toStartOf="@id/linearlayoutImages"
-        app:layout_constraintTop_toBottomOf="@id/linearlayoutImages" />
+        app:layout_constraintEnd_toEndOf="@id/scroll_date_range_cards_list"
+        app:layout_constraintStart_toStartOf="@id/scroll_date_range_cards_list"
+        app:layout_constraintTop_toBottomOf="@id/scroll_date_range_cards_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -2,7 +2,9 @@ package com.example.bookingapplication.clients;
 
 import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Card;
+import com.example.bookingapplication.model.DateRangeCard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -30,6 +32,14 @@ public interface AccommodationService {
     @Multipart
     @POST("images/{accommodation_id}")
     Call<Void> createAccommodationImages(@Path("accommodation_id") Long accommodation_id,   @Part List<MultipartBody.Part> image);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST("accommodations/priceList/{accommodation_id}")
+    Call<Void> addPriceList(@Path("accommodation_id") Long accommodation_id, @Body ArrayList<DateRangeCard> priceLists);
+
 
     @Headers({
             "User-Agent: Mobile-Android",
