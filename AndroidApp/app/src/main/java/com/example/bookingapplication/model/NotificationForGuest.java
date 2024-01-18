@@ -3,20 +3,26 @@ package com.example.bookingapplication.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.bookingapplication.helpers.LocalDateTimeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class NotificationForGuest implements Parcelable {
     private Long id;
     private String description;
     private Guest guest;
-    private boolean isRead;
+    private boolean read;
+    @JsonAdapter(LocalDateTimeAdapter.class)
+    @SerializedName("dateTime")
     private LocalDateTime dateTime;
 
     public NotificationForGuest(Long id, String description, Guest guest, boolean isRead, LocalDateTime dateTime) {
         this.id = id;
         this.description = description;
         this.guest = guest;
-        this.isRead = isRead;
+        this.read = isRead;
         this.dateTime = dateTime;
     }
 
@@ -27,7 +33,7 @@ public class NotificationForGuest implements Parcelable {
             id = in.readLong();
         }
         description = in.readString();
-        isRead = in.readByte() != 0;
+        read = in.readByte() != 0;
     }
 
     @Override
@@ -39,7 +45,7 @@ public class NotificationForGuest implements Parcelable {
             dest.writeLong(id);
         }
         dest.writeString(description);
-        dest.writeByte((byte) (isRead ? 1 : 0));
+        dest.writeByte((byte) (read ? 1 : 0));
     }
 
     @Override
@@ -84,11 +90,11 @@ public class NotificationForGuest implements Parcelable {
     }
 
     public boolean isRead() {
-        return isRead;
+        return read;
     }
 
     public void setRead(boolean read) {
-        isRead = read;
+        read = read;
     }
 
     public LocalDateTime getDateTime() {

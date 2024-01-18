@@ -1,5 +1,6 @@
 package com.example.bookingapplication.clients;
 
+import com.example.bookingapplication.model.NotificationForGuest;
 import com.example.bookingapplication.model.NotificationForHost;
 
 import java.util.List;
@@ -22,6 +23,18 @@ public interface NotificationService {
             "Content-Type:application/json"
     })
     @GET("notificationsForHost/{id}")
-    Call<NotificationForHost> markNotificationAsRead(@Path("id") Long id);
+    Call<NotificationForHost> markHostNotificationAsRead(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("notificationsForGuest/guest/{id}")
+    Call<List<NotificationForGuest>> getNotificationsForGuest(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("notificationsForGuest/{id}")
+    Call<NotificationForGuest> markGuestNotificationAsRead(@Path("id") Long id);
 
 }

@@ -43,12 +43,10 @@ public class NotificationForHostAdapter extends ArrayAdapter<NotificationForHost
         this.notificationFragment = notificationFragment;
 
     }
-
     @Override
     public int getCount() {
         return aProducts.size();
     }
-
 
     @Nullable
     @Override
@@ -64,7 +62,6 @@ public class NotificationForHostAdapter extends ArrayAdapter<NotificationForHost
     private User user;
     private NotificationCardBinding binding;
     private NotificationForHost card;
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -122,21 +119,14 @@ public class NotificationForHostAdapter extends ArrayAdapter<NotificationForHost
 
             dateTextView.setText(card.getDateTime().format(formatter));
 
-            notification_card.setOnClickListener(v -> {
-                Toast.makeText(getContext(), "Clicked: " + getItem(position).getType().toString()  +
-                        ", id: " + getItem(position).getId().toString(), Toast.LENGTH_SHORT).show();
-            });
-
             markAsReadBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     notification_card.setCardBackgroundColor(Color.argb(224,224,224,224));
                     markAsReadBtn.setVisibility(View.GONE);
                     markAsRead(getItem(position).getId());
-
                 }
             });
-
 
         }
 
@@ -144,7 +134,7 @@ public class NotificationForHostAdapter extends ArrayAdapter<NotificationForHost
     }
 
     private void markAsRead(Long id){
-        Call<NotificationForHost> call = ClientUtils.notificationService.markNotificationAsRead(id);
+        Call<NotificationForHost> call = ClientUtils.notificationService.markHostNotificationAsRead(id);
         call.enqueue(new Callback<NotificationForHost>() {
             @Override
             public void onResponse(Call<NotificationForHost> call, Response<NotificationForHost> response) {
@@ -155,7 +145,7 @@ public class NotificationForHostAdapter extends ArrayAdapter<NotificationForHost
 
             @Override
             public void onFailure(Call<NotificationForHost> call, Throwable t) {
-                Log.d("markirano",t.toString());
+                Log.d("markirano",t.getMessage());
             }
         });
     }
