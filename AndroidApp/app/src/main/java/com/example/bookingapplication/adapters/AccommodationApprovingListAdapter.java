@@ -19,10 +19,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.bookingapplication.R;
+import com.example.bookingapplication.clients.ClientUtils;
+import com.example.bookingapplication.model.AccApprovalStatus;
+import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.AccommodationApprovingCard;
+import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AccommodationApprovingListAdapter extends ArrayAdapter<AccommodationApprovingCard> {
     private ArrayList<AccommodationApprovingCard> aProducts ;
@@ -73,6 +81,7 @@ public class AccommodationApprovingListAdapter extends ArrayAdapter<Accommodatio
                 public void onClick(View v) {
                     Toast.makeText(getContext(), "Approved: " + card.getTitle()  +
                             ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
+                    approveAccommodation(card.getId());
                     deleteItem(getPosition(card));
                     notifyDataSetChanged();
                 }
@@ -82,6 +91,7 @@ public class AccommodationApprovingListAdapter extends ArrayAdapter<Accommodatio
                 public void onClick(View v) {
                     Toast.makeText(getContext(), "Decline: " + card.getTitle()  +
                             ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
+                    declineAccommodation(card.getId());
                     deleteItem(getPosition(card));
                     notifyDataSetChanged();
                 }
@@ -90,6 +100,41 @@ public class AccommodationApprovingListAdapter extends ArrayAdapter<Accommodatio
         }
 
         return convertView;
+    }
+    private void approveAccommodation(Long cardId){
+        AccApprovalStatus approvalStatus = new AccApprovalStatus(AccommodationApprovalStatus.APPROVED);
+        Log.d("ApprovalStatus",String.valueOf(approvalStatus.getAccommodationApprovalStatus()));
+        Call<Accommodation> call = ClientUtils.accommodationService.changeAccApprovalStatus(cardId, approvalStatus);
+        call.enqueue(new Callback<Accommodation>() {
+            @Override
+            public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                if(response.code() == 200){
+                    Log.d("ApproveAcc","Approved ");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Accommodation> call, Throwable t) {
+
+            }
+        });
+
+    }
+    private void declineAccommodation(Long cardId){
+        Call<Accommodation> call = ClientUtils.accommodationService.changeAccApprovalStatus(cardId, new AccApprovalStatus(AccommodationApprovalStatus.DECLINED));
+        call.enqueue(new Callback<Accommodation>() {
+            @Override
+            public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                if(response.code() == 200){
+                    Log.d("DeclineAcc","Declined");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Accommodation> call, Throwable t) {
+
+            }
+        });
     }
     private Bitmap convertBase64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64, 0);

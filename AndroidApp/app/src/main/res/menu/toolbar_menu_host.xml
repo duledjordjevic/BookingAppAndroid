@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/notificationForHostFragment"
+        android:title="@string/title_notifications"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        app:showAsAction="always"
+        />
     <item android:id="@+id/analyticsAnnualFragment"
         android:title="@string/analytics"
         android:icon="@drawable/analytics"
@@ -12,5 +17,6 @@
         android:icon="@drawable/logout_white"
         app:showAsAction="always"
         />
+
 
 </menu>

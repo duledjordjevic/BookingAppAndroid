@@ -5,9 +5,6 @@ import static androidx.navigation.Navigation.findNavController;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -18,15 +15,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
 
 import com.example.bookingapplication.R;
-import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.ApartmentCardBinding;
 import com.example.bookingapplication.model.ApartmentCard;
 import com.example.bookingapplication.model.User;
@@ -34,34 +30,27 @@ import com.example.bookingapplication.model.enums.UserType;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 import com.google.android.material.card.MaterialCardView;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+public class AccommodationForHostListAdapter  extends ArrayAdapter<ApartmentCard> {
+    private ArrayList<ApartmentCard> aProducts;
 
-public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
-    private ArrayList<ApartmentCard> accommodations;
-
-    public ApartmentCardsListAdapter(Context context, ArrayList<ApartmentCard> products){
+    public AccommodationForHostListAdapter(Context context, ArrayList<ApartmentCard> products){
         super(context, R.layout.apartment_card, products);
-        accommodations = products;
+        aProducts = products;
 
     }
 
     @Override
     public int getCount() {
-        return accommodations.size();
+        return aProducts.size();
     }
 
 
     @Nullable
     @Override
     public ApartmentCard getItem(int position) {
-        return accommodations.get(position);
+        return aProducts.get(position);
     }
 
     @Override
@@ -93,7 +82,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         ImageView likeBtnImage = binding.heartButton;
         Animation zoomInAnim = AnimationUtils.loadAnimation(getContext(),R.anim.zoom_in);
         Animation zoomOutAnim = AnimationUtils.loadAnimation(getContext(),R.anim.zoom_out);
-        user = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext());
+        user = SharedPreferencesManager.getUserInfo(getContext());
 
         if(card != null){
             Log.d("Kartica",String.valueOf(card.getIsLiked()));
@@ -111,69 +100,18 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
             apartment_card.setOnClickListener(v -> {
-                Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
-                        ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Clicked: " + getItem(position).getTitle()  +
+                        ", id: " + getItem(position).getId().toString(), Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
-                bundle.putLong("apartmentId", card.getId());
-                if(SharedPreferencesManager.getUserInfo(getContext()).getUserRole().equals(UserType.GUEST)){
-                    findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
-                }
-            });
-            likeBtnImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ApartmentCard cardAcc = getItem(position);
-                    Log.d("IDKARTICE",String.valueOf(cardAcc.getId()));
-                    Log.d("KliknutoLike",String.valueOf(cardAcc.getIsLiked()));
-                    if(cardAcc.getIsLiked()){
-                        likeBtnImage.setImageResource(R.drawable.ic_heart);
-                        unlikeAccommodation(position);
-                        cardAcc.setIsLiked(false);
+                bundle.putLong("apartmentId", getItem(position).getId());
 
-                    }else{
-                        likeBtnImage.setImageResource(R.drawable.full_heart);
-                        likeAccomodation(position);
-                        cardAcc.setIsLiked(true);
-                    }
-                    likeBtnImage.startAnimation(zoomInAnim);
-                }
+                findNavController(v).navigate(R.id.updateAccommodationFragment,bundle);
+
             });
         }
 
         return convertView;
     }
-    private void unlikeAccommodation(int position){
-        ApartmentCard cardAcc = getItem(position);
-        Log.d("CardId",String.valueOf(cardAcc.getId()));
-        Call<Boolean> call = ClientUtils.guestService.removeFavourite(user.getId(),cardAcc.getId());
-        call.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Log.d("ResponseUnliked",String.valueOf(response.body()));
-            }
-
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-
-            }
-        });
-    }
-    private void likeAccomodation(int position){
-        ApartmentCard cardAcc = getItem(position);
-        Log.d("CardId",String.valueOf(cardAcc.getId()));
-        Call<Boolean> call = ClientUtils.guestService.addFavourite(user.getId(), cardAcc.getId());
-        call.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Log.d("ResponseLiked",String.valueOf(response.body()));
-            }
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-
-            }
-        });
-    }
-
     private Bitmap convertBase64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);

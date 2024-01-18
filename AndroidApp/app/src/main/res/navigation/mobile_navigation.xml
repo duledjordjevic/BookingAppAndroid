@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.bookingapplication.fragments.notifications.NotificationsFragment"
+        android:name="com.example.bookingapplication.fragments.notificationForGuest.NotificationForGuestFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
@@ -101,4 +101,17 @@
         android:name="com.example.bookingapplication.fragments.guestFavourites.GuestFavouritesFragment"
         android:label="Favourites"
         tools:layout="@layout/fragment_guest_favourites" />
+    <fragment
+        android:id="@+id/updateAccommodationFragment"
+        android:name="com.example.bookingapplication.fragments.updateAccommodation.UpdateAccommodationFragment"
+        android:label="Update property" >
+        <action
+            android:id="@+id/action_updateAccommodationFragment_to_accommodationsForHostFragment"
+            app:destination="@id/accommodationsForHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationForHostFragment"
+        android:name="com.example.bookingapplication.fragments.notificationForHost.NotificationForHostFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notification_for_host" />
 </navigation>
