@@ -3,6 +3,7 @@ package com.example.bookingapplication.clients;
 import com.example.bookingapplication.model.AccApprovalStatus;
 import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Card;
+import com.example.bookingapplication.model.DateRangeCard;
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 
 import java.util.ArrayList;
@@ -74,5 +75,11 @@ public interface AccommodationService {
     })
     @PUT("accommodations/{id}")
     Call<Accommodation> updateAccommodation(@Body Accommodation accommodation,@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/intervalPrices/{id}")
+    Call<List<DateRangeCard>> getDateIntervals(@Path("id") Long id);
 
 }

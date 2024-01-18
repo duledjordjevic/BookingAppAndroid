@@ -6,21 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".fragments.notificationForGuest.NotificationForGuestFragment">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/ceo_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:id="@+id/scroll_notification_for_guest_list">
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/options_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/turn_on_off_title"
+                android:gravity="center"
+                android:textSize="10pt"
+                android:textStyle="bold"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/notification_reservation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notificaiton_reservation_req_respond"
+                style="@style/YourSwitchCompatStyle"/>
+
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center" >
+            android:layout_margin="10dp"
+            android:id="@+id/scroll_notification_for_guest_list">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center" >
 
-            <ProgressBar
-                android:id="@+id/loadingPanelNotificationHost"
+                <ProgressBar
+                    android:id="@+id/loadingPanelNotificationHost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true" />
+            </RelativeLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/settings_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true" />
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/settings"
+                android:backgroundTint="@color/dark_blue"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                app:elevation="2dp"
+                app:pressedTranslationZ="2dp" />
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

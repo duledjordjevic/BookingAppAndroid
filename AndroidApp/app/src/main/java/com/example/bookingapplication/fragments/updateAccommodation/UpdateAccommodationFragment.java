@@ -2,6 +2,9 @@ package com.example.bookingapplication.fragments.updateAccommodation;
 
 import static androidx.navigation.Navigation.findNavController;
 
+import static com.example.bookingapplication.fragments.createAccommodation.CreateAccommodationFragment.getCalendarConstraints;
+import static com.example.bookingapplication.fragments.createAccommodation.CreateAccommodationFragment.getDefaultDateSelection;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -38,21 +42,31 @@ import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.FragmentCreateAccommodationBinding;
 import com.example.bookingapplication.databinding.FragmentUpdateAccommodationBinding;
+import com.example.bookingapplication.fragments.FragmentTransition;
+import com.example.bookingapplication.fragments.dateRange.DateRangeCardsListFragment;
 import com.example.bookingapplication.helpers.ImageHelper;
 import com.example.bookingapplication.model.Accommodation;
 import com.example.bookingapplication.model.Address;
+import com.example.bookingapplication.model.DateRangeCard;
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 import com.example.bookingapplication.model.enums.AccommodationType;
 import com.example.bookingapplication.model.enums.Amenities;
 import com.example.bookingapplication.model.enums.CancellationPolicy;
 import com.example.bookingapplication.model.enums.ReservationMethod;
 import com.example.bookingapplication.util.SharedPreferencesManager;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -95,6 +109,12 @@ public class UpdateAccommodationFragment extends Fragment {
     private Long id;
     private List<String> existingImagesAccommodation = new ArrayList<>();
     private List<Uri> existingImagesUri = new ArrayList<>();
+    private ArrayList<DateRangeCard> dates;
+    private Button dateRangeBtn;
+    private LocalDate selectedStartDate;
+    private LocalDate selectedEndDate;
+    private TextInputEditText priceInput;
+    private Button setDateRangeBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -103,7 +123,14 @@ public class UpdateAccommodationFragment extends Fragment {
         binding = FragmentUpdateAccommodationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+//        dates = new ArrayList<>();
+//        FragmentTransition.to(DateRangeCardsListFragment.newInstance(dates), getActivity() , false, R.id.scroll_date_range_cards_list);
 
+
+
+        priceInput = binding.priceInput;
+        setDateRangeBtn = binding.setDateRangeBtn;
+        dateRangeBtn = binding.dateRangeBtn;
         propertyNameInput = binding.propertyNameInput;
         stateInput = binding.stateInput;
         cityInput = binding.cityInput;
@@ -138,6 +165,7 @@ public class UpdateAccommodationFragment extends Fragment {
             // Koristite apartmentId kako je potrebno
         }
         Log.e("Id", String.valueOf(id));
+        setDateIntervals();
         setValues();
 
         ActivityResultLauncher<PickVisualMediaRequest> pickMultipleMedia =
@@ -166,6 +194,44 @@ public class UpdateAccommodationFragment extends Fragment {
                         Log.d("PhotoPicker", "No media selected");
                     }
                 });
+
+        dateRangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+                        .setTitleText("Select dates")
+                        .setSelection(getDefaultDateSelection())
+                        .setCalendarConstraints(getCalendarConstraints())
+                        .build();
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+                    @Override
+                    public void onPositiveButtonClick(Pair<Long, Long> selection) {
+                        String date1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date(selection.first));
+                        String date2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date(selection.second));
+                        selectedStartDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        selectedEndDate = LocalDate.parse(date2, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        dateRangeBtn.setText(date1 + " - " + date2);
+                    }
+                });
+                materialDatePicker.show(getParentFragmentManager(), "tag");
+
+            }
+        });
+        setDateRangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!priceInput.getText().toString().isEmpty() && selectedStartDate != null && selectedEndDate != null){
+                    dates.add(new DateRangeCard(selectedStartDate, selectedEndDate, Double.parseDouble(priceInput.getText().toString())));
+                    FragmentTransition.to(DateRangeCardsListFragment.newInstance(dates), getActivity() , false, R.id.scroll_date_range_cards_list);
+                    selectedStartDate = null;
+                    selectedEndDate = null;
+                    priceInput.setText("");
+                    dateRangeBtn.setText("Date range");
+                }else{
+                    Toast.makeText(getActivity(), "Select price and dates!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         buttonPickImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -357,6 +423,21 @@ public class UpdateAccommodationFragment extends Fragment {
 
 
     }
+    private void setDateIntervals(){
+        Call<List<DateRangeCard>> call = ClientUtils.accommodationService.getDateIntervals(id);
+        call.enqueue(new Callback<List<DateRangeCard>>() {
+            @Override
+            public void onResponse(Call<List<DateRangeCard>> call, Response<List<DateRangeCard>> response) {
+                dates = new ArrayList<>(response.body());
+                FragmentTransition.to(DateRangeCardsListFragment.newInstance(dates), getActivity() , false, R.id.scroll_date_range_cards_list);
+            }
+
+            @Override
+            public void onFailure(Call<List<DateRangeCard>> call, Throwable t) {
+
+            }
+        });
+    }
 
     private void updateAccommodation(Accommodation accommodation){
         Call<Accommodation> call = ClientUtils.accommodationService.updateAccommodation(accommodation,id);
@@ -412,6 +493,28 @@ public class UpdateAccommodationFragment extends Fragment {
         cursor.close();
         return filePath;
     }
+    private void postDateRanges(Long accommodationId){
+        Call<Void> call = ClientUtils.accommodationService.addPriceList(accommodationId, dates);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200){
+                    Log.d("PRICELIST", "Successful");
+                    Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
+                    NavController navController = Navigation.findNavController(getView());
+                    navController.navigate(R.id.action_updateAccommodationFragment_to_accommodationsForHostFragment);
+                }else{
+                    Log.d("PRICELIST", "Some other code status");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("IMAGES", t.getMessage() != null?t.getMessage():"error");
+                Log.d("IMAGES", "FAIL");
+            }
+        });
+    }
 
     private void postImages(Long accommodationId, List<MultipartBody.Part> images){
         Call<Void> call = ClientUtils.accommodationService.createAccommodationImages(accommodationId, images);
@@ -419,11 +522,14 @@ public class UpdateAccommodationFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 200){
-                    Log.d("IMAGES", "Successful");
                     deleteAddedImages();
-                    Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
-                    NavController navController = Navigation.findNavController(getView());
-                    navController.navigate(R.id.action_updateAccommodationFragment_to_accommodationsForHostFragment);
+                    if(dates != null && dates.size() != 0){
+                        postDateRanges(accommodationId);
+                    }else{
+                        Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
+                        NavController navController = Navigation.findNavController(getView());
+                        navController.navigate(R.id.action_updateAccommodationFragment_to_accommodationsForHostFragment);
+                    }
                 }else{
                     Log.d("IMAGES", "Some other code status");
                 }

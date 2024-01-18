@@ -24,7 +24,12 @@
     <style name="CustomContainedButtonIcon" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/red</item>
     </style>
-
+    <style name="YourSwitchCompatStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+        <!-- Customize the appearance of your SwitchCompat -->
+        <item name="android:thumbTint">@color/dark_blue</item>
+        <item name="android:trackTint">@color/dark_blue</item>
+        <!-- Add more customization as needed -->
+    </style>
 
 
 </resources>

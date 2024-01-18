@@ -61,6 +61,12 @@
     <string name="postal_code">Postal code</string>
     <string name="property_name">Property name</string>
     <string name="description">Description: </string>
+    <string name="turn_on_off_title">Turn on/off notifications</string>
+    <string name="notification_reservation_req">Reservation request</string>
+    <string name="notificaiton_reservation_req_respond">Reservation request respond</string>
+    <string name="reservation_created">Reservation created</string>
+    <string name="reservation_cancelled">Reservation cancelled</string>
+    <string name="reviews">Reviews</string>
     <string name="cancellation_policy">Cancellation policy</string>
     <string name="payment_method">Payment method</string>
     <string name="reservation_confirmation_method">Reservation confirmation method</string>

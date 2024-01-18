@@ -309,7 +309,7 @@ public class CreateAccommodationFragment extends Fragment {
         return root;
     }
 
-    private CalendarConstraints getCalendarConstraints() {
+    public static CalendarConstraints getCalendarConstraints() {
         long today = MaterialDatePicker.todayInUtcMilliseconds();
 
         Calendar calendar = Calendar.getInstance();
@@ -324,7 +324,7 @@ public class CreateAccommodationFragment extends Fragment {
         return constraintsBuilder.build();
     }
 
-    private Pair<Long, Long> getDefaultDateSelection() {
+    public static Pair<Long, Long> getDefaultDateSelection() {
         long today = MaterialDatePicker.todayInUtcMilliseconds();
 
         Calendar calendar = Calendar.getInstance();
