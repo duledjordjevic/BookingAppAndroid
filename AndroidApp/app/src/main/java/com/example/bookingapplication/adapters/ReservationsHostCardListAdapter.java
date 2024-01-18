@@ -152,7 +152,7 @@ public class ReservationsHostCardListAdapter extends ArrayAdapter<ReservationHos
                 @Override
                 public void onClick(View v) {
                     Dialog reportDialog =new UserReportDialog(getContext(),R.style.CustomDialog,card.getGuest().getUser().getId(),
-                            SharedPreferencesManager.getUserInfo(getContext()).getId(),card.getId(),reservationsFragment);
+                            SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId(),card.getId(),reservationsFragment);
                     reportDialog.setCancelable(true);
                     reportDialog.setCanceledOnTouchOutside(true);
                     WindowManager.LayoutParams lp=reportDialog.getWindow().getAttributes();

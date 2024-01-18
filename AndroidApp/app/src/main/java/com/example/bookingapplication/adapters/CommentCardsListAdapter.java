@@ -102,7 +102,7 @@ public class CommentCardsListAdapter extends ArrayAdapter<CommentCard> {
 
         Button reportButton = binding.reportButton;
 
-        UserType role = SharedPreferencesManager.getUserInfo(getContext()).getUserRole();
+        UserType role = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getUserRole();
         switch (role) {
             case GUEST:
             case ADMIN:

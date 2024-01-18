@@ -232,7 +232,7 @@ public class CreateAccommodationFragment extends Fragment {
                     if(kitchenCheckBox.isChecked()) amenities.add(Amenities.KITCHEN);
                     accommodation.setAmenities(amenities);
                     accommodation.setAccommodationApprovalStatus(AccommodationApprovalStatus.PENDING);
-                    accommodation.setHostId(SharedPreferencesManager.getUserInfo(getActivity()).getId());
+                    accommodation.setHostId(SharedPreferencesManager.getUserInfo(getActivity().getApplicationContext()).getId());
                     createAccommodation(accommodation);
                 }
             }

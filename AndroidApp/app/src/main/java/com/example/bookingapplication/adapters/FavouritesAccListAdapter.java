@@ -117,7 +117,7 @@ public class FavouritesAccListAdapter extends ArrayAdapter<ApartmentCard> {
         return convertView;
     }
     private void removeFavouriteAcc(Long accId){
-        Long userId = SharedPreferencesManager.getUserInfo(getContext()).getId();
+        Long userId = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId();
         Call<Boolean> call = ClientUtils.guestService.removeFavourite(userId,accId);
         call.enqueue(new Callback<Boolean>() {
             @Override
