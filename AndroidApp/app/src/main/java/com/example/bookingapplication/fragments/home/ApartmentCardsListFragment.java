@@ -87,7 +87,7 @@ public class ApartmentCardsListFragment extends ListFragment {
     }
 
     private void getAccommodations(){
-        User user = SharedPreferencesManager.getUserInfo(getContext());
+        User user = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext());
         if(user.getUserRole().equals(UserType.GUEST)){
             getAccommodationsForGuest(user.getId());
         }else{
@@ -159,7 +159,7 @@ public class ApartmentCardsListFragment extends ListFragment {
         });
     }
     private void markFavouriteAcc(ApartmentCard card){
-        Long userId = SharedPreferencesManager.getUserInfo(getContext()).getId();
+        Long userId = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId();
         Call<Boolean> call = ClientUtils.guestService.isFavourite(userId,card.getId());
         call.enqueue(new Callback<Boolean>() {
             @Override

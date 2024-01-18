@@ -1,5 +1,8 @@
 package com.example.bookingapplication.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 import com.example.bookingapplication.model.enums.AccommodationType;
 import com.example.bookingapplication.model.enums.Amenities;
@@ -141,6 +144,8 @@ public class Accommodation {
     public void setHostId(Long hostId) {
         this.hostId = hostId;
     }
+
     public Host getHost(){return host;}
     public void setHost(Host host){this.host = host;}
+
 }

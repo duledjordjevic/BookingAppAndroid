@@ -85,7 +85,7 @@ public class GuestFavouritesCardsListFragment extends ListFragment {
         ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanelGuestFavourites);
         loadingProgressBar.setVisibility(View.VISIBLE);
 
-        Long id = SharedPreferencesManager.getUserInfo(getContext()).getId();
+        Long id = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId();
         Call<List<Card>> call = ClientUtils.guestService.getFavouritesAccommodations(id);
         call.enqueue(new Callback<List<Card>>() {
             @Override

@@ -178,8 +178,8 @@ public class ReservationsGuestCardsListFragment extends ListFragment {
         ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanelGuestReservations);
         loadingProgressBar.setVisibility(View.VISIBLE);
 
-        queryParams.put("guestId", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
-        Log.d("USAO", SharedPreferencesManager.getUserInfo(getContext()).getId().toString());
+        queryParams.put("guestId", SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId().toString());
+        Log.d("USAO", SharedPreferencesManager.getUserInfo(getContext().getApplicationContext()).getId().toString());
         Call<Collection<Reservation>> call = ClientUtils.reservationService.getFilteredReservationsForGuest( queryParams);
         call.enqueue(new Callback<Collection<Reservation>>() {
             @Override

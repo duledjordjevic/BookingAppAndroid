@@ -2,6 +2,7 @@ package com.example.bookingapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -83,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.loginActivity){
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            SharedPreferencesManager.clearUserInfo(this);
+            SharedPreferencesManager.clearUserInfo(getApplicationContext());
             startActivity(intent);
             finish();
             return true;

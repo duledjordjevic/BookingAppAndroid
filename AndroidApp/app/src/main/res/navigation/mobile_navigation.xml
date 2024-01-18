@@ -59,7 +59,11 @@
         android:id="@+id/apartmentDetailsFragment"
         android:name="com.example.bookingapplication.fragments.apartmentDetails.ApartmentDetailsFragment"
         android:label="Propery details"
-        tools:layout="@layout/fragment_apartment_details" />
+        tools:layout="@layout/fragment_apartment_details" >
+        <action
+            android:id="@+id/action_apartmentDetailsFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountAdminFragment"
         android:name="com.example.bookingapplication.fragments.accountAdmin.AccountAdminFragment"

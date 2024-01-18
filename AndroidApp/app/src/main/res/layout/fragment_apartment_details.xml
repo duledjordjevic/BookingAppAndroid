@@ -226,6 +226,30 @@
                         android:id="@+id/amenities"
                         android:text="" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/comments_title"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="24sp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/dark_blue"
+                        android:layout_margin="2dp"
+                        />
+
+                    <Button
+                        android:id="@+id/commentButton"
+                        style="@style/CustomOutlinedButtonIcon"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/dark_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comments_title"/>
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

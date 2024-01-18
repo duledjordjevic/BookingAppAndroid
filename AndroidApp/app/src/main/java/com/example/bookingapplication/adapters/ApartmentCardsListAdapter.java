@@ -44,24 +44,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
-    private ArrayList<ApartmentCard> aProducts;
+    private ArrayList<ApartmentCard> accommodations;
 
     public ApartmentCardsListAdapter(Context context, ArrayList<ApartmentCard> products){
         super(context, R.layout.apartment_card, products);
-        aProducts = products;
+        accommodations = products;
 
     }
 
     @Override
     public int getCount() {
-        return aProducts.size();
+        return accommodations.size();
     }
 
 
     @Nullable
     @Override
     public ApartmentCard getItem(int position) {
-        return aProducts.get(position);
+        return accommodations.get(position);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
         ImageView likeBtnImage = binding.heartButton;
         Animation zoomInAnim = AnimationUtils.loadAnimation(getContext(),R.anim.zoom_in);
         Animation zoomOutAnim = AnimationUtils.loadAnimation(getContext(),R.anim.zoom_out);
-        user = SharedPreferencesManager.getUserInfo(getContext());
+        user = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext());
 
         if(card != null){
             Log.d("Kartica",String.valueOf(card.getIsLiked()));
