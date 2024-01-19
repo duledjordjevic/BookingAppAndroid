@@ -29,6 +29,7 @@ import com.example.bookingapplication.R;
 import com.example.bookingapplication.clients.ClientUtils;
 import com.example.bookingapplication.databinding.ApartmentCardBinding;
 import com.example.bookingapplication.model.ApartmentCard;
+import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.model.User;
 import com.example.bookingapplication.model.enums.UserType;
 import com.example.bookingapplication.util.SharedPreferencesManager;
@@ -111,13 +112,13 @@ public class ApartmentCardsListAdapter extends ArrayAdapter<ApartmentCard> {
             product_desc11.setText(card.getDescriptionInfo());
             product_desc12.setText(card.getDescriptionRating());
             apartment_card.setOnClickListener(v -> {
-                Toast.makeText(getContext(), "Clicked: " + card.getTitle()  +
-                        ", id: " + card.getId().toString(), Toast.LENGTH_SHORT).show();
+//                Card card1 = v.getItem(position);
+                ApartmentCard card1 = getItem(position);
+                Toast.makeText(getContext(), "Clicked: " + card1.getTitle()  +
+                        ", id: " + card1.getId().toString(), Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
-                bundle.putLong("apartmentId", card.getId());
-                if(SharedPreferencesManager.getUserInfo(getContext()).getUserRole().equals(UserType.GUEST)){
-                    findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
-                }
+                bundle.putLong("apartmentId", card1.getId());
+                findNavController(v).navigate(R.id.action_navigation_home_to_apartmentDetailsFragment, bundle);
             });
             likeBtnImage.setOnClickListener(new View.OnClickListener() {
                 @Override

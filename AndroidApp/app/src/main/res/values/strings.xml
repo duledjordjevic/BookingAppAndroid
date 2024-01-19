@@ -30,6 +30,7 @@
     <string name="title_comments">Comments</string>
     <string name="title_logout">Logout</string>
     <string name="save_button">Save</string>
+    <string name="title_add">Comment</string>
     <string name="apartment_title">Suncev Breg</string>
     <string name="apartment_desc">Srbija, Novi Sad\n19. - 24. may\n$202 per night</string>
     <string name="apartment_review">Rating: 4.6\n200 reviews</string>
@@ -132,14 +133,21 @@
         <item>DECLINED</item>
         <item>CANCELLED</item>
     </string-array>
-    <string-array name="spinner_options">
+    <string-array name="comment_type_options">
         <item>Accommodation</item>
         <item>Host</item>
+    </string-array>
+    <string-array name="approve_comments_options">
+        <item>Approve</item>
+        <item>View reported</item>
     </string-array>
     <string name="comments_title">Comments</string>
     <string name="options">Options</string>
     <string name="report_comment">Report</string>
     <string name="delete_comment">Delete</string>
     <string name="report_comment_title">Report comment</string>
+    <string name="report_reason_text">Report reason:  </string>
     <string name="date_range">Date range</string>
+    <string name="add_comment_title">Add comment</string>
+    <string name="add_comment_hint">Add comment..</string>
 </resources>

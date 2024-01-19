@@ -3,6 +3,8 @@ package com.example.bookingapplication.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 import com.example.bookingapplication.model.enums.AccommodationType;
 import com.example.bookingapplication.model.enums.Amenities;
@@ -12,7 +14,7 @@ import com.example.bookingapplication.model.enums.ReservationMethod;
 import java.util.List;
 import java.util.Set;
 
-public class Accommodation {
+public class Accommodation implements Parcelable{
     private Long id;
     private String title;
     private String description;
@@ -33,6 +35,10 @@ public class Accommodation {
     public Accommodation() {
     }
 
+    public Accommodation(Parcel in) {
+        id = in.readLong();
+        title = in.readString();
+    }
     public Long getId() {
         return id;
     }
@@ -148,4 +154,26 @@ public class Accommodation {
     public Host getHost(){return host;}
     public void setHost(Host host){this.host = host;}
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(title);
+    }
+
+    public static final Creator<Accommodation> CREATOR = new Creator<Accommodation>() {
+        @Override
+        public Accommodation createFromParcel(Parcel in) {
+            return new Accommodation(in);
+        }
+
+        @Override
+        public Accommodation[] newArray(int size) {
+            return new Accommodation[size];
+        }
+    };
 }
