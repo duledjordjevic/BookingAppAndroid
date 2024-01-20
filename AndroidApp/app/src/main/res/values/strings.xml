@@ -79,9 +79,13 @@
     <string name="tv">TV</string>
     <string name="breakfast">Breakfast</string>
     <string name="lunch">Lunch</string>
+    <string name="pool">Pool</string>
     <string name="dinner">Dinner</string>
     <string name="air_condition">Air condition</string>
     <string name="kitchen">Kitchen</string>
+    <string name="hotel">Hotel</string>
+    <string name="apartment">Apartment</string>
+    <string name="both_options">Both options</string>
     <string name="create_accommodation">Create accommodation</string>
     <string name="update_accommodation">Update accommodation</string>
     <string name="create">Create</string>
@@ -100,6 +104,7 @@
     <string name="search">Search</string>
     <string name="reservation_status">Reservation status</string>
     <string name="host">Host: </string>
+    <string name="where">Where</string>
     <string name="reported_user">Reported user: </string>
     <string name="reason">Reason: </string>
     <string name="reporting_user">Reporting user: </string>

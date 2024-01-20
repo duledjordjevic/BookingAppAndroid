@@ -1,6 +1,187 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="@string/filter_text"
+            android:textAlignment="viewStart"
+            android:textSize="24sp"
+            android:textStyle="italic" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:layout_margin="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="2dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accommodation_type" />
+
+        <RadioGroup
+            android:id="@+id/accommodationTypeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/hotelRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hotel"/>
+
+            <RadioButton
+                android:id="@+id/apartmentRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/apartment"/>
+
+            <RadioButton
+                android:id="@+id/bothOptionstRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/both_options"/>
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"
+            android:layout_margin="2dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/amenities" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:id="@+id/dialogBackgroundView">
+
+            <!-- Ostatak vašeg XML-a -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                android:layout_margin="2dp" />
+
+            <!-- Prvi red CheckBox elemenata -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="2dp">
+
+                <CheckBox
+                    android:id="@+id/wifiCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/wifi" />
+
+                <CheckBox
+                    android:id="@+id/airConditionCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/air_condition" />
+
+                <CheckBox
+                    android:id="@+id/parkingCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/parking" />
+            </LinearLayout>
+
+            <!-- Drugi red CheckBox elemenata -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="2dp">
+
+                <CheckBox
+                    android:id="@+id/poolCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/pool" />
+
+                <CheckBox
+                    android:id="@+id/breakfastCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/breakfast" />
+
+                <CheckBox
+                    android:id="@+id/lunchCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lunch" />
+            </LinearLayout>
+
+            <!-- Treći red CheckBox elemenata -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="2dp">
+
+                <CheckBox
+                    android:id="@+id/dinnerCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dinner" />
+
+                <CheckBox
+                    android:id="@+id/kitchenCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/kitchen" />
+
+                <CheckBox
+                    android:id="@+id/tvCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tv" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            android:layout_margin="2dp" />
+
+    </LinearLayout>
+</LinearLayout>

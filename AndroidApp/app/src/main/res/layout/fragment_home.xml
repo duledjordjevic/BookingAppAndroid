@@ -40,7 +40,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="@string/search"
+                android:hint="@string/where"
                 app:counterEnabled="false"
                 app:startIconDrawable="@drawable/search"
                 app:endIconMode="clear_text"
