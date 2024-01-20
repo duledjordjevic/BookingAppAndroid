@@ -25,7 +25,9 @@ import com.example.bookingapplication.model.enums.UserType;
 import com.example.bookingapplication.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,12 +41,14 @@ public class ApartmentCardsListFragment extends ListFragment {
     private ArrayList<ApartmentCard> mProducts;
     private FragmentApartmentCardsListBinding binding;
     private ArrayList<ApartmentCard> cards = new ArrayList<>();
-
-    public static ApartmentCardsListFragment newInstance(ArrayList<ApartmentCard> products){
+    private static Map<String, String> map = new HashMap<>();
+    private List<ApartmentCard> apartmentCards = new ArrayList<>();
+    public static ApartmentCardsListFragment newInstance(ArrayList<ApartmentCard> products, Map<String, String> mapa){
         ApartmentCardsListFragment fragment = new ApartmentCardsListFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_PARAM, products);
         fragment.setArguments(args);
+        map = mapa;
         return fragment;
     }
 
@@ -91,7 +95,8 @@ public class ApartmentCardsListFragment extends ListFragment {
         if(user.getUserRole().equals(UserType.GUEST)){
             getAccommodationsForGuest(user.getId());
         }else{
-            getAccommodationsWithoutLike();
+//            getAccommodationsWithoutLike();
+            filterAccommodation();
         }
     }
     private void getAccommodationsForGuest(Long id){
@@ -114,10 +119,11 @@ public class ApartmentCardsListFragment extends ListFragment {
 //                    markFavouriteAcc(ac);
                     Log.d("VrednostBul",ac.getTitle());
                     Log.d("VrednostBul",String.valueOf(card.getIsFavourite()));
-                    cards.add(ac);
+//                    cards.add(ac);
+                    apartmentCards.add(ac);
                 }
-
-                addProducts(cards);
+                filterAccommodation();
+//                addProducts(cards);
 
             }
             @Override
@@ -154,6 +160,50 @@ public class ApartmentCardsListFragment extends ListFragment {
             }
             @Override
             public void onFailure(Call<List<Card>> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void filterAccommodation(){
+        ProgressBar loadingProgressBar = getActivity().findViewById(R.id.loadingPanel);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+//        Log.d("Mapa", map.toString());
+
+        Call<List<Card>> call = ClientUtils.accommodationService.filterAccommodations(map);
+        call.enqueue(new Callback<List<Card>>() {
+            @Override
+            public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
+                loadingProgressBar.setVisibility(View.GONE);
+                Log.d("filterRezultat", response.body().toString());
+                User user = SharedPreferencesManager.getUserInfo(getContext().getApplicationContext());
+                for (Card card : response.body()) {
+                    String rate;
+                    if(card.getAvgRate() == null){
+                        rate = "";
+                    } else {
+                        rate = card.getAvgRate().toString();
+                    }
+                    ApartmentCard ac = new ApartmentCard(card.getId(), card.getTitle(), card.getAddress().toString(), rate, card.getImage(),card.getIsFavourite());
+
+                    if(user.getUserRole().equals(UserType.GUEST)){
+                        ApartmentCard appCard = apartmentCards.stream().filter(c -> c.getId().equals(card.getId())).findFirst().get();
+                        if(appCard.getIsLiked()){
+                            ac.setIsLiked(true);
+                        } else {
+                            ac.setIsLiked(false);
+                        }
+                    }
+
+                    cards.add(ac);
+                }
+
+                addProducts(cards);
+
+            }
+            @Override
+            public void onFailure(Call<List<Card>> call, Throwable t) {
+                Log.d("FAIIIILLL", t.getMessage());
                 loadingProgressBar.setVisibility(View.GONE);
             }
         });

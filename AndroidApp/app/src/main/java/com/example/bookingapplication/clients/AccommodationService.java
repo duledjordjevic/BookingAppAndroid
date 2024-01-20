@@ -2,11 +2,15 @@ package com.example.bookingapplication.clients;
 
 import com.example.bookingapplication.model.AccApprovalStatus;
 import com.example.bookingapplication.model.Accommodation;
+import com.example.bookingapplication.model.AccommodationCard;
 import com.example.bookingapplication.model.Card;
 import com.example.bookingapplication.model.DateRangeCard;
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +24,10 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
+
 import java.util.List;
+import java.util.Map;
 
 public interface AccommodationService {
     @Headers({
@@ -88,5 +95,10 @@ public interface AccommodationService {
     })
     @GET("accommodations/{id}/availableDates")
     Call<List<Date>> getAvailableDates(@Path("id") Long id);
-
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/cards/filter")
+    Call<List<Card>> filterAccommodations(@QueryMap Map<String, String> queryParams);
 }
