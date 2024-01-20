@@ -127,4 +127,10 @@ public interface CommentsService {
     })
     @POST("commentsAboutAcc")
     Call<CommentAboutAcc> createCommentAboutAcc(@Body CommentAboutAcc commentAboutAcc);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/guest/{id}")
+    Call<Collection<Accommodation>> getAccommodationsForCommentHost(@Path("id") Long id);
 }

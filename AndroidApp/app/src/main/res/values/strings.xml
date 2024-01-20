@@ -112,6 +112,7 @@
     <string name="filter_text">Filter</string>
     <string name="analytics_for_all_accommodations">Analytics for all accommodations</string>
     <string name="analytics">Analytics</string>
+    <string name="price_text">Price: </string>
     <string-array name="accommodation_types">
         <item>HOTEL</item>
         <item>APARTMENT</item>
