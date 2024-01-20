@@ -93,10 +93,11 @@ public class AddCommentsCardListFragment extends ListFragment {
                 String newText = editable.toString();
                 if (newText.equals("Accommodation")){
                     addCommentsCardsListAdapter.setCommentForAcc(true);
+                    prepareAccommodations();
                 } else {
                     addCommentsCardsListAdapter.setCommentForAcc(false);
+                    prepareAccommodationsHost();
                 }
-                prepareAccommodations();
             }
         });
         return root;
@@ -127,6 +128,21 @@ public class AddCommentsCardListFragment extends ListFragment {
         });
     }
 
+    public void prepareAccommodationsHost(){
+        Call<Collection<Accommodation>> call = ClientUtils.commentsService.getAccommodationsForCommentHost(this.guestUserId);
+        call.enqueue(new Callback<Collection<Accommodation>>() {
+            @Override
+            public void onResponse(Call<Collection<Accommodation>> call, Response<Collection<Accommodation>> response) {
+                Log.d("VRATIO", response.body().toString());
+                addAccommodations((ArrayList<Accommodation>) response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Collection<Accommodation>> call, Throwable t) {
+                Log.d("Fail", t.toString());
+            }
+        });
+    }
     private void addAccommodations(ArrayList<Accommodation> accommodations){
         this.addCommentsCardsListAdapter.clear();
         this.addCommentsCardsListAdapter.addAll(accommodations);

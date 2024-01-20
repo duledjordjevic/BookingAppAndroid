@@ -7,6 +7,7 @@ import com.example.bookingapplication.model.DateRangeCard;
 import com.example.bookingapplication.model.enums.AccommodationApprovalStatus;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -81,5 +82,11 @@ public interface AccommodationService {
     })
     @GET("accommodations/intervalPrices/{id}")
     Call<List<DateRangeCard>> getDateIntervals(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/{id}/availableDates")
+    Call<List<Date>> getAvailableDates(@Path("id") Long id);
 
 }
