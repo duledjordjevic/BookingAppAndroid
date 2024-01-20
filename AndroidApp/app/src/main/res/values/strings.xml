@@ -109,6 +109,7 @@
     <string name="accommodation">Accommodation</string>
     <string name="annual_analytic">Annual analytic</string>
     <string name="year">Year</string>
+    <string name="filter_text">Filter</string>
     <string name="analytics_for_all_accommodations">Analytics for all accommodations</string>
     <string name="analytics">Analytics</string>
     <string-array name="accommodation_types">

@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
 
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), searchView::setQueryHint);
 
-        Spinner spinner = binding.btnSort;
+//        Spinner spinner = binding.btnSort;
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item,
@@ -66,30 +66,30 @@ public class HomeFragment extends Fragment {
         // Specify the layout to use when the list of choices appears
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(arrayAdapter);
+//        spinner.setAdapter(arrayAdapter);
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Button button = binding.outlinedButton;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                openDatePicker(requireContext()); // Open date picker dialog
-
-            }
-        });
-
-        Button buttonEnd = binding.outlinedButton2;
-        buttonEnd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                openDatePicker(requireContext()); // Open date picker dialog
-
-            }
-        });
+//        Button button = binding.outlinedButton;
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                openDatePicker(requireContext()); // Open date picker dialog
+//
+//            }
+//        });
+//
+//        Button buttonEnd = binding.outlinedButton2;
+//        buttonEnd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                openDatePicker(requireContext()); // Open date picker dialog
+//
+//            }
+//        });
 
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

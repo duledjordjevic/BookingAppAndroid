@@ -35,12 +35,22 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_text"
-                app:queryHint="Search"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/propertyName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_background" />
+                android:layout_height="60dp"
+                android:hint="@string/search"
+                app:counterEnabled="false"
+                app:startIconDrawable="@drawable/search"
+                app:endIconMode="clear_text"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textNoSuggestions|textVisiblePassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
         <LinearLayout
@@ -54,11 +64,11 @@
             android:gravity="start"
             >
             <Button
-                android:id="@+id/outlinedButton"
+                android:id="@+id/startDateBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="5dp"
                 android:textColor="@color/dark_blue"
                 android:text="@string/start_date"
                 app:icon="@drawable/ic_date"
@@ -66,12 +76,12 @@
                 />
 
             <Button
-                android:id="@+id/outlinedButton2"
+                android:id="@+id/endDateBtn"
                 style="@style/CustomOutlinedButtonIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/dark_blue"
                 android:text="@string/end_date"
                 app:icon="@drawable/ic_date" />
@@ -85,29 +95,29 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            >
+            android:layout_marginRight="10dp">
 
             <Button
-                android:id="@+id/textButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/filterButton"
+                android:layout_width="100dp"
+                android:layout_height="56dp"
                 android:layout_weight="0.5"
-                android:layout_marginRight="2dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
                 android:textColor="@color/dark_blue"
-                android:text="@string/filter"
-                style="@style/CustomOutlinedButtonIcon"
-                />
+                android:text="@string/filter_text"
+                style="@style/CustomOutlinedButtonIcon" />
 
-
-            <Spinner
-                android:id="@+id/btnSort"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="100dp"
+                android:layout_height="56dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/dark_blue"
-                android:layout_weight="0.3"/>
+                android:text="@string/search"
+                style="@style/CustomOutlinedButtonIcon" />
 
 
         </LinearLayout>
