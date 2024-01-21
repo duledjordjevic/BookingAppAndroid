@@ -123,7 +123,8 @@ public class ReservationGuestCardListAdapter  extends ArrayAdapter<ReservationGu
                 deleteBtn.setAlpha(1f);
             }
 
-            if(!(card.getStatus().equals(ReservationStatus.ACCEPTED)) || card.getAccommodation().getCancellationPolicy() == CancellationPolicy.NON_REFUNDABLE ){
+            if(!(card.getStatus().equals(ReservationStatus.ACCEPTED)) || card.getAccommodation().getCancellationPolicy() == CancellationPolicy.NON_REFUNDABLE
+                || card.getStartDate().isBefore(LocalDate.now().plusDays(1))){
                 cancelBtn.setEnabled(false);
                 cancelBtn.getBackground().setTint(getContext().getColor(R.color.red_light));
                 cancelBtn.setTextColor(getContext().getColor(R.color.white));
@@ -217,7 +218,7 @@ public class ReservationGuestCardListAdapter  extends ArrayAdapter<ReservationGu
                     Toast.makeText(getContext(), "You successful cancelled this reservation", Toast.LENGTH_LONG).show();
                     changeStatus(position);
                     notifyDataSetChanged();
-                }else if(response.code() == 405){
+                }else{
                     Toast.makeText(getContext(), "You can't cancel this reservation", Toast.LENGTH_LONG).show();
                 }
             }
